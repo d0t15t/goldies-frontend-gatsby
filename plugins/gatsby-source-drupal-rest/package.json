@@ -17,7 +17,7 @@
   "author": "Isaac Bigsby Trogdon <i.trogdon@loom.de>",
   "license": "MIT",
   "dependencies": {
-    "base-64": "^0.1.0",
+    "base-64": "^1.0.0",
     "bluebird": "^3.7.2",
     "fetch-multiple": "^1.2.3",
     "node-fetch": "^2.6.1"
