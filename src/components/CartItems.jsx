@@ -87,6 +87,7 @@ LineItem.defaultProps = {
 }
 
 const CartItems = ({ cart, lineItems, updating }) => {
+  if (!cart) return null
   return (
     <Box className="line-items-header" m={['auto']}>
       {lineItems && (

@@ -13,7 +13,7 @@ const Page = props => {
   const { node, seo } = data
   const { title, description, relationships } = node
   const { blocks } = relationships
-  const teasers = extractTeasers(blocks[0].relationships?.teasers)
+  const teasers = extractTeasers(blocks[0]?.relationships?.teasers)
 
   return (
     <>

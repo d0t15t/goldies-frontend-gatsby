@@ -52,7 +52,7 @@ const TeasersTiles = ({ teasers }) => {
 
   return (
     <Box className={baseClassName} p={[2]}>
-      {rows.map((row, rowIndex) => {
+      {rows?.map((row, rowIndex) => {
         const rowClassName = `${baseClassName}--row`
         const rowClassNames = `${rowClassName} ${rowClassName}__row-index-${rowIndex +
           1}`

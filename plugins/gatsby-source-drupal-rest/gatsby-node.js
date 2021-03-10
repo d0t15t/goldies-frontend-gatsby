@@ -9,8 +9,6 @@ exports.sourceNodes = (
   const { createNode } = actions
   const { endpoints, basicAuth } = configOptions
 
-  const me = 1
-
   delete configOptions.plugins // Gatsby adds a configOption that's not needed for this plugin, delete it
 
   const customFormat = str => {

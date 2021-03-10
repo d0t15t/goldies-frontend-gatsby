@@ -6,7 +6,7 @@ const backendUrl = process.env.GATSBY_DRUPAL_ROOT
 const frontendUrl = process.env.GATSBY_SITE_BASE
 
 export const getRelativeUrl = url =>
-  url.replace(process.env.GATSBY_PRODUCTION_URL, '')
+  url && url.replace(process.env.GATSBY_PRODUCTION_URL, '')
 
 export const replaceBackendUrl = url =>
   url && url.replace(backendUrl, frontendUrl)

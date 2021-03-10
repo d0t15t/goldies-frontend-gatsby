@@ -15,3 +15,5 @@ public
 !.env.example
 
 *.code-workspace
+# Local Netlify folder
+.netlify

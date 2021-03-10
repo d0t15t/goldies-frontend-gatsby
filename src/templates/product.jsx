@@ -56,19 +56,18 @@ const Product = ({ data }) => {
   const [activeId, setActiveId] = useState()
 
   const [slideIndex, setSlideIndex] = useState(0)
-  console.log(
-    '🚀 ~ file: product.jsx ~ line 59 ~ Product ~ slideIndex',
-    slideIndex
-  )
 
   const { node, seo } = data
+
+  if (!node) return null
+
   const { description, images, title, variants } = node
 
   const socialSettings = {
-    url: node.onlineStoreUrl,
+    url: node?.onlineStoreUrl,
     email: {
       subject: `${title} by Goldies Natural Beauty`,
-      body: `I thought you might like this: ${title} by Goldies Natural Beauty \n ${node.onlineStoreUrl}`,
+      body: `I thought you might like this: ${title} by Goldies Natural Beauty \n ${node?.onlineStoreUrl}`,
     },
     fb: {
       hashtag: '#GoldiesNaturalBeauty',
@@ -79,7 +78,7 @@ const Product = ({ data }) => {
     },
   }
 
-  const imageSlides = variants.map(item => {
+  const imageSlides = variants?.map(item => {
     return (
       <Img
         fluid={{ ...item.image.localFile.childImageSharp.fluid }}
