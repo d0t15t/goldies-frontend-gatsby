@@ -61,7 +61,7 @@ module.exports = {
           username: drupalUserName,
           password: drupalUserPass,
         },
-        concurrentFileRequests: 10,
+        concurrentFileRequests: 2,
       },
     },
     {
