@@ -91,7 +91,18 @@ const ProductCollections = ({ id, uuid }) => {
   })
 
   return (
-    <Box mt={[null, 3]} pl={[null, null, 2]}>
+    <Box
+      mt={[null, 3]}
+      pl={[null, null, 2]}
+      css={`
+        ul,
+        li {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+      `}
+    >
       <Text as="h5" fontSize={[2]} color={[colorSchemes.default.grey]}>
         This product is found in the following collecitons:
       </Text>

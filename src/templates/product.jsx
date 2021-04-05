@@ -196,6 +196,17 @@ const Product = ({ data }) => {
                   handleChange={handleChange}
                 />
               </Box>
+              <Box
+                mt={[3]}
+                css={`
+                  text-align: center;
+                  @media (min-width: ${themeGet('breakpoints.md', '768px')}) {
+                    display: none;
+                  }
+                `}
+              >
+                <ProductCollections uuid={shopifyId} />
+              </Box>
 
               <Box
                 className="description"
