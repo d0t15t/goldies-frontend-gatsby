@@ -1,6 +1,9 @@
 .idea
 .idea/*
 
+# symlink.
+web
+
 # Project dependencies
 .cache
 node_modules
