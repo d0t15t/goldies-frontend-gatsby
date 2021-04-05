@@ -4,6 +4,7 @@ import { Box, Text } from '~components/base'
 import SocialIcons from '~components/SocialIcons'
 import Layout from '~components/Layout'
 import TeasersTiles from '~components/TeasersTiles'
+import Paragraphs from '~components/paragraphs'
 import NewsletterForm from '~components/NewsletterForm'
 import { themeGet } from '~style'
 import { extractTeasers } from '~util'
@@ -12,13 +13,15 @@ const Page = props => {
   const { data } = props
   const { node, seo } = data
   const { title, description, relationships } = node
+  console.log('🚀 ~ file: page.jsx ~ line 16 ~ relationships', relationships)
   const { blocks } = relationships
   const teasers = extractTeasers(blocks[0]?.relationships?.teasers)
 
   return (
     <>
       <Layout menu variant="frontpage" metatags={{ ...seo }}>
-        <TeasersTiles teasers={teasers} />
+        {teasers && <TeasersTiles teasers={teasers} />}
+        <Paragraphs paragraphs={blocks} />
         <Box mt={[4]}>
           <NewsletterForm />
           <SocialIcons>
@@ -53,7 +56,13 @@ export const query = graphql`
 
       relationships {
         blocks: field_blocks {
+          ... on paragraph__overview {
+            typeName: __typename
+            id
+            overview: field_view
+          }
           ... on paragraph__tiles {
+            typeName: __typename
             fieldType: __typename
             relationships {
               teasers: field_teasers {

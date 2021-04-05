@@ -148,7 +148,7 @@ const colors = {
 const defaultColorScheme = {
   base: colors.black,
   grey: '#aaaaaa',
-  link: colors.blue[500],
+  link: colors.green[700],
   link_no_contrast: colors.black,
   base_contrast: colors.blue[500],
   highlight: colors.yellow[500],

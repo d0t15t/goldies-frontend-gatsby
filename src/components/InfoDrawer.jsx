@@ -15,9 +15,21 @@ const InfoDrawer = ({
   onClose,
   onRequestSearch,
 }) => {
-  const { sideBarMenuItems } = useStaticQuery(graphql`
+  const { collectionsMenu, sideBarMenu } = useStaticQuery(graphql`
     query sideBarMenuQuery {
-      footerMenu: allMenuLinkContentMenuLinkContent(
+      collectionsMenu: allMenuLinkContentMenuLinkContent(
+        filter: { menu_name: { eq: "collections" }, enabled: { eq: true } }
+        sort: { fields: weight, order: ASC }
+      ) {
+        nodes {
+          title
+          link {
+            alias: uri_alias
+          }
+        }
+      }
+
+      sideBarMenu: allMenuLinkContentMenuLinkContent(
         filter: { menu_name: { eq: "sidebar" }, enabled: { eq: true } }
         sort: { fields: weight, order: ASC }
       ) {
@@ -31,11 +43,11 @@ const InfoDrawer = ({
     }
   `)
 
-  const menuItems = items => {
+  const getMenuItems = items => {
     return items?.map(item => {
       return (
         <Box as="li" key={uuid()} pb={[3]}>
-          <Link to={item.link.uri} from="sidebar-menu">
+          <Link to={item.link.alias} from="sidebar-menu" onClick={onClose}>
             <Text as="span" fontSize={[3]} fontStyle="italic">
               {item.title}
             </Text>
@@ -64,8 +76,8 @@ const InfoDrawer = ({
             <CloseIcon onClick={onClose} />
           </button>
         </Box>
-        <Box p={['20px']} pt="10px" minWidth={['300px']} textAlign="center">
-          <Text as="h6" pb={[4]} fontSize={[4]}>
+        <Box p={['20px']} pt="5px" minWidth={['300px']} textAlign="center">
+          <Text as="h6" pb={[4]} fontSize={[2]} fontStyle="italic">
             All collections
           </Text>
           <Box
@@ -75,6 +87,7 @@ const InfoDrawer = ({
 
               li {
                 list-style: none;
+                margin-bottom: 0;
 
                 a {
                   color: grey;
@@ -82,7 +95,9 @@ const InfoDrawer = ({
               }
             `}
           >
-            {menuItems(sideBarMenuItems?.nodes)}
+            {getMenuItems(collectionsMenu?.nodes)}
+            <li>~</li>
+            <Box pt={[3]}>{getMenuItems(sideBarMenu?.nodes)}</Box>
           </Box>
         </Box>
       </Box>

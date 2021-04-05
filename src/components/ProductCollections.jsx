@@ -6,10 +6,6 @@ import { Box, Text } from '~components/base'
 import { theme, themeGet } from '~style'
 
 const { colorSchemes } = theme
-console.log(
-  '🚀 ~ file: ProductCollections.jsx ~ line 9 ~ colorSchemes',
-  colorSchemes
-)
 
 const ProductCollections = ({ id, uuid }) => {
   const {
