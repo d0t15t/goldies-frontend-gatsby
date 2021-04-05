@@ -30,7 +30,7 @@ const MainSliderWrapper = ({ children, enlarge, handleClick }) => {
       `}
     >
       <Box className="slider-main" css="position: relative">
-        {enlarge && (
+        {/* {enlarge && (
           <Box
             as="button"
             type="button"
@@ -55,7 +55,7 @@ const MainSliderWrapper = ({ children, enlarge, handleClick }) => {
             </span>{' '}
             <CropFree />
           </Box>
-        )}
+        )} */}
         <Box
         //  width={['700px']} height={['700px']}
         >
@@ -77,7 +77,7 @@ MainSliderWrapper.defaultProps = {
 }
 
 const ModalContent = ({ curIndex, handleClick, slides }) => {
-  const [ready, setReady] = useState(false)
+  // const [ready, setReady] = useState(false)
   // useEffect(() => {
   //   const delay = setTimeout(() => setReady(true), 200)
   //   return () => delay
@@ -85,6 +85,7 @@ const ModalContent = ({ curIndex, handleClick, slides }) => {
   const slideSettings = {
     onLazyLoad: true,
   }
+  const ready = true
   return ready ? (
     <Box
       width={['700px']}
@@ -133,10 +134,6 @@ const ModalContent = ({ curIndex, handleClick, slides }) => {
 }
 
 const SlickSlider = ({ slides, slideIndex, setSlideIndex }) => {
-  // console.log(
-  //   '🚀 ~ file: Slider.jsx ~ line 136 ~ SlickSlider ~ slideIndex',
-  //   slideIndex
-  // )
   // React.useEffect(() => slickGoTo(slideIndex), [slideIndex])
   const [, dispatch] = useContext(Context)
 
@@ -147,6 +144,7 @@ const SlickSlider = ({ slides, slideIndex, setSlideIndex }) => {
   let slider2 = []
 
   React.useEffect(() => {
+    if (slides.length === 1) return
     setNav1(slider1)
     setNav2(slider2)
     return () => true
@@ -192,7 +190,7 @@ const SlickSlider = ({ slides, slideIndex, setSlideIndex }) => {
             return (
               <button
                 type="button"
-                onClick={handleClick}
+                // onClick={handleClick}
                 key={uuid()}
                 className="btn--no-style btn--enlarge-image"
               >
@@ -204,7 +202,7 @@ const SlickSlider = ({ slides, slideIndex, setSlideIndex }) => {
         </Slider>
       </MainSliderWrapper>
       {slides.length > 1 && (
-        <Box className={thumbnailClasses}>
+        <Box className={thumbnailClasses} mt={[3]}>
           <h4 className="hidden" aria-label="Slider thumbnails">
             Slider thumbnails
           </h4>

@@ -54,84 +54,11 @@ export const extractTeasers = nodes => {
   })
 }
 
-// const getWindowDimensions = () => {
-//   if (typeof window !== `undefined`) {
-//     const { innerWidth: width, innerHeight: height } = window
-//     return {
-//       width,
-//       height,
-//     }
-//   }
-
-//   return { width: 900, height: 900 }
-// }
-
-// const useWindowDimensions = () => {
-//   const [windowDimensions, setWindowDimensions] = useState(
-//     getWindowDimensions()
-//   )
-//   useEffect(() => {
-//     function handleResize() {
-//       setWindowDimensions(getWindowDimensions())
-//     }
-
-//     window.addEventListener('resize', handleResize)
-//     return () => window.removeEventListener('resize', handleResize)
-//   }, [])
-
-//   return windowDimensions
-// }
-
-// const getViewport = (height, width) => {
-//   if (width <= 0) return null
-//   let viewportName = 'xs'
-//   Object.keys(theme.breakpoints).map((key, value) => {
-//     if (!isNaN(key)) return
-//     const breakpoint = parseInt(theme.breakpoints[key], 10)
-//     if (width > breakpoint) {
-//       viewportName = key
-//     }
-//   })
-//   return viewportName ?? null
-// }
-
-// const getSearchParams = key => {
-//   const values = qs.parse(window.location.search)
-//   return key ? values[key] : values
-// }
-
-// export const formatPrice = (price, locales, currency) => {
-//   return new Intl.NumberFormat(locales, {
-//     style: 'currency',
-//     currency,
-//   }).format(price)
-// }
-
 export const toggleDrawer = (dispatch, drawersStatus, newStatus, side) => {
   const drawersStatusUpdate = drawersStatus
   drawersStatusUpdate[side] = newStatus || !drawersStatus[side]
   dispatch({ type: 'DRAWER_STATUS', drawersStatus })
 }
-
-// export async function updateQuantity(variantId, quantity) {
-//   setUpdating(true)
-//   try {
-//     await updateItemQuantity(variantId, quantity)
-//     setUpdating(false)
-//   } catch {
-//     dispatch({
-//       type: 'MODAL_CONTENT',
-//       payload: (
-//         <Text as="p">
-//           There was a problem adding updating your cart, please contact
-//           administrator.
-//         </Text>
-//       ),
-//     })
-//     dispatch({ type: 'MODAL_STATUS', payload: true })
-//     setUpdating(false)
-//   }
-// }
 
 /**
  *
@@ -147,4 +74,8 @@ export const urlIsExternal = url => {
   const array = url.split('://')
   if (typeof array[1] !== 'undefined') return true
   return array[1] !== hostname
+}
+
+export function getShopifyUuid(shopifyId, type = 'ProductVariant') {
+  return btoa(`gid://shopify/${type}/${shopifyId}`)
 }

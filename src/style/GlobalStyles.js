@@ -78,7 +78,7 @@ const GlobalStyles = createGlobalStyle`
     visibility: hidden;
     height: 0;
     width: 0;
-    position:relative;
+    position: absolute;
   }
   
   .visually-hidden {

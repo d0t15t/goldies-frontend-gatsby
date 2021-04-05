@@ -20,9 +20,11 @@ import { Link } from '~components/Link'
 import { Image } from '~components/Image'
 import Layout from '~components/Layout'
 import Slider from '~components/Slider'
+import ProductCollections from '~components/ProductCollections'
 import Seo from '~components/Seo'
 import Emoji from '~components/Emoji'
 import { theme, themeGet } from '~style'
+import { getShopifyUuid } from '~util'
 
 const ProductBreadcrumbs = ({ links }) => {
   return links.length > 0 ? (
@@ -61,7 +63,7 @@ const Product = ({ data }) => {
 
   if (!node) return null
 
-  const { description, images, title, variants } = node
+  const { description, images, shopifyId, title, variants } = node
 
   const socialSettings = {
     url: node?.onlineStoreUrl,
@@ -149,7 +151,18 @@ const Product = ({ data }) => {
                   slides={imageSlides}
                   slideIndex={slideIndex}
                   setSlideIndex={setSlideIndex}
+                  enlarge={false}
                 />
+              </Box>
+              <Box
+                css={`
+                  display: none;
+                  @media (min-width: ${themeGet('breakpoints.md', '768px')}) {
+                    display: inherit;
+                  }
+                `}
+              >
+                <ProductCollections uuid={shopifyId} />
               </Box>
             </Box>
             <Box
@@ -189,7 +202,7 @@ const Product = ({ data }) => {
                 dangerouslySetInnerHTML={{ __html: description }}
                 // mt={[1, 0]}
                 width={[1]}
-                p={[3, 0]}
+                p={[2, 0]}
                 pt={[2, 3]}
               />
             </Box>
@@ -209,6 +222,7 @@ export const query = graphql`
       handle: { eq: $handle }
       availableForSale: { eq: true }
     ) {
+      shopifyId
       title
       tags
       description: descriptionHtml

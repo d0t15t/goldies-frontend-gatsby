@@ -36,64 +36,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   })
 }
 
-/* Schema.
- */
-// exports.createSchemaCustomization = ({ actions }) => {
-//   const { createTypes } = actions
-//   const typeDefs = `
-//     type paragraph__teaser implements Node {
-//       relationships: paragraph__teaserRelationships
-//     }
-//     type paragraph__teaserRelationships {
-//       field_page: node__page @link(from: "field_page___NODE")
-//     }
-//   `
-//   createTypes(typeDefs)
-// }
-
-/* Create nodes.
- */
-
-// exports.onCreateNode = ({ node, getNode, actions }) => {
-//   const { createNodeField } = actions
-//   const pageTypes = [
-//     { id: 'ShopifyCollection', type: 'collection' },
-//     { id: 'ShopifyProduct', type: 'product' },
-//   ]
-
-//   pageTypes.filter(item => {
-//     if (item.id === node.internal.type) {
-//       createNodeField({
-//         node,
-//         name: 'uri',
-//         value: `/${item.type}s/${node.handle}/`,
-//       })
-//       createNodeField({
-//         node,
-//         name: 'type',
-//         value: item.type,
-//       })
-//       return false
-//     }
-//   })
-
-//   const nodeTypes = {''}
-
-//   if (node.internal.type === 'node__page') {
-//     createNodeField({
-//       node,
-//       name: 'uri',
-//       value: node.path.alias,
-//     })
-//     createNodeField({
-//       node,
-//       name: 'type',
-//       value: 'page',
-//     })
-//     return false
-//   }
-// }
-
 /**
  * createPages()
  */

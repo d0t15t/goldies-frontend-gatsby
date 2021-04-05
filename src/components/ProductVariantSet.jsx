@@ -59,24 +59,24 @@ const ProductVariantSet = ({
   return (
     <>
       {/* Options selector */}
-      {hasVariants ? <Box mb={[2]}>{getOptions()}</Box> : '~'}
-      <Flex
-        mb={[1]}
-        css={`
-          > * {
-            line-height: 40px;
-            width: 50%;
-            display: ${hasVariants ? 'none' : 'inherit'};
-          }
-        `}
-      >
-        <Text fontSize={[3]} mr={[2]} textAlign={['right']}>
-          {getVariantTitle()}
-        </Text>
-        <Text fontSize={[4]} ml={[2]} textAlign={['left']}>
-          ${activeItem.price}
-        </Text>
-      </Flex>
+      {hasVariants && <Box mb={[3]}>{getOptions()}</Box>}
+      {!hasVariants && (
+        <Flex
+          mb={[3]}
+          justifyContent={['center', 'left']}
+          css={`
+            > * {
+              line-height: 35px;
+            }
+          `}
+        >
+          <Text mr={[2]}>{getVariantTitle()}</Text>
+          <Text as="span">~</Text>
+          <Text pl={[2]} fontSize={[4]}>
+            ${activeItem.price}
+          </Text>
+        </Flex>
+      )}
       <Flex mb={[2, 3]} justifyContent={['center', 'left']} pt={[0, 1]}>
         <IncrementNumberButtons
           minimum={1}
@@ -114,6 +114,7 @@ const ProductVariantSet = ({
         />
       </Box>
       <Box
+        pt={[3]}
         css={`
           @media (min-width: ${themeGet('breakpoints.md', '768px')}) {
             display: none;
