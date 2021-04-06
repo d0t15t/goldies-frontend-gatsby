@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
-import qs from 'query-string'
-import { theme } from '~style'
+import btoa from 'btoa'
 
 const backendUrl = process.env.GATSBY_DRUPAL_ROOT
 const frontendUrl = process.env.GATSBY_SITE_BASE

@@ -13,7 +13,7 @@ const Page = props => {
   const { data } = props
   const { node, seo } = data
   const { title, description, relationships } = node
-  console.log('🚀 ~ file: page.jsx ~ line 16 ~ relationships', relationships)
+
   const { blocks } = relationships
   const teasers = extractTeasers(blocks[0]?.relationships?.teasers)
 
