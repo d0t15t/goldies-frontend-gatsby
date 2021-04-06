@@ -21,7 +21,6 @@ const getOverview = node => {
 }
 
 const Overview = ({ node }) => {
-  console.log('🚀 ~ file: index.jsx ~ line 6 ~ Overview ~ node', node)
   return getOverview(node)
 }
 

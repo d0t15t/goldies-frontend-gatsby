@@ -12,7 +12,7 @@ import { toggleDrawer } from '~util'
 
 const Header = () => {
   const [state, dispatch] = useContext(Context)
-  // console.log('🚀 ~ file: Header.jsx ~ line 14 ~ Header ~ state', state)
+
   const { drawersStatus } = state
 
   const inputEl = useRef(null)

@@ -5,10 +5,6 @@ import { Box, Flex, Text } from '~components/base'
 import { Link } from '~components/Link'
 
 const Stockist = ({ children, address, link, image }) => {
-  console.log(
-    '🚀 ~ file: stockists.jsx ~ line 8 ~ Stockist ~ children',
-    children
-  )
   const item = (
     <Box as="article">
       <Text as="h5">{children}</Text>
@@ -46,7 +42,6 @@ const Stockists = props => {
 
   const getItems = nodes => {
     return nodes.map(node => {
-      console.log('🚀 ~ file: stockists.jsx ~ line 45 ~ item', node)
       const data = {
         link: node.link?.uri,
         // image
