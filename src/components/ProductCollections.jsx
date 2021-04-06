@@ -52,7 +52,10 @@ const ProductCollections = ({ id, uuid }) => {
 
   function getDrupalCollections(collections, drupalCollections) {
     return drupalCollections.reduce((sum, cur) => {
-      const curUuid = getShopifyUuid(cur.relationships.shopify.id, 'Collection')
+      const curUuid = getShopifyUuid(
+        cur.relationships.shopify?.id,
+        'Collection'
+      )
       const find = collections.find(item => item.shopifyId === curUuid)
       return find ? sum.concat(cur) : sum
     }, [])

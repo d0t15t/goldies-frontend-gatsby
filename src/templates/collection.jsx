@@ -55,7 +55,7 @@ const Collection = ({ data }) => {
     )
   }
 
-  const shopifyProducts = getProductData(shopifyCollection.products)
+  const shopifyProducts = getProductData(shopifyCollection?.products)
 
   const customProducts = getCustomProductData(
     node.relationships?.products,
