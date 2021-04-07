@@ -8,8 +8,6 @@ import { Flex, Box, Text } from '~components/base'
 import styled, { themeGet } from '~style'
 import { extractQueryImage } from '~util'
 
-// console.log(data)
-
 const TileTeasers = ({ blocks }) => {
   const { relationships } = blocks
   const { field_teasers } = relationships
@@ -30,16 +28,6 @@ const TileTeasers = ({ blocks }) => {
     return sets
   }
 
-  const chunks = makeRowChunks()
-
-  const Row = styled(Box)`
-    // + li {
-    //   padding-left: ${themeGet('space.unit.base', '13px')};
-    // }
-    border: 1px solid;
-    border-color: ${themeGet('colorSchemes.default.base_contrast', '#f00000')};
-  `
-
   const Teaser = ({ title, path, image }) => {
     return (
       <Box as="article" height={['100%']}>
@@ -52,9 +40,6 @@ const TileTeasers = ({ blocks }) => {
         </Link>
       </Box>
     )
-  }
-  const TeaserRow = ({ children }) => {
-    return <Box className="teaser-row">{children}</Box>
   }
 
   const teaserWidth = index => {

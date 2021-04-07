@@ -53,6 +53,7 @@ const Teaser = props => {
         <Text as="h4">{subTitle}</Text>
       </Box>
     )
+    return 'test'
     return (
       <>
         <BgImage
@@ -79,7 +80,11 @@ const Teaser = props => {
       css="position: relative"
     >
       {uri ? (
-        <Link className="transition-element" to={uri} from="Product teaser">
+        <Link
+          className="transition-element tile-link-findme"
+          to={uri}
+          from="Product teaser"
+        >
           <TeaserContent />
         </Link>
       ) : (
