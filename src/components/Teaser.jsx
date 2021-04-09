@@ -79,7 +79,7 @@ const Teaser = props => {
       height={['100%']}
       css="position: relative"
     >
-      {!uri ? (
+      {uri ? (
         <Link
           className="transition-element tile-link-findme"
           to={uri}
