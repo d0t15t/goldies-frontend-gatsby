@@ -2,10 +2,12 @@ import React, { Fragment } from 'react'
 import { arrayOf, shape, string } from 'prop-types'
 import { graphql } from 'gatsby'
 
+import TeasersTiles from '~components/TeasersTiles'
 import Overview from '~components/views'
 
 const components = {
   paragraph__overview: Overview,
+  paragraph__tiles: TeasersTiles,
   // paragraph__announcement: Announcement,
 }
 
@@ -22,7 +24,7 @@ const getParagraph = node => {
   )
 }
 
-export const Paragraphs = ({ paragraphs }) => {
+const Paragraphs = ({ paragraphs }) => {
   return (
     <>
       {paragraphs.map(item => {

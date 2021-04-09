@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { BgImage, Image } from '~components/Image'
+import { Image } from '~components/Image'
 import { Box, Text } from '~components/base'
 import { Link } from '~components/Link'
 import { themeGet } from '~style'

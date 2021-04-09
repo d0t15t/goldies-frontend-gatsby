@@ -1,12 +1,15 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import uuid from 'react-uuid'
-import PropTypes from 'prop-types'
+import { shape } from 'prop-types'
 import { Box } from '~components/base'
-import { themeGet, theme } from '~style'
+import { themeGet } from '~style'
 import Teaser from '~components/Teaser'
+import { extractTeasers } from '~util'
 
-const TeasersTiles = ({ teasers }) => {
+const TeasersTiles = ({ node }) => {
+  const teasers = extractTeasers(node.relationships?.teasers)
+
   const baseClassName = 'teasers-grid'
 
   const makeRowChunks = () => {
@@ -120,7 +123,7 @@ const TeasersTiles = ({ teasers }) => {
 }
 
 TeasersTiles.propTypes = {
-  teasers: PropTypes.arrayOf(Teaser).isRequired,
+  node: shape({}).isRequired,
 }
 
 export default TeasersTiles

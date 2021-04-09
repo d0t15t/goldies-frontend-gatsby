@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import { Box, Text } from '~components/base'
 import SocialIcons from '~components/SocialIcons'
 import Layout from '~components/Layout'
-import TeasersTiles from '~components/TeasersTiles'
+
 import Paragraphs from '~components/paragraphs'
 import NewsletterForm from '~components/NewsletterForm'
 import { themeGet } from '~style'
@@ -15,12 +15,11 @@ const Page = props => {
   const { title, description, relationships } = node
 
   const { blocks } = relationships
-  const teasers = extractTeasers(blocks[0]?.relationships?.teasers)
 
   return (
     <>
       <Layout menu variant="frontpage" metatags={{ ...seo }}>
-        {teasers && <TeasersTiles teasers={teasers} />}
+        {/* {teasers && <TeasersTiles teasers={teasers} />} */}
         <Paragraphs paragraphs={blocks} />
         <Box mt={[4]}>
           <NewsletterForm />
@@ -63,6 +62,7 @@ export const query = graphql`
           }
           ... on paragraph__tiles {
             typeName: __typename
+            id
             fieldType: __typename
             relationships {
               teasers: field_teasers {
