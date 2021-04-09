@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { BgImage } from '~components/Image'
+import { BgImage, Image } from '~components/Image'
 import { Box, Text } from '~components/base'
 import { Link } from '~components/Link'
 import { themeGet } from '~style'
@@ -56,7 +56,7 @@ const Teaser = props => {
     // return 'test'
     return (
       <>
-        <BgImage
+        <Image
           className="teaser--background transition-element"
           fluid={image}
           height={['100%']}
@@ -66,7 +66,7 @@ const Teaser = props => {
             className="visibly-hidden"
             aria-label={`${title} - page link`}
           />
-        </BgImage>
+        </Image>
         {teaserStyle === 'with_text' && <TeaserOverlay />}
       </>
     )

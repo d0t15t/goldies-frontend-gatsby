@@ -102,6 +102,11 @@ const TeasersTiles = ({ teasers }) => {
                   width={teaserWidth(teaserIndex, rowIndex)}
                   height={teaserHeight(teaserIndex, rowIndex)}
                   p={[2]}
+                  css={`
+                    .gatsby-image-wrapper {
+                      height: 100%;
+                    }
+                  `}
                 >
                   <Teaser {...teaser} />
                 </Box>
