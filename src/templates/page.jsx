@@ -7,14 +7,10 @@ import Layout from '~components/Layout'
 import Paragraphs from '~components/paragraphs'
 import NewsletterForm from '~components/NewsletterForm'
 import { themeGet } from '~style'
-import { extractTeasers } from '~util'
 
-const Page = props => {
-  const { data } = props
+const Page = ({ data }) => {
   const { node, seo } = data
-  const { title, description, relationships } = node
-
-  const { blocks } = relationships
+  const { blocks } = node.relationships
 
   return (
     <>
