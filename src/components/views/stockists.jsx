@@ -68,10 +68,30 @@ const Stockists = props => {
     }
   `)
 
+  function getAddress(obj) {
+    function getLine(line) {
+      return (
+        line && (
+          <>
+            <span>{line}</span>
+            <br />
+          </>
+        )
+      )
+    }
+    const parts = [
+      obj?.address_line1,
+      obj?.address_line2,
+      `${obj?.locality} ${obj?.administrative_area} ${obj?.postal_code}`,
+    ]
+    if (!obj) return null
+    return parts.map(line => getLine(line))
+  }
+
   const getItems = nodes => {
     return nodes.map(node => {
-      console.log('🚀 ~ file: stockists.jsx ~ line 73 ~ node', node)
       const data = {
+        address: getAddress(node?.address),
         link: node.link?.uri,
         image: extractImages(node.relationships).shift(),
       }
