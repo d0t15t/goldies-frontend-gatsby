@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
+import { Box } from '~components/base'
 import Stockists from './stockists'
 
 const overviews = {
@@ -21,7 +22,11 @@ const getOverview = node => {
 }
 
 const Overview = ({ node }) => {
-  return getOverview(node)
+  return (
+    <Box width={[5 / 6, 2 / 3]} mb={[null, 3]} m={['auto']} mt={['20px']}>
+      {getOverview(node)}
+    </Box>
+  )
 }
 
 export default Overview

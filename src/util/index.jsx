@@ -29,10 +29,10 @@ export const extractImage = (parent, teaserType) => {
   if (media) {
     return extractImage(media?.relationships, teaserType)
   }
-  Object.keys(parent).forEach(item => {
-    // console.log(item, teaserType)
-    // console.log(relationships[item])
-  })
+  // Object.keys(parent).forEach(item => {
+  //   // console.log(item, teaserType)
+  //   // console.log(relationships[item])
+  // })
 
   // relationships.keys().forEach(item => {
   //   console.log(item)
@@ -41,13 +41,33 @@ export const extractImage = (parent, teaserType) => {
   return null
 }
 
+/**
+ * @param {Object} parent
+ */
+export const extractImages = parent => {
+  const images = []
+  const { media } = parent || {}
+  if (media) {
+    if (media?.relationships) {
+      images.push(extractImage(media.relationships))
+    } else if (Array.isArray(media)) {
+      media.forEach(item => {
+        if (item?.relationships) {
+          images.push(extractImage(item.relationships))
+        }
+      })
+    }
+  }
+  return images
+}
+
 export const extractTeasers = nodes => {
   return nodes?.map(node => {
     return {
       ...node,
       title: node.title || node.relationships.content.title,
       image: extractImage(node.relationships),
-      uri: node.relationships.content.path.alias,
+      uri: node.relationships.content?.path?.alias,
     }
   })
 }
