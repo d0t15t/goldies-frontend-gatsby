@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { node } from 'prop-types'
 import { Box, Flex, Text } from '~components/base'
@@ -6,23 +6,22 @@ import { Image } from '~components/Image'
 import { Link } from '~components/Link'
 import { extractImages } from '~util'
 
-const Stockist = ({ address, children, link, image }) => {
-  const item = (
-    <Box as="article">
-      <Text as="h5">{children}</Text>
-      <Box>{address}</Box>
-      {image && <Image fluid={image} />}
-    </Box>
-  )
+const Stockist = ({ address, id, name, link, image }) => {
   return (
-    <Box width={[1 / 2, 1 / 3, 1 / 4]}>
-      {' '}
-      {link ? (
-        <Link to={link} from="Stockists page">
-          {item}
-        </Link>
-      ) : (
-        <>{item}</>
+    <Box width={[1 / 2, 1 / 3]} pb={4} key={id}>
+      {/* {image && <Image fluid={image} pb={[3]} />} */}
+      <Text as="h5" mb={[3]}>
+        {name}
+      </Text>
+      <Box color="black" fontSize={[1]} pr={[3]}>
+        {address}
+      </Box>
+      {link && (
+        <Text pt={[2]} fontSize={1}>
+          <Link to={link} from="Stockists page" target="_blank">
+            {link}
+          </Link>
+        </Text>
       )}
     </Box>
   )
@@ -72,10 +71,10 @@ const Stockists = props => {
     function getLine(line) {
       return (
         line && (
-          <>
+          <Fragment key={line}>
             <span>{line}</span>
             <br />
-          </>
+          </Fragment>
         )
       )
     }
@@ -92,17 +91,19 @@ const Stockists = props => {
     return nodes.map(node => {
       const data = {
         address: getAddress(node?.address),
+        id: node.id,
         link: node.link?.uri,
         image: extractImages(node.relationships).shift(),
+        name: node.title,
       }
-      return (
-        <Stockist key={node.id} {...data}>
-          {node.title}
-        </Stockist>
-      )
+      return <Stockist {...data} key={node.id} />
     })
   }
-  return <Flex width={[1]}>{getItems(allStockists.nodes)}</Flex>
+  return (
+    <Flex flexWrap="wrap" width={[1]}>
+      {getItems(allStockists.nodes)}
+    </Flex>
+  )
 }
 
 export default Stockists

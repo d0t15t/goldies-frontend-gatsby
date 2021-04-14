@@ -15,7 +15,20 @@ const Page = ({ data }) => {
   return (
     <>
       <Layout menu variant="frontpage" metatags={{ ...seo }}>
-        {/* {teasers && <TeasersTiles teasers={teasers} />} */}
+        
+        {node?.body?.value && 
+          <Box
+            className="description"
+            width={[5 / 6, 2 / 3]}
+            pt={[3]}
+            m={['auto']}
+          >
+            <Text as="h2" fontSize={[2]} dangerouslySetInnerHTML={{ __html: node.body.value }} textAlign='center' />
+          </Box>
+          }
+
+        
+
         <Paragraphs paragraphs={blocks} />
         <Box mt={[4]}>
           <NewsletterForm />
@@ -45,8 +58,8 @@ export const query = graphql`
   query($id: String!, $nid: String!) {
     node: nodePage(id: { eq: $id }) {
       title
-      description: body {
-        value
+      body {
+        value: processed
       }
 
       relationships {
