@@ -5,6 +5,7 @@ import Drawer from '@material-ui/core/Drawer'
 import CloseIcon from '@material-ui/icons/Close'
 import { Link } from '~components/Link'
 import { Box, Text } from '~components/base'
+import SearchForm from '~components/SearchForm'
 
 const InfoDrawer = ({
   anchor,
@@ -15,6 +16,7 @@ const InfoDrawer = ({
   onClose,
   onRequestSearch,
 }) => {
+  open = true
   const { collectionsMenu, sideBarMenu } = useStaticQuery(graphql`
     query sideBarMenuQuery {
       collectionsMenu: allMenuLinkContentMenuLinkContent(
@@ -75,6 +77,9 @@ const InfoDrawer = ({
           <button type="button" className="btn--no-style">
             <CloseIcon onClick={onClose} />
           </button>
+        </Box>
+        <Box pl={[3]} pr={[3]}>
+          <SearchForm />
         </Box>
         <Box p={['20px']} pt="5px" minWidth={['300px']} textAlign="center">
           <Text as="h6" pb={[4]} fontSize={[2]} fontStyle="italic">

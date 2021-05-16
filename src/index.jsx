@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-oldschool-dark'
@@ -14,6 +15,12 @@ const shopifyAccess = {
 }
 
 const Layout = ({ children }) => {
+  const [state, setState] = useState(0)
+  useEffect(() => {
+    window.onpopstate = e => {
+      // window.location.reload()
+    }
+  }, [state])
   return (
     <ContextProvider>
       <ThemeContext.Consumer>

@@ -59,7 +59,7 @@ const Footer = () => {
         overflow: hidden;
       `}
       p={[3]}
-      pt={['100px']}
+      pt={['120px']}
       pb={['50px']}
       className={`${baseClass}`}
     >
