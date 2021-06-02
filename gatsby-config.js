@@ -119,6 +119,27 @@ module.exports = {
       //   linkStyles: true, // (default: true) Enable/disable loading stylesheets via CDN
       // },
     },
+    {
+      resolve: `@gatsby-contrib/gatsby-plugin-elasticlunr-search`,
+      options: {
+        // Fields to index
+        fields: [
+          `title`,
+          // `tags`
+        ],
+        // How to resolve each field`s value for a supported node type
+        resolvers: {
+          // For any node of type MarkdownRemark, list how to resolve the fields` values
+          node__product: {
+            title: node => node.title,
+            // tags: node => node.relationships.node__collection.title,
+            path: node => node.path.alias,
+          },
+        },
+        // Optional filter to limit indexed nodes
+        // filter: (node, getNode) => node.frontmatter.tags !== "exempt",
+      },
+    },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-offline',
