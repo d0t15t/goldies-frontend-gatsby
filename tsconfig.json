@@ -7,7 +7,15 @@
     "noEmit": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ES2017"
+    "target": "ES2017",
+    "baseUrl": "src",
+    "paths": {
+      "~components": ["./src/components"],
+      "~g": ["./src/gatsby"],
+      "~hooks": ["./src/hooks"],
+      "~src": ["./src"],
+      "~static": ["./static"],
+    }
   },
   "include": ["./src/**/*"]
 }
