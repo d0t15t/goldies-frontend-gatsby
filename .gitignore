@@ -65,3 +65,6 @@ yarn-error.log
 
 # Yarn Integrity file
 .yarn-integrity
+
+#IDE
+.vscode

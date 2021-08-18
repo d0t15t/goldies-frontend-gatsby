@@ -1,23 +1,33 @@
 module.exports = {
   root: true,
-  extends: ['airbnb', 'airbnb/hooks', 'plugin:prettier/recommended'],
+  extends: [
+    'airbnb',
+    'airbnb/hooks',
+    'eslint:recommended',
+    'plugin:import/typescript',
+    'plugin:import/recommended',
+    'plugin:prettier/recommended',
+  ],
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
+    tsconfigRootDir: __dirname,
   },
   env: {
     browser: true,
     node: true,
   },
+  plugins: ['import'],
   rules: {
     'import/no-extraneous-dependencies': 'off',
     'import/prefer-default-export': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     'react/jsx-one-expression-per-line': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'import/no-unresolved': 'error',
   },
   overrides: [
     {
@@ -33,4 +43,15 @@ module.exports = {
       },
     },
   ],
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+        project: './',
+      },
+    },
+  },
 };

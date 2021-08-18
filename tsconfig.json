@@ -8,13 +8,14 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2017",
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "moduleResolution": "node",
     "paths": {
-      "~components": ["./src/components"],
-      "~g": ["./src/gatsby"],
-      "~hooks": ["./src/hooks"],
-      "~src": ["./src"],
-      "~static": ["./static"],
+      "~components/*": ["./src/components/*"],
+      "~g/*": ["./src/gatsby/*"],
+      "~hooks/*": ["./src/hooks/*"],
+      "~src/*": ["./src/*"],
+      "~static/*": ["./static/*"],
     }
   },
   "include": ["./src/**/*"]
