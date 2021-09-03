@@ -3,7 +3,7 @@ module.exports = {
     baseUrl: '.',
     paths: {
       '~components/*': ['./src/components/*'],
-      '~g/*': ['./src/gatsby/*'],
+      '~utils/*': ['./src/utils/*'],
       '~hooks/*': ['./src/hooks/*'],
       '~src/*': ['./src/*'],
       '~static/*': ['./static/*'],

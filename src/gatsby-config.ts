@@ -14,6 +14,17 @@ dotenv.config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+const shopifyShopVars = {
+  shopName: process.env.GATSBY_SHOP_NAME,
+  shopToken: process.env.GATSBY_SHOPIFY_ACCESS_TOKEN,
+};
+
+const drupalVars = {
+  url: process.env.GATSBY_DRUPAL_ROOT,
+  user: process.env.GATSBY_DRUPAL_API_USER_NAME,
+  password: process.env.GATSBY_DRUPAL_API_USER_PASS,
+};
+
 const gatsbyConfig: GatsbyConfig = {
   siteMetadata: {
     title: 'Gatsby Skeleton',
@@ -38,26 +49,47 @@ const gatsbyConfig: GatsbyConfig = {
     {
       resolve: `gatsby-theme-shopify-manager`,
       options: {
-        // shopName: process.env.GATSBY_SHOP_NAME,
-        shopName: 'goldies-natural-beauty',
-        // accessToken: '47477a2978fa2f2abd99622b69fe4dee',
-        accessToken: process.env.GATSBY_SHOPIFY_ACCESS_TOKEN,
+        shopName: shopifyShopVars.shopName,
+        accessToken: shopifyShopVars.shopToken,
         shouldConfigureSourcePlugin: false,
       },
     },
     {
-      resolve: `gatsby-source-drupal`,
+      resolve: 'gatsby-source-drupal',
       options: {
-        baseUrl: process.env.GATSBY_DRUPAL_ROOT,
+        baseUrl: drupalVars.url,
         basicAuth: {
-          username: process.env.GATSBY_DRUPAL_API_USER_NAME,
-          password: process.env.GATSBY_DRUPAL_API_USER_PASS,
+          username: drupalVars.user,
+          password: drupalVars.password,
         },
-        filters: {
-          nodes: `${process.env.GATSBY_DRUPAL_ROOT}jsonapi/node/page`,
-        },
+        // filters: {
+        //   nodes: `${process.env.GATSBY_DRUPAL_ROOT}jsonapi/node/page`,
+        // },
       },
     },
+    {
+      resolve: 'gatsby-source-drupal-rest',
+      options: {
+        endpoints: [
+          // `${drupalVars.url}/rest/menu-item`,
+          // `${drupalVars.url}/rest/meta-tags?type=node&bundle=page`,
+          // `${drupalVars.url}/rest/meta-tags?type=node&bundle=collection`,
+          // `${drupalVars.url}/rest/meta-tags?type=node&bundle=product`,
+        ],
+        basicAuth: {
+          username: drupalVars.user,
+          password: drupalVars.password,
+        },
+        concurrentFileRequests: 1,
+      },
+    },
+    // {
+    //   resolve: `gatsby-source-drupal-menu-links`,
+    //   options: {
+    //     baseUrl: process.env.GATSBY_DRUPAL_ROOT,
+    //     menus: ['main', 'sidebar'],
+    //   },
+    // },
     {
       resolve: 'gatsby-plugin-styled-components',
       options: {
@@ -72,10 +104,10 @@ const gatsbyConfig: GatsbyConfig = {
       },
     },
     'gatsby-plugin-svgr',
-    'gatsby-transformer-sharp',
     'gatsby-plugin-image',
-    'gatsby-plugin-react-helmet',
     'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
   ],
 };

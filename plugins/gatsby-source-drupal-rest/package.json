@@ -1,0 +1,32 @@
+{
+  "name": "gatsby-source-drupal-rest",
+  "version": "0.0.1",
+  "description": "A fork of gatsby-source-rest-api",
+  "main": "index.js",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-source",
+    "gatsby-source-plugin",
+    "gatsby-source-rest-api",
+    "gatsby-rest-api-plugin",
+    "gatsby-rest-api",
+    "rest-api",
+    "drupal"
+  ],
+  "author": "Isaac Bigsby Trogdon <i.trogdon@loom.de>",
+  "license": "MIT",
+  "dependencies": {
+    "base-64": "^0.1.0",
+    "bluebird": "^3.7.2",
+    "fetch-multiple": "^1.2.3",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-preset-minify": "^0.5.0",
+    "cross-env": "^5.2.0"
+  }
+}

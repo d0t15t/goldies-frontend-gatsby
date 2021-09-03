@@ -21,6 +21,11 @@ export default (plop: NodePlopAPI) => {
         path: './src/components/{{name}}/{{name}}.styled.ts',
         templateFile: './templates/component/component.styled.hbs',
       },
+      {
+        type: 'add',
+        path: './src/components/{{name}}/README.md',
+        templateFile: './templates/component/component.readme.hbs',
+      },
     ],
   });
   plop.setGenerator('page', {

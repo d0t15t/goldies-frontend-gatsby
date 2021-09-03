@@ -49,3 +49,7 @@ declare module '*.svg' {
   const src: string;
   export default src;
 }
+
+declare module 'gatsby-theme-shopify-manager';
+
+// declare module './src/components/index';
