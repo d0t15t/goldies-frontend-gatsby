@@ -154,17 +154,3 @@ exports.createPages = async ({ graphql, actions }) => {
 
   return Promise.all(promises);
 };
-
-// exports.onCreateWebpackConfig = ({ actions }) => {
-//   actions.setWebpackConfig({
-//     resolve: {
-//       alias: {
-//         '~components': path.resolve(__dirname, './src/components'),
-//         '~static': path.resolve(__dirname, './static'),
-//         '~hooks': path.resolve(__dirname, './src/hooks'),
-//         '~g/*': path.resolve(__dirname, './src/gatsby/*'),
-//         '~src': path.resolve(__dirname, './src'),
-//       },
-//     },
-//   });
-// };

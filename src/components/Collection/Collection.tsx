@@ -18,16 +18,19 @@ export default Collection;
 
 export const query = graphql`
   fragment collectionPageFragment on Query {
-    collection: nodeCollection(id: { eq: $id }) {
+    node__collection: nodeCollection(id: { eq: $id }) {
       id
       title
-      path {
-        alias
-      }
       internal {
         type
       }
-      relationships {
+      path {
+        alias
+      }
+      headline: field_headline {
+        processed
+      }
+      re: relationships {
         field_products {
           id
           internal {

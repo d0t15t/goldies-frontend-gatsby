@@ -5,10 +5,14 @@ import { AddToCart } from '~components/AddToCart/AddToCart';
 
 import * as S from './Product.styled';
 
-export const Product: FunctionComponent = ({ data }) => {
+interface ProductProps {
+  data: object;
+}
+
+export const Product: FunctionComponent<ProductProps> = ({ data }: ProductProps) => {
   const { node } = data;
 
-  const { id, relationships, title } = node;
+  const { id, rels, title } = node;
   const [product, variants] = getProductParts(node);
 
   const Variant = ({ v }) => {
@@ -44,21 +48,21 @@ export default Product;
 
 export const query = graphql`
   fragment productPageFragment on Query {
-    product: nodeProduct(id: { eq: $id }) {
+    node__product: nodeProduct(id: { eq: $id }) {
       id
       title
-      path {
-        alias
-      }
       internal {
         type
       }
-      relationships {
+      path {
+        alias
+      }
+      rels: relationships {
         product: field_shopify_product {
           shopifyId: product_id
           id
           title
-          relationships {
+          rels: relationships {
             variants {
               id
               shopifyId: variant_id

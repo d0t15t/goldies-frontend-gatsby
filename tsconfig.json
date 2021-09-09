@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
     "lib": ["DOM", "ES2017"],
     "module": "CommonJS",
     "noEmit": true,
@@ -18,5 +19,6 @@
       "~static/*": ["./static/*"],
     }
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*"],
+  
 }

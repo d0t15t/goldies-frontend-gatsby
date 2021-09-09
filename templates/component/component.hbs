@@ -1,10 +1,12 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC, ReactNode } from 'react';
 import * as S from './{{name}}.styled';
 
-interface {{name}}Props {}
+interface {{name}}Props {
+  children: ReactNode;
+}
 
-export const {{name}}: FunctionComponent<{{name}}Props> = () => {
-  return <S.Container>{{name}}</S.Container>;
+export const {{name}}: FC<{{name}}Props> = ({children}) => {
+  return <S.Container>{{name}}{children}</S.Container>;
 };
 
 export default {{name}};
