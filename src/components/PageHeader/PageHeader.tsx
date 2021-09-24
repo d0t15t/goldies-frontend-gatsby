@@ -1,5 +1,6 @@
 import React, { FC, Fragment, ReactNode } from 'react';
-import { Logo } from '~components/index';
+
+import { Link, Logo } from '~components/index';
 import * as S from './PageHeader.styled';
 
 export interface PageHeaderProps {
@@ -12,11 +13,13 @@ export interface PageHeaderProps {
 export const PageHeader: FC<PageHeaderProps> = ({ body, children, title }) => {
   return (
     <>
-      <Logo />
+      <Link url="/">
+        <Logo />
+      </Link>
       <S.Container dangerouslySetInnerHTML={{ __html: `${title}${body}` }} />
       {children}
     </>
   );
 };
 
-export default PageHeader;
+// export default PageHeader;

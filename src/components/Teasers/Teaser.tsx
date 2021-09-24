@@ -1,25 +1,37 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { FunctionComponent } from 'react';
-import Img, { FluidObject } from 'gatsby-image';
-import { Link } from '~components/index';
+import React, { FC } from 'react';
+import { Image, Link } from '~components/index';
 import * as S from './Teaser.styled';
 
 export interface TeaserProps {
   id: string;
-  // imageFluid: FluidObject;
   subTitle: string;
+  teaserStyle: string | null;
   title: string;
-  url: string;
+  url: string | null;
 }
 
-export const Teaser: FunctionComponent<TeaserProps> = ({ title, subTitle, url, imageFluid }) => {
+export const Teaser: FC<TeaserProps> = ({ teaserStyle, title, subTitle, url, image }) => {
+  const TeaserInner = () => {
+    return (
+      <>
+        <S.TitleWrapper>
+          <S.Title>{title}</S.Title>
+          <S.SubTitle>{subTitle}</S.SubTitle>
+        </S.TitleWrapper>
+        {image && <Image data={image} alt={title || ''} />}
+      </>
+    );
+  };
   return (
     <S.Container>
-      <Link url={url}>
-        {title}
-        {subTitle}
-        {/* <Img fluid={imageFluid} /> */}
-      </Link>
+      {url ? (
+        <Link url={url}>
+          <TeaserInner />
+        </Link>
+      ) : (
+        <TeaserInner />
+      )}
     </S.Container>
   );
 };

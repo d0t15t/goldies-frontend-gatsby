@@ -3,13 +3,13 @@
  */
 
 import path from 'path';
+import * as U from './utils';
 
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
 const frontPageId = process.env.GATSBY_DRUPAL_FRONTPAGE_ID;
-// import { g } from './utils';
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -21,69 +21,28 @@ exports.createPages = async ({ graphql, actions }) => {
     return nid === frontPageId ? '/' : node?.path?.alias || `/node/${node.nid}`;
   };
 
-  const getComponent = (componentName: string) =>
-    path.resolve(`./src/components/${componentName}/${componentName}.tsx`);
+  // const getComponent = (componentName: string) =>
+  //   path.resolve(`./src/components/${componentName}/${componentName}.tsx`);
 
-  // const doCreatePage = ({ componentName, node }) => {
-  //   const capitalizeFirstLetter = (string: string) => {
-  //     return string.charAt(0).toUpperCase() + string.slice(1);
-  //   };
-  //   createPage({
-  //     component: getComponent(componentName),
-  //     path: getPath(node),
-  //     context: {
-  //       id: node.id,
-  //     },
-  //   });
-  //   return true;
-  // };
-
-  const getTemplate = async ({ nodeType, nodes }) => {
-    const templates = {
-      collection: ({ nodeType, nodes }) => {
-        nodes.forEach((node) => {
-          createPage({
-            component: getComponent('Page'),
-            path: getPath(node),
-            context: {
-              id: node.id,
-            },
-          });
-          return true;
-        });
-      },
-      page: ({ nodeType, nodes }) => {
-        nodes.forEach((node) => {
-          createPage({
-            component: getComponent('Page'),
-            path: getPath(node),
-            context: {
-              id: node.id,
-            },
-          });
-          return true;
-        });
-      },
-      product: ({ nodeType, nodes }: Object) => {
-        nodes.forEach((node) => {
-          createPage({
-            component: getComponent('Page'),
-            path: getPath(node),
-            context: {
-              id: node.id,
-            },
-          });
-          return true;
-        });
-      },
-    };
-    return templates[nodeType]({ nodeType, nodes });
+  const doCreateNodes = ({ nodeType, nodes }) => {
+    return nodes.forEach((node) => {
+      createPage({
+        // component: getComponent(U.capitalizeFirstLetter(nodeType)),
+        component: path.resolve(`./src/templates/Page/Page.tsx`),
+        path: getPath(node),
+        context: {
+          id: node.id,
+        },
+      });
+      return true;
+    });
+    return true;
   };
 
   const processQueryItems = (data) => {
     return Object.keys(data).forEach((nodeType) => {
       const nodes = data[nodeType]?.nodes;
-      return getTemplate({ nodeType, nodes });
+      return doCreateNodes({ nodeType, nodes });
     });
   };
 

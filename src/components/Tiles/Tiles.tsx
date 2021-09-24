@@ -1,21 +1,19 @@
 import React, { FC, ReactNode } from 'react';
 import * as S from './Tiles.styled';
-import Teasers, { TeasersProps } from '~components/Teasers/Teasers';
+import { Teasers, TeasersProps } from '~components/Teasers/Teasers';
+import { TextBlock } from '~components/TextBlock/TextBlock';
 
 export interface TilesProps {
   tiles: TeasersProps[];
 }
 
-const Tile: FC = ({ id, teasers }) => <Teasers teasers={teasers} />;
-
 export const Tiles: FC<TilesProps> = ({ tiles }) => {
-  return (
-    <S.Container>
-      {tiles.map((tile) => (
-        <Tile key={tile.id} {...tile} />
-      ))}
-    </S.Container>
-  );
+  const tileMap = {
+    paragraph__tiles: ({ teasers, id }) => <Teasers teasers={teasers} key={id} />,
+    paragraph__text: ({ teasers, id }) => <TextBlock key={id} />,
+  };
+
+  return <S.Container>{tiles.map((tile) => tileMap[tile.internal.type]({ ...tile }))}</S.Container>;
 };
 
 export default Tiles;

@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from 'react';
-import { PageProps } from 'gatsby';
+import React, { FC } from 'react';
+import { PageProps, graphql } from 'gatsby';
 import { GlobalStyle } from '../../style/GlobalStyle';
 import { SEO } from '../SEO/SEO';
 
-export const Layout: FunctionComponent<Omit<PageProps, 'children'>> = ({ children, location }) => {
+export const Layout: FC<Omit<PageProps, 'children'>> = ({ children, location }) => {
   return (
     <>
       <GlobalStyle />

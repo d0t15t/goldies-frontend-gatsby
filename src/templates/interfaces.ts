@@ -25,10 +25,10 @@ export interface pageBasicData extends typeBase {
     alias: string;
   };
   headline: {
-    processed: string;
+    markup: string;
   };
   body: {
-    processed: string;
+    markup: string;
   };
   titleDisplay: boolean | undefined;
 }
@@ -97,9 +97,10 @@ export interface localFileType extends typeBase {
   childImageSharp: childImageSharpType;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface childImageSharpType extends typeBase {
-  fixed: FixedObject;
-  fluid: FluidObject;
+  // fixed: FixedObject;
+  // fluid: FluidObject;
 }
 
 export interface mediaFileBase {

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import { ReactComponent as Logo } from '../../assets/svg/gatsby.svg';
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
@@ -13,11 +12,4 @@ export const Container = styled.div`
   color: white;
 `;
 
-export const Paragraph = styled.p`
-  margin: 2.5rem 0;
-`;
-
-export const Link = styled.a`
-  color: ${({ theme }) => theme.colors.secondary};
-  text-decoration: underline;
-`;
+export const Title = styled.h1``;
