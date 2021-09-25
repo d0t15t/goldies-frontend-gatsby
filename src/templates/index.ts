@@ -76,7 +76,6 @@ export const getNodeTiles = (tiles) => {
       paragraph__text: () => {
         return {
           ...tile,
-          // teasers: getPageBodyTileTeasers(tile.rels.teasers),
         };
       },
     };
@@ -109,6 +108,34 @@ export const getCollectionNodeData = (node) => {
 };
 
 /*
+ * Product functions.
+ */
+
+export const getProductNodeShopifyProductImageSet = (productNode) => {
+  return {
+    images: [{ ...productNode.rels?.mainImage?.localFile }].concat(
+      productNode.rels.extraImages.map((item) => item)
+    ),
+    thumbnails: [{ ...productNode.rels?.thumbnailImage?.localFile }],
+  };
+};
+
+export const getProductNodeShopifyProduct = (productNode) => productNode.rels?.shopifyProduct;
+
+export const getProductNodeShopifyProductVariants = (shopifyProductNode) =>
+  shopifyProductNode.rels?.variants ?? [];
+
+export const getProductNodeData = (node) => {
+  const shopifyProduct = getProductNodeShopifyProduct(node);
+  return {
+    headline: getHeadline(node),
+    ...shopifyProduct,
+    variants: getProductNodeShopifyProductVariants(shopifyProduct),
+    images: getProductNodeShopifyProductImageSet(shopifyProduct),
+  };
+};
+
+/*
  * Helper functions.
  */
 export const getNodeType = (data: I.pageWrapper): string => {
@@ -121,12 +148,16 @@ export const getNode = (data: I.pageWrapper): I.pageBase => {
 };
 
 export const getPageNodeData = (node) => {
+  // console.log('🚀 ~ file: index.ts ~ line 124 ~ getPageNodeData ~ node', node);
   const pageDataTemplate = {
     node__page: () => {
       return { tiles: getNodeTiles(node?.rels.tiles) };
     },
     node__collection: () => {
       return getCollectionNodeData(node);
+    },
+    node__product: () => {
+      return getProductNodeData(node);
     },
   };
 
