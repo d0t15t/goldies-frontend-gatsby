@@ -39,7 +39,7 @@ export const getNodeTitleDisplay = (node: I.pageBase): boolean => {
  * Node helper functions.
  */
 export const getNodeImageData = (node) => {
-  return node.rels?.media?.rels?.mediaImage?.localFile?.image;
+  return node.rels?.media?.rels?.mediaImage?.localFile?.teaserImage;
 };
 
 export const getNodeUrl = (node) => node.path.alias;
@@ -89,7 +89,6 @@ export const getNodeTiles = (tiles) => {
  * Collection functions.
  */
 export const getCollectionNodeProduct = (product) => {
-  // console.log('🚀 ~ file: index.ts ~ line 93 ~ getCollectionNodeProduct ~ product', product);
   return {
     ...product,
     image: getNodeImageData(product),
@@ -112,11 +111,48 @@ export const getCollectionNodeData = (node) => {
  */
 
 export const getProductNodeShopifyProductImageSet = (productNode) => {
+  const getImage = ({ index, localFile }) => {
+    return localFile ? { ...localFile, ...localFile[index] } : null;
+  };
+
+  const getImageSet = ({ index, set }) => {
+    return set.map((item) => getImage({ localFile: item.localFile, index }));
+  };
+
+  const getUnique = (array) => {
+    return array
+      ? Array.from(new Set(array.map((s) => s && s?.id))).map((id) =>
+          array.find((s) => s?.id === id)
+        )
+      : [];
+  };
+
+  const getVariantImage = ({ variant, name }) =>
+    variant.rels?.image ? getImage({ index: name, localFile: variant.rels.image.localFile }) : null;
+
+  const getVariantsImageSet = ({ variants, name }) =>
+    variants.map((variant) => getVariantImage({ variant, name })).filter((e) => e);
+
+  const teaserVariantSet = getVariantsImageSet({
+    variants: productNode.rels.variants,
+    name: 'teaserImage',
+  });
+  const thumbnailVariantSet = getVariantsImageSet({
+    variants: productNode.rels.variants,
+    name: 'thumbnailImage',
+  });
+
   return {
-    images: [{ ...productNode.rels?.mainImage?.localFile }].concat(
-      productNode.rels.extraImages.map((item) => item)
+    teaserImages: getUnique(
+      teaserVariantSet.length
+        ? teaserVariantSet
+        : getImageSet({ index: 'teaserImage', set: productNode.rels.extraImages })
     ),
-    thumbnails: [{ ...productNode.rels?.thumbnailImage?.localFile }],
+    thumbnailImages: getUnique(
+      thumbnailVariantSet.length
+        ? thumbnailVariantSet
+        : getImageSet({ index: 'thumbnailImage', set: productNode.rels.extraImages })
+    ),
   };
 };
 

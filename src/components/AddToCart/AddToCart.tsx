@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { useAddItemsToCart, useCartCount } from 'gatsby-theme-shopify-manager';
 import * as S from './AddToCart.styled';
 
-export const AddToCart: FunctionComponent = ({ variantId, quantity, text }) => {
+export const AddToCart: FunctionComponent = ({ variantId, quantity, children }) => {
   const addItemsToCart = useAddItemsToCart();
   const handleClick = async () => {
     const items = [
@@ -23,7 +23,7 @@ export const AddToCart: FunctionComponent = ({ variantId, quantity, text }) => {
     <>
       <div>
         <button type="button" onClick={handleClick}>
-          {text}
+          {children}
         </button>
       </div>
       <p>Your cart has {useCartCount()} items.</p>
@@ -31,4 +31,4 @@ export const AddToCart: FunctionComponent = ({ variantId, quantity, text }) => {
   );
 };
 
-export default AddToCart;
+// export default AddToCart;

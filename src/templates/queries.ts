@@ -144,58 +144,6 @@ export const productPageFragment = graphql`
   }
 `;
 
-export const shopifyProductVariantImageThumbnailsFragment = graphql`
-  fragment shopifyProductVariantImageThumbnailsFragment on shopify_product_variant__shopify_product_variant {
-    id
-    internal {
-      type
-    }
-    relationships {
-      thumbnail: image {
-        id
-        internal {
-          type
-        }
-        localFile {
-          id
-          internal {
-            type
-          }
-          image: childImageSharp {
-            gatsbyImageData(width: 75, placeholder: BLURRED, formats: [WEBP])
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const shopifyProductVariantImageMainFragment = graphql`
-  fragment shopifyProductVariantImageMainFragment on shopify_product_variant__shopify_product_variant {
-    id
-    internal {
-      type
-    }
-    relationships {
-      main: image {
-        id
-        internal {
-          type
-        }
-        localFile {
-          id
-          internal {
-            type
-          }
-          image: childImageSharp {
-            gatsbyImageData(width: 500, placeholder: BLURRED, formats: [WEBP])
-          }
-        }
-      }
-    }
-  }
-`;
-
 export const shopifyProductVariantFragment = graphql`
   fragment shopifyProductVariantFragment on shopify_product_variant__shopify_product_variant {
     id
@@ -214,6 +162,22 @@ export const shopifyProductVariantFragment = graphql`
     variant_id
     weight
     weight_unit
+    rels: relationships {
+      image {
+        id
+        internal {
+          type
+        }
+        localFile {
+          id
+          internal {
+            type
+          }
+          ...teaserImageFragment
+          ...thumbnailImageFragment
+        }
+      }
+    }
   }
 `;
 
@@ -241,7 +205,7 @@ export const shopifyProductFragment = graphql`
           ...thumbnailImageFragment
         }
       }
-      mainImage: image {
+      teaserImage: image {
         localFile {
           ...teaserImageFragment
         }
