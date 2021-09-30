@@ -29,11 +29,11 @@ export const getGid = (prefix: string, id: string) => btoa(`gid://${prefix}/${id
  * @param node
  * @returns
  */
-export const getProductParts = (node) => {
-  const product = node?.rels?.product;
-  const variants = node?.rels?.product?.relationships?.variants;
-  return [product, variants];
-};
+// export const getProductParts = (node) => {
+//   const product = node?.rels?.product;
+//   const variants = node?.rels?.product?.relationships?.variants;
+//   return [product, variants];
+// };
 
 /**
  * @param {String} url

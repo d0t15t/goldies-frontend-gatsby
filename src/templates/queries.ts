@@ -159,7 +159,7 @@ export const shopifyProductVariantFragment = graphql`
     sku
     title
     taxable
-    variant_id
+    shopifyId: variant_id
     weight
     weight_unit
     rels: relationships {

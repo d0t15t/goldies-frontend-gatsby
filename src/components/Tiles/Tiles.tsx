@@ -13,7 +13,13 @@ export const Tiles: FC<TilesProps> = ({ tiles }) => {
     paragraph__text: ({ teasers, id }) => <TextBlock key={id} />,
   };
 
-  return <S.Container>{tiles.map((tile) => tileMap[tile.internal.type]({ ...tile }))}</S.Container>;
+  return (
+    <S.Container>
+      {tiles.map((tile) => {
+        return tile?.internal?.type in tileMap ? tileMap[tile.internal.type]({ ...tile }) : null;
+      })}
+    </S.Container>
+  );
 };
 
 export default Tiles;

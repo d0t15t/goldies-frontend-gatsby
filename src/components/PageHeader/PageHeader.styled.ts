@@ -11,3 +11,5 @@ export const Container = styled.div`
     font-size: 1.2em;
   }
 `;
+export const Headline = styled.div``;
+export const Body = styled.div``;

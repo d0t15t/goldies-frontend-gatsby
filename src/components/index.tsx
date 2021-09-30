@@ -1,6 +1,7 @@
 import { utils } from '~utils/index';
 
 export { AddToCart } from '~components/AddToCart/AddToCart';
+export { Counter } from '~components/Counter/Counter';
 export { FancyImageBox } from '~components/FancyImageBox/FancyImageBox';
 export { Image } from '~components/Image/Image';
 export { Link } from '~components/Link/Link';

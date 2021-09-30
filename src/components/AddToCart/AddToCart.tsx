@@ -2,12 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { useAddItemsToCart, useCartCount } from 'gatsby-theme-shopify-manager';
 import * as S from './AddToCart.styled';
 
-export const AddToCart: FunctionComponent = ({ variantId, quantity, children }) => {
+export const AddToCart: FunctionComponent = ({ shopifyId, quantity, children }) => {
   const addItemsToCart = useAddItemsToCart();
+
   const handleClick = async () => {
     const items = [
       {
-        variantId,
+        variantId: shopifyId,
         quantity,
       },
     ];
@@ -22,7 +23,7 @@ export const AddToCart: FunctionComponent = ({ variantId, quantity, children }) 
   return (
     <>
       <div>
-        <button type="button" onClick={handleClick}>
+        <button type="button" onClick={() => handleClick()}>
           {children}
         </button>
       </div>

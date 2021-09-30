@@ -15,9 +15,6 @@ const PageWrapper: FC<I.pageWrapper> = ({ data }) => {
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
-  const { images } = bodyData;
-  // console.log('🚀 ~ file: page.tsx ~ line 19 ~ bodyData', bodyData);
-  // console.log('🚀 ~ file: page.tsx ~ line 18 ~ bodyData', images);
 
   const getPageBodyTemplate = (data, type) => {
     const pageBodyTemplate = {

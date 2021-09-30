@@ -44,6 +44,8 @@ export const getNodeImageData = (node) => {
 
 export const getNodeUrl = (node) => node.path.alias;
 
+export const getNodeTitle = (node) => node.title;
+
 /*
  * Tile helper functions.
  */
@@ -79,7 +81,7 @@ export const getNodeTiles = (tiles) => {
         };
       },
     };
-    return tile.internal.type in pageBodyTileTemplate
+    return tile.internal?.type in pageBodyTileTemplate
       ? pageBodyTileTemplate[tile.internal.type]()
       : null;
   });
@@ -184,7 +186,6 @@ export const getNode = (data: I.pageWrapper): I.pageBase => {
 };
 
 export const getPageNodeData = (node) => {
-  // console.log('🚀 ~ file: index.ts ~ line 124 ~ getPageNodeData ~ node', node);
   const pageDataTemplate = {
     node__page: () => {
       return { tiles: getNodeTiles(node?.rels.tiles) };
@@ -199,10 +200,10 @@ export const getPageNodeData = (node) => {
 
   return {
     headerData: {
-      title: getHeadline(node) || null,
       body: getBody(node) || null,
-      display: getNodeTitleDisplay(node),
       children: null,
+      display: getNodeTitleDisplay(node),
+      headline: getHeadline(node) || `<h1>${getNodeTitle(node)}</h1>`,
     },
     bodyData:
       node?.internal.type in pageDataTemplate ? pageDataTemplate[node?.internal.type]() : null,

@@ -7,6 +7,7 @@ interface CollectionProps {
 }
 
 export const Collection: FC<CollectionProps> = ({ headline, body, products }) => {
+  console.log('🚀 ~ file: Collection.tsx ~ line 10 ~ products', products);
   return (
     <S.Container>
       <S.Headline>{headline}</S.Headline>
