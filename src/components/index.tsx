@@ -7,6 +7,7 @@ export { Image } from '~components/Image/Image';
 export { Link } from '~components/Link/Link';
 export { Logo } from '~components/Logo/Logo';
 export { Modal } from '~components/Modal/Modal';
+export { Portal } from '~components/Portal/Portal';
 // export { MenuMain } from '~components/MenuMain/MenuMain';
 export { PageTitle } from '~components/PageTitle/PageTitle';
 

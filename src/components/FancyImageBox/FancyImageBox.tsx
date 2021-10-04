@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Thumbs } from 'swiper';
-import { Image, Link, Modal } from '~components/index';
+import { Image, Link, Modal, Portal } from '~components/index';
 import * as S from './FancyImageBox.styled';
 
 import 'swiper/css/navigation';
@@ -20,6 +20,7 @@ interface FancyImageBoxProps {
 }
 
 export const FancyImageBox: FC<FancyImageBoxProps> = ({ teaserImages, thumbnailImages }) => {
+  const [lightbox, setLightBox] = useState(false);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const getSlide = (image) => {
@@ -35,7 +36,7 @@ export const FancyImageBox: FC<FancyImageBoxProps> = ({ teaserImages, thumbnailI
   return (
     <S.Container>
       <Swiper
-        style={{ '--swiper-navigation-color': '#fff', '--swiper-pagination-color': '#fff' }}
+        style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
         loop
         spaceBetween={10}
         navigation
@@ -55,6 +56,8 @@ export const FancyImageBox: FC<FancyImageBoxProps> = ({ teaserImages, thumbnailI
       >
         {getSlides(thumbnailImages)}
       </Swiper>
+
+      <Modal />
     </S.Container>
   );
 };

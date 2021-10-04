@@ -16,8 +16,9 @@ interface UpdateCounterProps {
 }
 
 export const Product: FC<ProductProps> = ({ headline, body, images, variants }) => {
+  const [addToCartAmount, setAddToCartAmount] = useState(1);
+
   const getVariantId = (variant) => variant.shopifyId;
-  const [cartAmount, setCartAmount] = useState(1);
   const getShopifyId = (id: string) => {
     return PU.getGid(`shopify/ProductVariant`, id);
   };
@@ -25,9 +26,9 @@ export const Product: FC<ProductProps> = ({ headline, body, images, variants }) 
   const [currentId, setCurrentId] = useState(shopifyId);
   const counterProps = {
     amountChange: 1,
-    currentCount: cartAmount,
+    currentCount: addToCartAmount,
     updateCounter: ({ current, value }: UpdateCounterProps) => {
-      setCartAmount(current + value);
+      setAddToCartAmount(current + value);
     },
     minimumValue: 1,
   };
@@ -40,12 +41,11 @@ export const Product: FC<ProductProps> = ({ headline, body, images, variants }) 
       <AddToCart
         // shopifyId="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8xMTc2MjA4ODk5"
         shopifyId={PU.getGid(`shopify/ProductVariant`, getVariantId(variants[0]))}
-        quantity={cartAmount}
+        quantity={addToCartAmount}
       >
         Add to Cart
       </AddToCart>
       <FancyImageBox {...images} />
-      <Modal />
     </S.Container>
   );
 };
