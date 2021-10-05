@@ -1,38 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IconContext } from 'react-icons';
 import { CgClose } from 'react-icons/cg';
-import { Portal } from '~components/index';
+import { Button, Overlay, Portal } from '~components/index';
 import * as S from './Modal.styled';
 
-const ModalClose = ({ handleClose, children }) => {
-  const close = () => {
-    console.log('doing close');
-    handleClose();
-  };
+console.log('🚀 ~ file: Modal.tsx ~ line 14 ~ ModalClose ~ S.buttonStyles', S.buttonStyles);
+const ModalClose = ({ handleClose }) => {
   return (
-    <button className="close" onClick={close} type="button">
-      {/* &times; */}
-      {children}
-    </button>
+    <Button
+      handleClick={() => {
+        handleClose();
+      }}
+      styles={S.buttonStyles}
+      type="button"
+    >
+      <IconContext.Provider value={{ color: 'black', className: 'modal-close' }}>
+        <CgClose />
+      </IconContext.Provider>
+    </Button>
   );
 };
 
-export const Modal = ({ children }) => {
+export const Modal = ({ children, setStatus, status }) => {
   return (
-    <Portal>
-      <S.Container>
-        <S.Inner>
-          <S.ModalClose>
-            <ModalClose handleClose={(e) => console.log(e)}>
-              <IconContext.Provider value={{ color: 'blue', className: 'modal-close' }}>
-                <CgClose />
-              </IconContext.Provider>
-            </ModalClose>
-          </S.ModalClose>
-          <h3>DeezNuts.</h3>
+    <Portal status={status}>
+      <Overlay>
+        <S.Container>
+          <ModalClose
+            handleClose={() => {
+              setStatus(false);
+            }}
+          />
+          {/* <S.Inner>{children}</S.Inner> */}
           {children}
-        </S.Inner>
-      </S.Container>
+        </S.Container>
+      </Overlay>
     </Portal>
   );
 };

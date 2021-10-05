@@ -1,7 +1,7 @@
 import React, { FC, ReactNode, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation, Thumbs } from 'swiper';
-import { Image, Link, Modal, Portal } from '~components/index';
+import SwiperCore, { Keyboard, Navigation, Thumbs } from 'swiper';
+import { Button, Image, Link, Modal, Portal } from '~components/index';
 import * as S from './FancyImageBox.styled';
 
 import 'swiper/css/navigation';
@@ -13,7 +13,7 @@ import 'swiper/css/thumbs';
 // import Swiper core and required modules
 
 // install Swiper modules
-SwiperCore.use([Navigation, Thumbs]);
+SwiperCore.use([Keyboard, Navigation, Thumbs]);
 
 interface FancyImageBoxProps {
   children: ReactNode;
@@ -26,7 +26,9 @@ export const FancyImageBox: FC<FancyImageBoxProps> = ({ teaserImages, thumbnailI
   const getSlide = (image) => {
     return (
       <SwiperSlide key={image.id}>
-        <Image data={image} alt={image?.alt} />
+        <Button type="button" handleClick={() => setLightBox(true)}>
+          <Image data={image} alt={image?.alt} />
+        </Button>
       </SwiperSlide>
     );
   };
@@ -42,6 +44,12 @@ export const FancyImageBox: FC<FancyImageBoxProps> = ({ teaserImages, thumbnailI
         navigation
         thumbs={{ swiper: thumbsSwiper }}
         className="teaser-swiper"
+        keyboard={{
+          enabled: true,
+          onlyInViewport: false,
+        }}
+        onSlideChange={() => console.log('slider main change')}
+        pagination={{ clickable: true }}
       >
         {getSlides(teaserImages)}
       </Swiper>
@@ -57,7 +65,24 @@ export const FancyImageBox: FC<FancyImageBoxProps> = ({ teaserImages, thumbnailI
         {getSlides(thumbnailImages)}
       </Swiper>
 
-      <Modal />
+      <Modal status={lightbox} setStatus={setLightBox}>
+        <Swiper
+          style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
+          loop
+          spaceBetween={10}
+          navigation
+          thumbs={{ swiper: thumbsSwiper }}
+          className="teaser-swiper"
+          keyboard={{
+            enabled: true,
+            onlyInViewport: false,
+          }}
+          onSlideChange={() => console.log('slider main change')}
+          pagination={{ clickable: true }}
+        >
+          {getSlides(teaserImages)}
+        </Swiper>
+      </Modal>
     </S.Container>
   );
 };

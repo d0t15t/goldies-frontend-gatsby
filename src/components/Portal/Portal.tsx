@@ -5,19 +5,15 @@ import * as S from './Portal.styled';
 
 interface PortalProps {
   children: ReactNode;
+  status: boolean;
 }
 
-export const Portal: FC<PortalProps> = ({ children }) => {
-  const [status, setStatus] = useState(false);
+export const Portal: FC<PortalProps> = ({ children, status }) => {
+  // const [status, setStatus] = useState(false);
 
   // Use a ternary operator to make sure that the document object is defined
-  const portalRoot = typeof document !== `undefined` ? document.getElementById('portal') : null;
-  const el = useRef(portalRoot ? document.createElement('div') : null);
-
-  // useEffect(() => {
-  // portalRoot.appendChild(el);
-  // return () => portalRoot.removeChild(el);
-  // }, []);
+  // const portalRoot = typeof document !== `undefined` ? document.getElementById('portal') : null;
+  // const el = useRef(portalRoot ? document.createElement('div') : null);
 
   return (
     <>
@@ -26,7 +22,6 @@ export const Portal: FC<PortalProps> = ({ children }) => {
           <S.Container>{children}</S.Container>
         </ReactPortal>
       )}
-      <button onClick={() => setStatus(!status)}>click</button>
     </>
   );
 };
