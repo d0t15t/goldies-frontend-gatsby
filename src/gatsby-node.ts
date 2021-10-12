@@ -1,7 +1,7 @@
 /**
  * @file gatsby-node.ts
  */
-
+import webpack from 'web';
 import path from 'path';
 import * as U from './utils';
 
@@ -112,4 +112,12 @@ exports.createPages = async ({ graphql, actions }) => {
   promises.push(Object.values(pageQuerySets));
 
   return Promise.all(promises);
+};
+
+exports.onCreateWebpackConfig = ({ actions, stage, plugins }) => {
+  if (stage === 'build-javascript' || stage === 'develop') {
+    actions.setWebpackConfig({
+      plugins: [plugins.provide({ Buffer: ['buffer/', 'Buffer'] })],
+    });
+  }
 };

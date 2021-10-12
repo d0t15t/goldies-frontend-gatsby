@@ -175,6 +175,7 @@ export const shopifyProductVariantFragment = graphql`
           }
           ...teaserImageFragment
           ...thumbnailImageFragment
+          ...largeImageFragment
         }
       }
     }
@@ -210,6 +211,11 @@ export const shopifyProductFragment = graphql`
           ...teaserImageFragment
         }
       }
+      largeImage: image {
+        localFile {
+          ...largeImageFragment
+        }
+      }
       extraImages: extra_images {
         id
         internal {
@@ -218,6 +224,7 @@ export const shopifyProductFragment = graphql`
         localFile {
           ...thumbnailImageFragment
           ...teaserImageFragment
+          ...largeImageFragment
         }
       }
     }
@@ -262,6 +269,18 @@ export const teaserMediaFragment = graphql`
   }
 `;
 
+export const thumbnailImageFragment = graphql`
+  fragment thumbnailImageFragment on File {
+    id
+    internal {
+      type
+    }
+    thumbnailImage: childImageSharp {
+      gatsbyImageData(width: 100, placeholder: BLURRED, formats: [WEBP])
+    }
+  }
+`;
+
 export const teaserImageFragment = graphql`
   fragment teaserImageFragment on File {
     id
@@ -274,14 +293,14 @@ export const teaserImageFragment = graphql`
   }
 `;
 
-export const thumbnailImageFragment = graphql`
-  fragment thumbnailImageFragment on File {
+export const largeImageFragment = graphql`
+  fragment largeImageFragment on File {
     id
     internal {
       type
     }
-    thumbnailImage: childImageSharp {
-      gatsbyImageData(width: 100, placeholder: BLURRED, formats: [WEBP])
+    largeImage: childImageSharp {
+      gatsbyImageData(width: 900, placeholder: BLURRED, formats: [WEBP])
     }
   }
 `;

@@ -39,6 +39,10 @@ export const Container = styled.div`
     object-fit: cover;
   }
 
+  .swiper-slide button {
+    width: 100%;
+  }
+
   .swiper {
     width: 100%;
     height: 300px;

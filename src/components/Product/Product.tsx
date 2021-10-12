@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { AddToCart, Counter, FancyImageBox, Image, Link, Modal } from '~components/index';
+import { AddToCart, Counter, FancyImageBox, Link } from '~components/index';
 
 /** @var PU ProductUtils */
 import * as PU from '~src/utils/index';
@@ -39,7 +39,6 @@ export const Product: FC<ProductProps> = ({ headline, body, images, variants }) 
       {body && <S.Body>{body}</S.Body>}
       <Counter {...counterProps} />
       <AddToCart
-        // shopifyId="Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8xMTc2MjA4ODk5"
         shopifyId={PU.getGid(`shopify/ProductVariant`, getVariantId(variants[0]))}
         quantity={addToCartAmount}
       >

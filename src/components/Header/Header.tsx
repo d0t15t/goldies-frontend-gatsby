@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { Logo, PageTitle } from '~components/index';
+import { IconButton, Logo, PageTitle, Portal } from '~components';
 import * as S from './Header.styled';
 
 interface HeaderProps {
@@ -7,10 +7,17 @@ interface HeaderProps {
 }
 
 export const Header: FunctionComponent<HeaderProps> = ({ pageTitle }: HeaderProps) => {
+  return null;
   return (
     <S.Container>
       <Logo />
       {pageTitle ? <PageTitle>{pageTitle}</PageTitle> : null}
+      foo
+      <Portal>
+        <S.Buttons>
+          <IconButton iconName="cart" />
+        </S.Buttons>
+      </Portal>
     </S.Container>
   );
 };

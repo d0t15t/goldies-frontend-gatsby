@@ -68,3 +68,7 @@ yarn-error.log
 
 #IDE
 .vscode
+
+*.zip
+*.sql
+*.gz

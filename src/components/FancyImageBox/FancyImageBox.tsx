@@ -1,32 +1,33 @@
-import React, { FC, ReactNode, useState } from 'react';
+import React, { FC, ReactNode, useContext, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Keyboard, Navigation, Thumbs } from 'swiper';
-import { Button, Image, Link, Modal, Portal } from '~components/index';
+import { ModalContext, useDispatch } from '~context';
+import { Button, Image, Link, Modal } from '~components';
 import * as S from './FancyImageBox.styled';
 
 import 'swiper/css/navigation';
 import 'swiper/css';
 import 'swiper/css/thumbs';
 
-// import './styles.css';
-
-// import Swiper core and required modules
-
-// install Swiper modules
 SwiperCore.use([Keyboard, Navigation, Thumbs]);
 
 interface FancyImageBoxProps {
   children: ReactNode;
 }
 
-export const FancyImageBox: FC<FancyImageBoxProps> = ({ teaserImages, thumbnailImages }) => {
-  const [lightbox, setLightBox] = useState(false);
+export const FancyImageBox: FC<FancyImageBoxProps> = ({
+  thumbnailImages,
+  teaserImages,
+  largeImages,
+}) => {
+  const [{ modalStatus }, dispatch] = useContext(ModalContext);
+
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const getSlide = (image) => {
     return (
       <SwiperSlide key={image.id}>
-        <Button type="button" handleClick={() => setLightBox(true)}>
+        <Button type="button" handleClick={() => dispatch({ type: 'modalStatus', payload: true })}>
           <Image data={image} alt={image?.alt} />
         </Button>
       </SwiperSlide>
@@ -65,7 +66,10 @@ export const FancyImageBox: FC<FancyImageBoxProps> = ({ teaserImages, thumbnailI
         {getSlides(thumbnailImages)}
       </Swiper>
 
-      <Modal status={lightbox} setStatus={setLightBox}>
+      {/* <Modal
+        status={modalStatus}
+        setStatus={(newStatus: boolean) => dispatch({ type: 'modalStatus', payload: newStatus })}
+      >
         <Swiper
           style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
           loop
@@ -80,9 +84,9 @@ export const FancyImageBox: FC<FancyImageBoxProps> = ({ teaserImages, thumbnailI
           onSlideChange={() => console.log('slider main change')}
           pagination={{ clickable: true }}
         >
-          {getSlides(teaserImages)}
+          {getSlides(largeImages)}
         </Swiper>
-      </Modal>
+      </Modal> */}
     </S.Container>
   );
 };

@@ -1,6 +1,5 @@
-import React, { FC, Fragment, ReactNode } from 'react';
-
-import { Link, Logo } from '~components/index';
+import React, { FC, ReactNode } from 'react';
+import { Link, Logo } from '~components';
 import * as S from './PageHeader.styled';
 
 export interface PageHeaderProps {
@@ -22,5 +21,3 @@ export const PageHeader: FC<PageHeaderProps> = ({ body, children, headline }) =>
     </>
   );
 };
-
-// export default PageHeader;

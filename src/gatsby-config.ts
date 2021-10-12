@@ -39,7 +39,9 @@ const gatsbyConfig: GatsbyConfig = {
       resolve: 'gatsby-plugin-root-import',
       options: {
         '~components': path.join(__dirname, './components'),
-        '~g': path.join(__dirname, './gatsby'),
+        '~context': path.join(__dirname, './context'),
+        '~templates': path.join(__dirname, './templates'),
+        '~utils': path.join(__dirname, './utils'),
         '~hooks': path.join(__dirname, './hooks'),
         '~src': path.join(__dirname, './'),
         '~static': path.join(__dirname, '../static'),
@@ -109,7 +111,7 @@ const gatsbyConfig: GatsbyConfig = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-portal',
+    // 'gatsby-plugin-portal',
     // 'gatsby-plugin-preact',
   ],
 };

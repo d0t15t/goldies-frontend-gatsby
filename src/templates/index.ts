@@ -2,7 +2,6 @@ import * as I from '~templates/interfaces';
 import { PageHeaderProps } from '~components/PageHeader/PageHeader';
 // import { PageBodyProps } from '~components/PageBody/PageBody';
 import { PageFooterProps } from '~components/PageFooter/PageFooter';
-import { getProductParts } from '~utils/';
 
 // import Teasers from '~components/Teasers/Teasers';
 
@@ -143,6 +142,10 @@ export const getProductNodeShopifyProductImageSet = (productNode) => {
     variants: productNode.rels.variants,
     name: 'thumbnailImage',
   });
+  const largeVariantSet = getVariantsImageSet({
+    variants: productNode.rels.variants,
+    name: 'largeImage',
+  });
 
   return {
     teaserImages: getUnique(
@@ -154,6 +157,11 @@ export const getProductNodeShopifyProductImageSet = (productNode) => {
       thumbnailVariantSet.length
         ? thumbnailVariantSet
         : getImageSet({ index: 'thumbnailImage', set: productNode.rels.extraImages })
+    ),
+    largeImages: getUnique(
+      largeVariantSet.length
+        ? largeVariantSet
+        : getImageSet({ index: 'largeImage', set: productNode.rels.extraImages })
     ),
   };
 };

@@ -22,7 +22,8 @@ export const getRelativePath = (url: string, basePath: string) => url.replace(ba
  * @param prefix
  * @returns
  */
-export const getGid = (prefix: string, id: string) => btoa(`gid://${prefix}/${id}`);
+export const getGid = (prefix: string, id: string) =>
+  Buffer.from(`gid://${prefix}/${id}`).toString('base64');
 
 /**
  *
