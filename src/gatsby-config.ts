@@ -93,6 +93,42 @@ const gatsbyConfig: GatsbyConfig = {
     //   },
     // },
     {
+      resolve: 'gatsby-plugin-local-search',
+      options: {
+        name: 'products',
+        engine: 'flexsearch',
+        engineOptions: '',
+        query: `
+          {
+            allNodeProduct(sort: { fields: drupal_internal__nid }) {
+              nodes {
+                id
+                nid: drupal_internal__nid
+                title
+                body {
+                  markdown: processed
+                }
+                path {
+                  alias
+                }
+              }
+            }    
+          }
+        `,
+        ref: 'id',
+        index: ['title', 'body'],
+        store: ['id', 'path', 'title'],
+        normalizer: ({ data }) => {
+          return data.allNodeProduct.nodes.map((node) => ({
+            id: node.id,
+            path: node.path.alias,
+            title: node.title,
+            body: node.body?.processed,
+          }));
+        },
+      },
+    },
+    {
       resolve: 'gatsby-plugin-styled-components',
       options: {
         displayName: process.env.NODE_ENV !== 'production',
@@ -111,6 +147,7 @@ const gatsbyConfig: GatsbyConfig = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-use-query-params',
     // 'gatsby-plugin-portal',
     // 'gatsby-plugin-preact',
   ],

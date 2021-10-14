@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 // import { Portal } from 'react-portal';
 import { ModalContext } from '~context';
 import { useDispatch } from '~hooks';
-import { Cart, CartButton, IconButton, Modal, Portal } from '~components';
+import { Cart, CartButton, IconButton, Modal, Portal, SearchBar } from '~components';
 import * as S from './Navigation.styled';
 
 export const Navigation = () => {
@@ -21,8 +21,13 @@ export const Navigation = () => {
       <div id="navigation-portal" />
       <Portal target="navigation-portal" status>
         <S.Container id="navigation">
-          <IconButton iconStyles={iconStyles} iconName="hamburger" />
-          <CartButton iconStyles={iconStyles} handleClick={cartButtonClick} />
+          <S.Unit>
+            <IconButton iconStyles={iconStyles} iconName="hamburger" />
+            <SearchBar />
+          </S.Unit>
+          <S.Unit>
+            <CartButton iconStyles={iconStyles} handleClick={cartButtonClick} />
+          </S.Unit>
         </S.Container>
       </Portal>
     </>

@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import { IconContext } from 'react-icons';
-import { BiCart } from 'react-icons/bi';
+import { BiCart, BiSearchAlt } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Button } from './Button';
@@ -24,6 +24,7 @@ export const IconButton: FC<IconButtonProps> = ({
     cart: <BiCart />,
     close: <CgClose />,
     hamburger: <GiHamburgerMenu />,
+    search: <BiSearchAlt />,
   };
   return (
     <Button handleClick={handleClick} styles={buttonStyles} type="button">

@@ -15,5 +15,6 @@ export { Overlay } from '~components/Overlay/Overlay';
 export { Portal } from '~components/Portal/Portal';
 // export { MenuMain } from '~components/MenuMain/MenuMain';
 export { PageTitle } from '~components/PageTitle/PageTitle';
+export { SearchBar } from '~components/SearchBar/SearchBar';
 
 // export * from '~components/Tiles/Tiles';
