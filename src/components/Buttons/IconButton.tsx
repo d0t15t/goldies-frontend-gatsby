@@ -3,6 +3,7 @@ import { IconContext } from 'react-icons';
 import { BiCart, BiSearchAlt } from 'react-icons/bi';
 import { CgClose } from 'react-icons/cg';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { MdOutlineClear } from 'react-icons/md';
 import { Button } from './Button';
 
 interface IconButtonProps {
@@ -22,6 +23,7 @@ export const IconButton: FC<IconButtonProps> = ({
 }) => {
   const iconTemplate = {
     cart: <BiCart />,
+    clear: <MdOutlineClear />,
     close: <CgClose />,
     hamburger: <GiHamburgerMenu />,
     search: <BiSearchAlt />,

@@ -3,10 +3,8 @@ import cls from 'classnames';
 import { graphql, navigate, useStaticQuery } from 'gatsby';
 import { usePopper } from 'react-popper';
 import { useFlexSearch } from 'react-use-flexsearch';
-import { useQueryParam, NumberParam, StringParam } from 'use-query-params';
+import { useQueryParam, StringParam } from 'use-query-params';
 import Downshift from 'downshift';
-import { IconContext } from 'react-icons';
-import { BiSearchAlt } from 'react-icons/bi';
 import { IconButton, Modal } from '~components';
 import * as S from './SearchBar.styled';
 
@@ -23,19 +21,22 @@ export const SearchBar = () => {
   const { index, store } = queryData;
 
   const [query, setQuery] = useState('');
+  console.log('🚀 ~ file: SearchBar.tsx ~ line 26 ~ SearchBar ~ query', query);
   const searchResults = useFlexSearch(query, index, store);
 
-  const handleSelect = (selection) => {
-    // console.log('🚀 ~ file: SearchBar.tsx ~ line 26 ~ handleSelect ~ selection', selection);
-    return selection?.path ? navigate(selection.path) : null;
-  };
+  const handleSelect = (selection) => (selection?.path ? navigate(selection.path) : null);
+
   const handleFormSubmit = (e) => e.preventDefault();
+
+  const handleInputClick = (e) => e.target.select();
+
+  const handleClear = (e) => setQuery('');
 
   const [paramQ, setParamQ] = useQueryParam('q', StringParam);
 
   const iconStyles = { color: 'white', className: 'search-icon' };
 
-  // Popper
+  // Popper props
   const [referenceElement, setReferenceElement] = useState(null);
   const [popperElement, setPopperElement] = useState(null);
   const [arrowElement, setArrowElement] = useState(null);
@@ -45,35 +46,44 @@ export const SearchBar = () => {
 
   return (
     <S.Container>
-      <form action="/" method="get" autoComplete="off" onSubmit={handleFormSubmit}>
-        <IconButton handleClick={handleFormSubmit} iconName="search" iconStyles={iconStyles} />
-        <Downshift
-          onChange={(selection) => handleSelect(selection)}
-          itemToString={(item) => (item ? item.title : query)}
-          onInputValueChange={(inputValue: string, stateAndHelpers: object) => {
-            setQuery(inputValue);
-          }}
-        >
-          {({
-            getInputProps,
-            getItemProps,
-            getLabelProps,
-            getMenuProps,
-            isOpen,
-            inputValue,
-            highlightedIndex,
-            selectedItem,
-          }) => (
-            <div>
+      <Downshift
+        onChange={(selection) => handleSelect(selection)}
+        itemToString={(item) => (item ? item.title : query)}
+        onInputValueChange={(inputValue: string, stateAndHelpers: object) => {
+          setQuery(inputValue);
+        }}
+      >
+        {({
+          getInputProps,
+          getItemProps,
+          getLabelProps,
+          getMenuProps,
+          isOpen,
+          inputValue,
+          highlightedIndex,
+          selectedItem,
+        }) => {
+          console.log('🚀 ~ file: SearchBar.tsx ~ line 66 ~ SearchBar ~ inputValue', inputValue);
+          return (
+            <form action="/" method="get" autoComplete="off" onSubmit={handleFormSubmit}>
+              <IconButton
+                handleClick={handleFormSubmit}
+                iconName="search"
+                iconStyles={iconStyles}
+              />
               <S.SearchBarLabel className="visually-hidden" {...getLabelProps()}>
                 Search products:
               </S.SearchBarLabel>
               <input
-                {...getInputProps({ placeholder: 'Enter a position' })}
+                {...getInputProps({ placeholder: 'Search for a product...' })}
+                // inputValue={query}
                 ref={setReferenceElement}
+                onClick={handleInputClick}
               />
+              <IconButton handleClick={handleClear} iconName="clear" iconStyles={iconStyles} />
 
               {isOpen ? (
+                // Popper.
                 <div ref={setPopperElement} style={styles.popper} {...attributes.popper}>
                   <ul {...getMenuProps()}>
                     {searchResults
@@ -98,10 +108,10 @@ export const SearchBar = () => {
                   <div ref={setArrowElement} style={styles.arrow} />
                 </div>
               ) : null}
-            </div>
-          )}
-        </Downshift>
-      </form>
+            </form>
+          );
+        }}
+      </Downshift>
     </S.Container>
   );
 };
