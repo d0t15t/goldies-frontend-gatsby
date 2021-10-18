@@ -85,6 +85,6 @@ export const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     position: absolute;
     white-space: nowrap;
-    width: 1px;
+    width: 0px;
   }
 `;

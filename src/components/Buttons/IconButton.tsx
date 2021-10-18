@@ -6,21 +6,9 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { MdOutlineClear } from 'react-icons/md';
 import { Button } from './Button';
 
-interface IconButtonProps {
-  buttonStyles: string | null;
-  children: ReactNode;
-  handleClick: Function | null;
-  iconName: string | null;
-  iconStyles: Object | null;
-}
+export const IconButton = (props) => {
+  const { buttonStyles, children, iconStyles, iconName, handleClick } = props;
 
-export const IconButton: FC<IconButtonProps> = ({
-  buttonStyles,
-  children,
-  iconStyles,
-  iconName,
-  handleClick,
-}) => {
   const iconTemplate = {
     cart: <BiCart />,
     clear: <MdOutlineClear />,
@@ -29,9 +17,9 @@ export const IconButton: FC<IconButtonProps> = ({
     search: <BiSearchAlt />,
   };
   return (
-    <Button handleClick={handleClick} styles={buttonStyles} type="button">
+    <Button {...props} type="button">
       <IconContext.Provider value={iconStyles ?? {}}>
-        {iconName && iconName in iconTemplate ? iconTemplate[iconName] : 'default icon'}
+        {iconName && iconName in iconTemplate ? iconTemplate[iconName] : 'defaultIconToDo'}
       </IconContext.Provider>
       {children}
     </Button>

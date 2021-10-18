@@ -12,7 +12,7 @@ interface CartButtonProps {
 export const CartButton: FC<CartButtonProps> = ({ buttonStyles, iconStyles, handleClick }) => {
   const cartCount = useCartCount();
   return cartCount ? (
-    <S.Container className="cart-button-wrapper">
+    <>
       <IconButton
         buttonStyles={buttonStyles}
         handleClick={handleClick}
@@ -20,7 +20,7 @@ export const CartButton: FC<CartButtonProps> = ({ buttonStyles, iconStyles, hand
         iconStyles={iconStyles}
       />
       <S.Count>{cartCount}</S.Count>
-    </S.Container>
+    </>
   ) : null;
 };
 
