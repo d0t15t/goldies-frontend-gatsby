@@ -32,8 +32,20 @@ export const pageTilesFragment = graphql`
           ... on paragraph__tiles {
             ...tilesFragment
           }
+          ... on paragraph__cart {
+            ...cartFragment
+          }
         }
       }
+    }
+  }
+`;
+
+export const cartFragment = graphql`
+  fragment cartFragment on paragraph__cart {
+    id
+    internal {
+      type
     }
   }
 `;
@@ -126,12 +138,6 @@ export const productPageFragment = graphql`
       path {
         alias
       }
-      body {
-        markup: processed
-      }
-      headline: field_headline {
-        markup: processed
-      }
       rels: relationships {
         # media: field_media {
         #   ...teaserMediaFragment
@@ -189,8 +195,8 @@ export const shopifyProductFragment = graphql`
       type
     }
     handle
-    body_html {
-      processed
+    body: body_html {
+      markup: processed
     }
     title
     product_id
@@ -301,6 +307,46 @@ export const largeImageFragment = graphql`
     }
     largeImage: childImageSharp {
       gatsbyImageData(width: 900, placeholder: BLURRED, formats: [WEBP])
+    }
+  }
+`;
+
+export const menuLinkFragment = graphql`
+  fragment menuLinkFragment on MenuLinkContentMenuLinkContent {
+    id
+    internal {
+      type
+    }
+    title
+    langcode
+    link {
+      alias: uri_alias
+    }
+    menuName: menu_name
+    parent {
+      id
+    }
+  }
+`;
+
+export const menuFooterMenuFragment = graphql`
+  fragment menuFooterMenuFragment on Query {
+    menuItems: allMenuLinkContentMenuLinkContent(filter: { menu_name: { eq: "footer" } }) {
+      nodes {
+        id
+        internal {
+          type
+        }
+        title
+        langcode
+        link {
+          alias: uri_alias
+        }
+        menuName: menu_name
+        parent {
+          id
+        }
+      }
     }
   }
 `;

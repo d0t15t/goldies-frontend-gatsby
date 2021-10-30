@@ -1,32 +1,31 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 // import { Portal } from 'react-portal';
-import { ModalContext } from '~context';
+import { Context } from '~context';
 import { useDispatch } from '~hooks';
 import { Cart, CartButton, IconButton, Modal, Portal, SearchBar } from '~components';
 import * as S from './Navigation.styled';
 
 export const Navigation = () => {
-  const [{ modalIsOpen, modalNodes }, dispatch] = useContext(ModalContext);
+  const [{ modalIsOpen, modalContent }, dispatch] = useContext(Context);
 
   const cartButtonClick = () => {
     useDispatch('modalIsOpen', true, dispatch);
-    useDispatch('modalNodes', <Cart />, dispatch);
+    useDispatch('modalContent', <Cart />, dispatch);
   };
 
-  const iconStyles = { color: 'white', size: '1.5em' };
+  // const iconStyles = { color: 'white', size: '1.5em' };
 
   return (
     <>
-      <div id="navigation-portal" />
       <Portal target="navigation-portal" status>
         <S.Container id="navigation">
           <S.Unit>
-            <IconButton iconStyles={iconStyles} iconName="hamburger" />
+            <IconButton iconName="hamburger" />
             <SearchBar />
           </S.Unit>
           <S.Unit>
-            <CartButton iconStyles={iconStyles} handleClick={cartButtonClick} />
+            <CartButton handleClick={cartButtonClick} />
           </S.Unit>
         </S.Container>
       </Portal>

@@ -60,6 +60,7 @@ const gatsbyConfig: GatsbyConfig = {
       resolve: 'gatsby-source-drupal',
       options: {
         baseUrl: drupalVars.url,
+        apiBase: 'jsonapi',
         basicAuth: {
           username: drupalVars.user,
           password: drupalVars.password,
@@ -89,7 +90,8 @@ const gatsbyConfig: GatsbyConfig = {
     //   resolve: `gatsby-source-drupal-menu-links`,
     //   options: {
     //     baseUrl: process.env.GATSBY_DRUPAL_ROOT,
-    //     menus: ['main', 'sidebar'],
+    //     apiBase: 'jsonapi',
+    //     menus: ['main', 'sidebar', 'footer'],
     //   },
     // },
     {
@@ -105,9 +107,6 @@ const gatsbyConfig: GatsbyConfig = {
                 id
                 nid: drupal_internal__nid
                 title
-                body {
-                  markdown: processed
-                }
                 path {
                   alias
                 }
@@ -123,7 +122,6 @@ const gatsbyConfig: GatsbyConfig = {
             id: node.id,
             path: node.path.alias,
             title: node.title,
-            body: node.body?.processed,
           }));
         },
       },
@@ -141,13 +139,19 @@ const gatsbyConfig: GatsbyConfig = {
         name: 'assets',
       },
     },
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `./src/utils/typography`,
+      },
+    },
     'gatsby-plugin-svgr',
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
-    'gatsby-plugin-use-query-params',
+    // 'gatsby-plugin-use-query-params',
     // 'gatsby-plugin-portal',
     // 'gatsby-plugin-preact',
   ],

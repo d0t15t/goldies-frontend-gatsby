@@ -5,7 +5,7 @@ interface TextBlockProps {
   children: ReactNode;
 }
 
-export const TextBlock: FC<TextBlockProps> = ({children}) => {
+export const TextBlock: FC<TextBlockProps> = ({ children }) => {
   return <S.Container>TextBlock{children}</S.Container>;
 };
 

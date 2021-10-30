@@ -3,36 +3,40 @@ import styled from 'styled-components';
 const padding = '8px';
 
 export const Container = styled.div`
-  button {
-    width: 20px;
+  button svg {
+    min-width: 20px;
   }
 
   .controls {
     display: flex;
   }
-
-  .dropdown {
-    max-height: 516px;
-    overflow: hidden;
-  }
 `;
 export const ComboBox = styled.div`
   position: relative;
 `;
+
+export const DropDownWrapper = styled.div``;
+
 export const DropDownMenu = styled.ul`
   background: lightgrey;
 `;
+
 export const DropDownMenuItem = styled.li`
-  background-color: ${(props) => (props.ishighlighted ? '#bde4ff' : '')};
-  border-radius: ${padding};
+  ${(props) => {
+    const { theme } = props;
+    return `
+      border-radius: ${theme?.padding ?? 0};
+      background-color: ${theme?.isHighlighted ? '#bde4ff' : ''};
 
-  &:last {
-    padding-bottom: ${padding};
-  }
-
-  button {
-    padding: ${padding};
-    width: 100%;
-    text-align: left;
-  }
+      &:last {
+        padding-bottom: ${theme?.padding ?? 0};
+      }
+      
+      button {
+        padding: ${theme?.padding ?? 0};
+        width: 100%;
+        text-align: left;
+      }    
+    `;
+  }}
 `;

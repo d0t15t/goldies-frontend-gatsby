@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React, { FC } from 'react';
 import { graphql } from 'gatsby';
+import { Link, SocialBlock } from '~components';
 
 //* @var I */ Interfaces */
 import * as I from '~templates/interfaces';
@@ -15,6 +16,7 @@ const PageWrapper: FC<I.pageWrapper> = ({ data }) => {
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
+  // console.log('🚀 ~ file: Page.tsx ~ line 20 ~ headerData, bodyData', headerData, bodyData);
 
   const getPageBodyTemplate = (data, type) => {
     const pageBodyTemplate = {
@@ -32,11 +34,12 @@ const PageWrapper: FC<I.pageWrapper> = ({ data }) => {
   };
 
   return node ? (
-    <S.Container>
+    <S.Page>
       <PU.PageHeader {...headerData} />
-      {getPageBodyTemplate(bodyData, node.internal.type)}
+      <div id="main-content">{getPageBodyTemplate(bodyData, node.internal.type)}</div>
+      <SocialBlock />
       <PU.PageFooter />
-    </S.Container>
+    </S.Page>
   ) : null;
 };
 

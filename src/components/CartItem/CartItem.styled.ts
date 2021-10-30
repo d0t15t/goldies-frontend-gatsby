@@ -1,11 +1,25 @@
 import styled from 'styled-components';
 
-export const Container = styled.li`
-  // display: flex;
+export const ListItem = styled.li`
+  display: flex;
+
+  .inner {
+    display: flex;
+  }
 `;
 
-export const Row = styled.div``;
-export const Title = styled.p``;
+export const ListItemCol = styled.div`
+  ${({ theme }) => {
+    return `
+      button {
+        svg {
+          width: ${theme.iconSizes[1]}
+        }
+      }
+    `;
+  }}
+`;
+
 export const Image = styled.img`
   max-width: 100px;
 `;

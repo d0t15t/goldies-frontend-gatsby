@@ -1,42 +1,55 @@
 import React, { FC, useState } from 'react';
+import { Button } from '~components';
 import * as S from './Counter.styled';
 
 interface CounterProps {
   amountChange: number;
   currentCount: number;
-  updateCounter: Function;
+  updateQuantity: Function;
   minimumValue: number;
+  targetId: string;
 }
 
 export const Counter: FC<CounterProps> = ({
   amountChange,
   currentCount,
-  updateCounter,
   minimumValue,
+  targetId,
+  updateQuantity,
 }) => {
   // @todo: add Component handling for state if no default is provided?
-  // const [current, setCurrent] = useState(currentCount ?? 1);
   const change = amountChange ?? 1;
   const minimum = minimumValue ?? 1;
-  const handleClick = (value: number) => {
-    updateCounter({ current: currentCount, value });
-    // updateCounter({ current, value });
-    // setCurrent(currentCount);
+  const handleClick = (increment: number) => {
+    const newQuantity = currentCount + increment;
+    updateQuantity({ quantity: newQuantity, targetId });
   };
+
   const isDisabled = {
     minimum: () => currentCount <= minimum,
-    // minimum: () => current <= minimum,
     maximum: () => false,
   };
   return (
     <S.Container>
-      <S.CountButton onClick={() => handleClick(change)} disabled={isDisabled.maximum()}>
-        +
-      </S.CountButton>
+      <Button
+        name="increase-quantity"
+        onClick={() => handleClick(change)}
+        disabled={isDisabled.maximum()}
+        buttonTemplate="default"
+        type="button"
+      >
+        + <span className="visually-hidden">Increase amount</span>
+      </Button>
       <S.CurCount>{currentCount}</S.CurCount>
-      <S.CountButton onClick={() => handleClick(change * -1)} disabled={isDisabled.minimum()}>
-        -
-      </S.CountButton>
+      <Button
+        name="decrease-quantity"
+        onClick={() => handleClick(change * -1)}
+        disabled={isDisabled.minimum()}
+        buttonTemplate="default"
+        type="button"
+      >
+        - <span className="visually-hidden">Decrease amount</span>
+      </Button>
     </S.Container>
   );
 };

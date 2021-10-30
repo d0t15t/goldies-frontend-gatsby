@@ -1,6 +1,8 @@
-import React, { FC, ReactNode, useContext, useEffect, useRef } from 'react';
+import React, { FC, ReactNode, useCallback, useContext, useEffect, useRef } from 'react';
+import { useDimensions } from 'react-hook-dimensions';
+import useEventListener from '@use-it/event-listener';
 import { useKeyPress, useDispatch } from '~hooks';
-import { ModalContext } from '~context';
+import { Context } from '~context';
 import { CloseButton, Overlay, Portal } from '~components';
 import * as S from './Modal.styled';
 
@@ -10,9 +12,8 @@ interface ModalCloseProps {
 
 const ModalClose: FC<ModalCloseProps> = ({ handleClose }) => (
   <CloseButton
-    buttonStyles={S.buttonStyles}
-    iconStyles={{ color: 'black', className: 'modal-close' }}
     handleClick={handleClose}
+    iconStyles={{ color: 'black', className: 'modal-close' }}
   />
 );
 
@@ -23,48 +24,47 @@ interface ModalProps {
 }
 
 export const Modal = () => {
-  const [{ modalIsOpen, modalNodes }, dispatch] = useContext(ModalContext);
+  const modalInnerId = 'modal-overlay';
+  const [{ modalIsOpen, modalContent }, dispatch] = useContext(Context);
 
-  const updateModalIsOpen = (modalIsOpen: boolean, modalNodes: ReactNode) => {
-    useDispatch('modalIsOpen', modalIsOpen, dispatch);
-    useDispatch('modalNodes', modalNodes, dispatch);
-  };
+  const [modalRef, modalDimensions] = useDimensions({
+    dependencies: [modalIsOpen],
+  });
+
+  const updateModalIsOpen = useCallback((status: boolean, content: ReactNode) => {
+    useDispatch('modalIsOpen', status, dispatch);
+    useDispatch('modalContent', content, dispatch);
+  }, []);
 
   // Close by outside click
-  const node = useRef();
-  const handleClick = (e) => {
-    console.log('🚀 ~ file: Modal.tsx ~ line 27 ~ Modal ~ modalIsOpen', modalIsOpen, e);
+  useEventListener('click', (e) => {
     // if (!modalIsOpen) return;
-    if (node?.current?.contains(e.target)) {
-      // return;
-    }
-    // updateModalIsOpen(false, null); // outside click
-  };
-
-  // useEffect(() => {
-  //   document.addEventListener('mousedown', handleClick);
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClick);
-  //   };
-  // }, []);
+    // if (modalRef?.current?.contains(e.target)) {
+    //   return;
+    // }
+    // updateModalIsOpen(false, null);
+  });
 
   // Close by esc. key.
   const key = 'Escape';
   const kp = useKeyPress(key);
   useEffect(() => {
     if (kp === true) updateModalIsOpen(false, null);
-  }, [kp]);
+  }, [kp, updateModalIsOpen]);
 
   return (
     <>
-      <div id="modal-portal" />
       {modalIsOpen && (
-        <Portal target="modal-portal">
+        <Portal>
           <Overlay>
-            <S.Container ref={node} onClick={handleClick}>
-              <ModalClose handleClose={() => updateModalIsOpen(false, null)} />
-              <S.Inner>{modalNodes ?? 'foo'}</S.Inner>
+            <S.Container>
+              <S.Inner id={modalInnerId} ref={modalRef}>
+                {modalContent}
+              </S.Inner>
             </S.Container>
+            <S.CloseButtonWrapper position={{ ...modalDimensions }}>
+              <ModalClose handleClose={() => updateModalIsOpen(false, null)} />
+            </S.CloseButtonWrapper>
           </Overlay>
         </Portal>
       )}

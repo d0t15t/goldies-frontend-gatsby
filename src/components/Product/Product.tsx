@@ -1,49 +1,63 @@
 import React, { FC, useState } from 'react';
-import { AddToCart, Counter, FancyImageBox, Link } from '~components/index';
+import { AddToCart, Counter, FancyImageBox, Price, ProductVariants } from '~components/index';
 
-/** @var PU ProductUtils */
-import * as PU from '~src/utils/index';
+import * as U from '~utils';
 import * as S from './Product.styled';
 
 interface ProductProps {
   headline: string;
   body: string;
+  images: Object[];
+  variants: Object[];
 }
 
 interface UpdateCounterProps {
-  current: number;
-  value: number;
+  quantity: number;
 }
 
-export const Product: FC<ProductProps> = ({ headline, body, images, variants }) => {
+export const Product: FC<ProductProps> = ({ body, headline, images, variants }) => {
   const [addToCartAmount, setAddToCartAmount] = useState(1);
 
-  const getVariantId = (variant) => variant.shopifyId;
-  const getShopifyId = (id: string) => {
-    return PU.getGid(`shopify/ProductVariant`, id);
-  };
-  const shopifyId = getShopifyId(getVariantId(variants[0]));
-  const [currentId, setCurrentId] = useState(shopifyId);
+  const [currentVariantId, setCurrentVariantId] = useState(variants[0].shopifyId);
+
+  const updateCurrentVariantId = (id: string) => setCurrentVariantId(id);
+
+  const currentVariant = U.getCurrentVariant(variants, currentVariantId);
+
+  const productVariantTitle = U.getProductVariantTitle(headline, currentVariant);
+
   const counterProps = {
     amountChange: 1,
     currentCount: addToCartAmount,
-    updateCounter: ({ current, value }: UpdateCounterProps) => {
-      setAddToCartAmount(current + value);
+    updateQuantity: ({ quantity }: UpdateCounterProps) => {
+      setAddToCartAmount(quantity);
     },
     minimumValue: 1,
   };
 
   return (
     <S.Container>
-      <S.Headline>{headline}</S.Headline>
-      {body && <S.Body>{body}</S.Body>}
-      <Counter {...counterProps} />
-      <AddToCart
-        shopifyId={PU.getGid(`shopify/ProductVariant`, getVariantId(variants[0]))}
-        quantity={addToCartAmount}
-      >
-        Add to Cart
-      </AddToCart>
+      {/* <S.Headline>{headline}</S.Headline>
+      {body ? <S.Body>{body}</S.Body> : null} */}
+
+      <S.Controls>
+        <form>
+          <S.ControlsInner>
+            <AddToCart
+              shopifyId={currentVariantId}
+              quantity={addToCartAmount}
+              title={productVariantTitle}
+            />
+            <Price value={currentVariant.price} />
+            <Counter {...counterProps} />
+            <ProductVariants
+              items={variants}
+              current={currentVariant}
+              updateCurrentId={updateCurrentVariantId}
+            />
+          </S.ControlsInner>
+        </form>
+      </S.Controls>
       <FancyImageBox {...images} />
     </S.Container>
   );

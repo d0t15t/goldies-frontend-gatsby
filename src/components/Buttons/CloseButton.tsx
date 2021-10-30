@@ -17,7 +17,7 @@ export const CloseButton: FC<CloseButtonProps> = ({
   handleClick,
 }) => {
   return (
-    <Button handleClick={handleClick} styles={buttonStyles} type="button">
+    <Button onClick={handleClick} styles={buttonStyles} type="button">
       <IconContext.Provider value={iconStyles}>
         <CgClose />
       </IconContext.Provider>

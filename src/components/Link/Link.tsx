@@ -1,19 +1,22 @@
 import React, { FC, ReactNode } from 'react';
 import { Link as GatsbyLink } from 'gatsby';
+import cls from 'classnames';
 import { urlIsExternal } from '~utils/index';
 // todo: add handling for external links.
 import * as S from './Link.styled';
 
 interface LinkProps {
-  url: string;
   children: ReactNode;
+  classNames: string;
+  handleClick: Function;
+  url: string;
 }
 
-export const Link: FC<LinkProps> = ({ url, children }) => {
+export const Link: FC<LinkProps> = ({ handleClick, url, children, classNames }) => {
   return (
-    <S.Container>
-      <GatsbyLink to={url}>{children}</GatsbyLink>
-    </S.Container>
+    <GatsbyLink to={url} className={cls(['link', classNames])} onClick={handleClick}>
+      {children}
+    </GatsbyLink>
   );
 };
 

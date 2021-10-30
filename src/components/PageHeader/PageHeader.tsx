@@ -11,13 +11,13 @@ export interface PageHeaderProps {
 
 export const PageHeader: FC<PageHeaderProps> = ({ body, children, headline }) => {
   return (
-    <>
+    <S.Container>
       <Link url="/">
         <Logo />
       </Link>
       <S.Headline dangerouslySetInnerHTML={{ __html: `${headline}` }} />
-      {body ? <S.Container dangerouslySetInnerHTML={{ __html: `${body}` }} /> : null}
+      {body ? <S.Body dangerouslySetInnerHTML={{ __html: `${body}` }} /> : null}
       {children}
-    </>
+    </S.Container>
   );
 };

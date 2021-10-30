@@ -2,17 +2,26 @@ import React, { FC, ReactNode } from 'react';
 import * as S from './Button.styled';
 
 interface ButtonProps {
+  buttonTemplate: string;
   children: ReactNode;
   handleClick: Function;
   styles: string;
   type: string;
 }
 
-export const Button: FC<ButtonProps> = ({ children, handleClick, styles, type }) => {
+export const Button: FC<ButtonProps> = (props) => {
+  const { buttonTemplate, children, styles, type } = props;
+  const templateMap = {
+    basic: S.BasicButton,
+    default: S.DefaultButton,
+    // link: S.LinkButton,
+    noStyle: S.NoStyleButton,
+  };
+  const Template = buttonTemplate in templateMap ? templateMap[buttonTemplate] : S.NoStyleButton;
   return (
-    <S.Container type={type} onClick={handleClick} styles={styles}>
+    <Template {...props} type={type || 'button'} styles={styles}>
       {children}
-    </S.Container>
+    </Template>
   );
 };
 

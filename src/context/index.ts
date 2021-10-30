@@ -1,2 +1,2 @@
-export { ModalProvider, ModalContext } from './modalProvider';
+export { ContextProvider, Context } from './contextProvider';
 export { useDispatch } from '~hooks/index';

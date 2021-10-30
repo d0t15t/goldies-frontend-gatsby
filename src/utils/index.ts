@@ -12,29 +12,75 @@ export const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase(
  *
  * @param url
  * @param basePath
- * @returns
+ * @returns string
  */
-export const getRelativePath = (url: string, basePath: string) => url.replace(basePath, '');
+export const getRelativePath = (url: string, basePath: string): string => url.replace(basePath, '');
 
 /**
  *
- * @param id
- * @param prefix
- * @returns
+ * @param id string
+ * @param prefix string
+ * @returns string
  */
-export const getGid = (prefix: string, id: string) =>
+export const getGid = (prefix: string, id: string): string =>
   Buffer.from(`gid://${prefix}/${id}`).toString('base64');
 
 /**
  *
- * @param node
- * @returns
+ * @param id string
+ * @returns string
  */
-// export const getProductParts = (node) => {
-//   const product = node?.rels?.product;
-//   const variants = node?.rels?.product?.relationships?.variants;
-//   return [product, variants];
-// };
+export const getProductVariantGid = (id: string): string => getGid(`shopify/ProductVariant`, id);
+
+/**
+ * @param items Variant[]
+ * @param currentId string
+ * @returns Variant
+ */
+export const getCurrentVariant = (items, currentId: string) =>
+  items.find((item) => item.shopifyId === currentId);
+
+/**
+ * @param title string
+ * @param variant
+ * @returns string
+ */
+export const getProductVariantTitle = (title, variant): string => {
+  return `${title}, ${variant.title}`;
+};
+
+/**
+ * @param s string
+ * @returns bool
+ */
+export const variantHasTitle = (s: string): boolean => s !== 'Default Title';
+
+/**
+ * @param context string | undefined | null
+ * @returns bool
+ */
+export const cartIsDefaultViewMode = (context: string | undefined | null): boolean =>
+  context === '' || context === undefined || context === null || context === 'default';
+
+/**
+ * @param e
+ * @param buttonId string
+ * @param dropdownRef ref
+ * @returns bool
+ */
+export const isCartButtonClick = (e, buttonId, dropdownRef): boolean =>
+  dropdownRef?.current?.contains(e.target) ||
+  e.target.parentNode.id === 'cart-button' ||
+  e.target.id === 'cart-button';
+
+/**
+ * @param {}
+ * @returns string
+ */
+export const getVariantProductNodePathAlias = ({ variants, current }): string =>
+  variants.find((item) => {
+    return getProductVariantGid(item.variantId) === current.variant.id;
+  })?.rels?.product[0]?.rels?.page[0]?.path?.alias;
 
 /**
  * @param {String} url

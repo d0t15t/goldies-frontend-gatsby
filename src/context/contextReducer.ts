@@ -1,4 +1,4 @@
-export const ModalReducer = (state, action) => {
+export const ContextReducer = (state, action) => {
   const { payload } = action;
 
   switch (action.type) {
@@ -20,4 +20,4 @@ export const ModalReducer = (state, action) => {
   }
 };
 
-export default ModalReducer;
+export default ContextReducer;

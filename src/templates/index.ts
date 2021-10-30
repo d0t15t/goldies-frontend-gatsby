@@ -13,6 +13,8 @@ export * from '~components/Collection/Collection';
 export * from '~components/Product/Product';
 export * from '~components/Tiles/Tiles';
 
+import * as U from '~utils';
+
 export interface pageData {
   headerData: PageHeaderProps;
   // bodyData: PageBodyProps;
@@ -67,22 +69,20 @@ export const getTileNodeTeasers = (teasers) => {
 
 export const getNodeTiles = (tiles) => {
   return tiles.map((tile) => {
+    const defaultTemplate = {
+      ...tile,
+    };
     const pageBodyTileTemplate = {
-      paragraph__tiles: () => {
-        return {
-          ...tile,
-          teasers: getTileNodeTeasers(tile.rels.teasers),
-        };
+      paragraph__tiles: {
+        ...tile,
+        teasers: tile?.rels?.teasers ? getTileNodeTeasers(tile.rels.teasers) : [],
       },
-      paragraph__text: () => {
-        return {
-          ...tile,
-        };
-      },
+      paragraph__text: defaultTemplate,
+      paragraph__cart: defaultTemplate,
     };
     return tile.internal?.type in pageBodyTileTemplate
-      ? pageBodyTileTemplate[tile.internal.type]()
-      : null;
+      ? pageBodyTileTemplate[tile.internal.type]
+      : defaultTemplate;
   });
 };
 
@@ -169,12 +169,14 @@ export const getProductNodeShopifyProductImageSet = (productNode) => {
 export const getProductNodeShopifyProduct = (productNode) => productNode.rels?.shopifyProduct;
 
 export const getProductNodeShopifyProductVariants = (shopifyProductNode) =>
-  shopifyProductNode.rels?.variants ?? [];
+  shopifyProductNode.rels?.variants.map((variant) => {
+    return { ...variant, shopifyId: U.getProductVariantGid(variant.shopifyId) };
+  }) ?? [];
 
 export const getProductNodeData = (node) => {
   const shopifyProduct = getProductNodeShopifyProduct(node);
   return {
-    headline: getHeadline(node),
+    headline: getNodeTitle(node),
     ...shopifyProduct,
     variants: getProductNodeShopifyProductVariants(shopifyProduct),
     images: getProductNodeShopifyProductImageSet(shopifyProduct),
