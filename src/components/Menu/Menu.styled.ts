@@ -1,13 +1,6 @@
 import styled from 'styled-components';
+import { Box, Divider, List, ListItem, ListItemText, ListItemIcon } from '@mui/material';
 
-export const Menu = styled.ul`
-  ${({ orientation }) => {
-    return `
-      display: ${orientation === 'vertical' ? 'flex' : 'inherit'};
-    `;
-  }}}
-`;
-
-export const MenuItem = styled.li`
-  padding: ${({ theme }) => theme.margins[1]};
+export const Menu = styled(List)`
+  display: ${({ vertical: v }) => (v === 1 ? 'inherit' : 'flex')};
 `;

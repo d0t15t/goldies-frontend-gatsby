@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Box, Typography } from '@mui/material';
 
-export const Container = styled.div``;
-export const Title = styled.h4``;
+export const Teaser = styled(Box)``;
+export const Text = styled(Typography)``;
 export const SubTitle = styled.h5``;
 export const TitleWrapper = styled.div``;

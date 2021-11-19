@@ -8,6 +8,7 @@ const initialState = {
   // status: 'success', // 'wait', 'error'
   modalIsOpen: false,
   modalContent: null,
+  modalStyle: null,
   currentSearchInput: '',
   // modalId: 0,
   // modalContent: null,

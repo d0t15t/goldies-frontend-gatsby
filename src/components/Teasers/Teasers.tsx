@@ -8,11 +8,11 @@ export interface TeasersProps {
 
 export const Teasers: FC<TeasersProps> = ({ teasers }) => {
   return (
-    <S.Container>
+    <S.Teasers>
       {teasers.map((teaser) => {
         return <Teaser {...teaser} key={teaser.id} />;
       })}
-    </S.Container>
+    </S.Teasers>
   );
 };
 

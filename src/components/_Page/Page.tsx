@@ -1,22 +1,19 @@
 /* eslint-disable camelcase */
 import React, { FC } from 'react';
 import { graphql } from 'gatsby';
+import { Typography } from '@mui/material';
 import { Link, SocialBlock } from '~components';
 
-//* @var I */ Interfaces */
-import * as I from '~templates/interfaces';
-
 //* @var PU */ Page Utilities */
-import * as PU from '..';
+import * as PU from './index';
 
 //* @var S */ Styled components */
 import * as S from './Page.styled';
 
-const PageWrapper: FC<I.pageWrapper> = ({ data }) => {
+const PageWrapper: FC<pageWrapper> = ({ data }) => {
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
-  // console.log('🚀 ~ file: Page.tsx ~ line 20 ~ headerData, bodyData', headerData, bodyData);
 
   const getPageBodyTemplate = (data, type) => {
     const pageBodyTemplate = {

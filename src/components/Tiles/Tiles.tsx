@@ -15,11 +15,11 @@ export const Tiles: FC<TilesProps> = ({ tiles }) => {
   };
 
   return (
-    <S.Container>
+    <S.Tile>
       {tiles.map((tile) => {
         return tile?.internal?.type in tileMap ? tileMap[tile.internal.type]({ ...tile }) : null;
       })}
-    </S.Container>
+    </S.Tile>
   );
 };
 

@@ -11,28 +11,28 @@ export interface TeaserProps {
   url: string | null;
 }
 
-export const Teaser: FC<TeaserProps> = ({ teaserStyle, title, subTitle, url, image }) => {
+export const Teaser: FC<TeaserProps> = ({ teaserStyle, title, subTitle, link, image }) => {
   const TeaserInner = () => {
     return (
       <>
         <S.TitleWrapper>
-          <S.Title>{title}</S.Title>
-          <S.SubTitle>{subTitle}</S.SubTitle>
+          <S.Text variant="h5">{title}</S.Text>
+          <S.Text variant="subtitle1">{subTitle}</S.Text>
         </S.TitleWrapper>
         {image && <Image data={image} alt={title || ''} />}
       </>
     );
   };
   return (
-    <S.Container>
-      {url ? (
-        <Link url={url}>
+    <S.Teaser>
+      {link ? (
+        <Link to={link}>
           <TeaserInner />
         </Link>
       ) : (
         <TeaserInner />
       )}
-    </S.Container>
+    </S.Teaser>
   );
 };
 

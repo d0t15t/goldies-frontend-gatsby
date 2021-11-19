@@ -1,4 +1,3 @@
-import * as I from '~templates/interfaces';
 import { PageHeaderProps } from '~components/PageHeader/PageHeader';
 // import { PageBodyProps } from '~components/PageBody/PageBody';
 import { PageFooterProps } from '~components/PageFooter/PageFooter';
@@ -24,15 +23,15 @@ export interface pageData {
 /*
  * Page element helper functions.
  */
-export const getHeadline = (node: I.pageBase): string | undefined => {
+export const getHeadline = (node: pageBase): string | undefined => {
   return node?.headline?.markup;
 };
 
-export const getBody = (node: I.pageBase): string | undefined => {
+export const getBody = (node: pageBase): string | undefined => {
   return node?.body?.markup;
 };
 
-export const getNodeTitleDisplay = (node: I.pageBase): boolean => {
+export const getNodeTitleDisplay = (node: pageBase): boolean => {
   return node?.titleDisplay || false;
 };
 
@@ -59,7 +58,7 @@ export const getTileNodeTeaser = (teaser) => {
   return {
     ...teaser,
     image: getNodeImageData(teaser),
-    url: getTileTeaserNodeUrl(teaser),
+    link: getTileTeaserNodeUrl(teaser),
   };
 };
 
@@ -93,7 +92,7 @@ export const getCollectionNodeProduct = (product) => {
   return {
     ...product,
     image: getNodeImageData(product),
-    url: getNodeUrl(product),
+    link: getNodeUrl(product),
   };
 };
 
@@ -186,11 +185,11 @@ export const getProductNodeData = (node) => {
 /*
  * Helper functions.
  */
-export const getNodeType = (data: I.pageWrapper): string => {
+export const getNodeType = (data: pageWrapper): string => {
   return Object.values(data).find((e) => e?.internal?.type)?.internal?.type || '';
 };
 
-export const getNode = (data: I.pageWrapper): I.pageBase => {
+export const getNode = (data: pageWrapper): pageBase => {
   const type = getNodeType(data);
   return type in data ? data[type] : null;
 };

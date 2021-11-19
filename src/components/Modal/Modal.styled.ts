@@ -1,13 +1,17 @@
 import styled from 'styled-components';
+import { Box, Modal as MuiModal } from '@mui/material';
 
-export const Container = styled.div`
+export const Modal = styled(MuiModal)`
+  padding: ${({ theme }) => theme.spacing(5)}px;
+`;
+
+export const Inner = styled.div`
   max-width: 1200px;
-  width: 100%;
-  // height: 75vh;
+  max-width: 75%;
+  /* max-height: 75vh; */
   margin: auto;
-  font-size: 2em;
-  position: relative;
-  background-color: white;
+  padding: ${({ theme }) => theme.spacing(5)}px;
+  background-color: ${({ theme }) => theme.palette.info.light};
 `;
 
 export const CloseButtonWrapper = styled.div`
@@ -18,9 +22,9 @@ export const CloseButtonWrapper = styled.div`
       position: absolute;
       left: ${position?.left + 'px' ?? '0'};
       top: ${position?.top + 'px' ?? '0'};
-      width: ${theme.iconSizes[2]};
-      height: ${theme.iconSizes[2]};
-      
+      width: 25px;
+      height: 25px;
+    
       button {
         width: 100%;
       }
@@ -28,40 +32,22 @@ export const CloseButtonWrapper = styled.div`
   }}
 `;
 
-// export const buttonStyles = `
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   z-index: 2;
-//   &: hover {
-//     path {
-//       color: gold;
-//     }
+// export const Inner = styled.div`
+//   padding: 2em;
+//   max-width: 100%;
+//   width: 100%;
+
+//   .swiper {
+//     margin: auto;
+//     width: 100%;
 //   }
-// `;
 
-export const Inner = styled.div`
-  padding: 2em;
-  max-width: 100%;
-  width: 100%;
-
-  .swiper {
-    margin: auto;
-    width: 100%;
-  }
-
-  ${(props) => {
-    const { theme } = props;
-    return `
-      a {
-        color: ${theme.colors.secondary};
-      }
-    `;
-  }}
-`;
-
-// export const ModalClose = styled.div`
-//   margin-left: -1em;
-//   margin-top: -1em;
-//   cursor: pointer;
+//   ${(props) => {
+//     const { theme, modalStyle } = props;
+//     return `
+//       a {
+//         color: ${theme.palette.secondary};
+//       }
+//     `;
+//   }}
 // `;

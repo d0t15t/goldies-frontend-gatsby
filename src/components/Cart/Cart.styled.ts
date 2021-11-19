@@ -4,7 +4,7 @@ export const Container = styled.div`
   ${({ theme }) => {
     return `
       .cart-item {
-        padding: ${theme.margins[3]};
+        padding: ${theme.spacing(3)};
       }
     `;
   }}

@@ -1,5 +1,23 @@
 import React, { FC, useState } from 'react';
-import { Button } from '~components';
+import {
+  FormControl,
+  InputLabel,
+  Box,
+  MenuItem,
+  Button,
+  ButtonGroup,
+  Grid,
+  FormLabel,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from '@mui/material';
+import { ExpandMore } from '@mui/icons-material';
+
+import { BsChevronDown } from 'react-icons/bs';
+import { Dropdown } from '~components';
+
 import * as S from './Counter.styled';
 
 interface CounterProps {
@@ -30,27 +48,25 @@ export const Counter: FC<CounterProps> = ({
     maximum: () => false,
   };
   return (
-    <S.Container>
+    <S.Counter>
       <Button
         name="increase-quantity"
         onClick={() => handleClick(change)}
         disabled={isDisabled.maximum()}
-        buttonTemplate="default"
         type="button"
       >
         + <span className="visually-hidden">Increase amount</span>
       </Button>
-      <S.CurCount>{currentCount}</S.CurCount>
+      <input disabled value={currentCount} />
       <Button
         name="decrease-quantity"
         onClick={() => handleClick(change * -1)}
         disabled={isDisabled.minimum()}
-        buttonTemplate="default"
         type="button"
       >
         - <span className="visually-hidden">Decrease amount</span>
       </Button>
-    </S.Container>
+    </S.Counter>
   );
 };
 

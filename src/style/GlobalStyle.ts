@@ -3,7 +3,11 @@ import 'normalize.css';
 
 export const GlobalStyle = createGlobalStyle`
   ${({ theme }) => {
+    console.log('🚀 ~ file: GlobalStyle.ts ~ line 114 ~ theme', theme);
     return `
+
+
+
       // :root {
       //   font-size: 62.5%;
       // }
@@ -20,18 +24,23 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -webkit-tap-highlight-color: transparent;
       }
-    
-      // body {
-      //   font-size: 1.6rem;
+
+      // html {
+      //   overflow-x: hidden;
+      //   margin-right: calc(-1 * (100vw - 100%));
       // }
     
+      body {
+        background-color: ${theme.palette.background.paper}
+      }
+    
       a {
-        color: ${theme.colors.secondary};
+        color: ${theme.palette.primary.main};
         text-decoration: none;
         cursor: pointer;
 
         &:hover {
-          color: ${theme.colors.light};
+          color: ${theme.palette.primary.light};
         }
       }
     
@@ -103,4 +112,6 @@ export const GlobalStyle = createGlobalStyle`
       }
     `;
   }}
+  
+  
 `;

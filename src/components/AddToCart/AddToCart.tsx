@@ -55,11 +55,7 @@ export const AddToCart: FC<AddToCartProps> = ({ children, quantity, shopifyId, t
     }
   };
 
-  return (
-    <Button buttonTemplate="basic" onClick={() => handleClick()}>
-      {children || 'Add to cart'}
-    </Button>
-  );
+  return <Button onClick={() => handleClick()}>{children || 'Add to cart'}</Button>;
 };
 
 export default AddToCart;

@@ -10,8 +10,8 @@ export const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase(
 
 /**
  *
- * @param url
- * @param basePath
+ * @param string url
+ * @param string basePath
  * @returns string
  */
 export const getRelativePath = (url: string, basePath: string): string => url.replace(basePath, '');
@@ -50,7 +50,7 @@ export const getProductVariantTitle = (title, variant): string => {
 };
 
 /**
- * @param s string
+ * @param String foo
  * @returns bool
  */
 export const variantHasTitle = (s: string): boolean => s !== 'Default Title';
@@ -70,7 +70,7 @@ export const cartIsDefaultViewMode = (context: string | undefined | null): boole
  */
 export const isCartButtonClick = (e, buttonId, dropdownRef): boolean =>
   dropdownRef?.current?.contains(e.target) ||
-  e.target.parentNode.id === 'cart-button' ||
+  e?.target?.parentNode?.id === 'cart-button' ||
   e.target.id === 'cart-button';
 
 /**
@@ -95,4 +95,13 @@ export const urlIsExternal = (url: string): boolean => {
   const array = url.split('://');
   if (typeof array[1] !== 'undefined') return true;
   return array[1] !== process.env.GATSBY_BASE_HOSTNAME;
+};
+
+export const getMenuItems = (menuItems) => {
+  return menuItems.nodes.map((menuItem) => {
+    return {
+      ...menuItem,
+      link: menuItem.link.alias,
+    };
+  });
 };

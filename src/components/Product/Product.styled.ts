@@ -13,11 +13,11 @@ export const Body = styled.p`
 export const Controls = styled.div``;
 
 export const ControlsInner = styled.div`
-  ${({ theme, themeStyle }) => {
+  ${({ theme }) => {
     return `
       display: flex;
       justify-content: space-between;
-      margin-bottom: ${theme.margins[1]};
+      margin-bottom: ${theme.spacing(2)};
     `;
   }}
 `;

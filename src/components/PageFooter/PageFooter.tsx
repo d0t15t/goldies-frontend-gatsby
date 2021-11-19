@@ -1,6 +1,7 @@
 import React, { FC, ReactNode } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Logo, Menu, NewsletterBlock } from '~components';
+import { Link, Logo, Menu, NewsletterBlock } from '~components';
+import * as U from '~utils';
 import * as S from './PageFooter.styled';
 
 export interface PageFooterProps {
@@ -8,9 +9,7 @@ export interface PageFooterProps {
 }
 
 export const PageFooter: FC<PageFooterProps> = ({ children }) => {
-  const {
-    menuItems: { nodes },
-  } = useStaticQuery(graphql`
+  const { menuItems } = useStaticQuery(graphql`
     query {
       ...menuFooterMenuFragment
     }
@@ -19,13 +18,15 @@ export const PageFooter: FC<PageFooterProps> = ({ children }) => {
     <S.Footer>
       <NewsletterBlock />
       <S.Lower>
-        <div>
-          <Menu items={nodes} />
-        </div>
+        {/* <div> */}
+        <Menu items={U.getMenuItems(menuItems)} />
+        {/* </div> */}
+        <p>☮</p>
         <S.Identity>
-          <Logo />
-          <p>Goldie's Natural Beauty</p>
-          <p>Copyright © {new Date().getFullYear()} </p>
+          <Link to="/">
+            <Logo />
+          </Link>
+          <p>© Goldie's Natural Beauty {new Date().getFullYear()} </p>
         </S.Identity>
       </S.Lower>
     </S.Footer>

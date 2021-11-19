@@ -6,12 +6,12 @@ export const Footer = styled.footer`
       display: flex;
       flex-direction: column;
       min-height: 300px;
-      // padding: ${theme.margins[4]};
+      // padding: ${theme.spacing[4]};
       text-align: center;
       background-image: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0),
-        ${theme.colors.gold},
+        ${theme.palette.secondary.dark},
         gold
       );
     `;

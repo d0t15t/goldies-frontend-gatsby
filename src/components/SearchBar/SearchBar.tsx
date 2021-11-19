@@ -5,11 +5,24 @@ import { useFlexSearch } from 'react-use-flexsearch';
 import { useCombobox } from 'downshift';
 import { useDimensions } from 'react-hook-dimensions';
 import useEventListener from '@use-it/event-listener';
-import { IconContext } from 'react-icons';
-import { BiSearchAlt } from 'react-icons/bi';
-import { CgClose } from 'react-icons/cg';
+
+import {
+  FormLabel,
+  IconButton,
+  Input,
+  InputBase,
+  List,
+  ListItem,
+  ListItemText,
+  TextField,
+} from '@mui/material';
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+
+import { Close, Search } from '@mui/icons-material';
+import { visuallyHidden } from '@mui/utils';
+
 import { Context, useDispatch } from '~context';
-import { Dropdown } from '~components';
+import { Dropdown, Link } from '~components';
 import * as S from './SearchBar.styled';
 
 interface InputItemProps {
@@ -29,11 +42,6 @@ export const SearchBar = () => {
 
   const searchInputRef = useRef();
 
-  /**
-   * Searchbar combobox
-   * @param props
-   * @returns
-   */
   const ComboBox = (props) => {
     const {
       queryData: { index, store },
@@ -103,45 +111,68 @@ export const SearchBar = () => {
 
     return (
       <>
-        <label className="visually-hidden" {...getLabelProps()}>
+        <FormLabel {...getLabelProps()} sx={visuallyHidden}>
           Search products:
-        </label>
+        </FormLabel>
         <form
           {...getComboboxProps()}
           className={cls(['form', 'form__search-bar'])}
           onSubmit={(e) => e.preventDefault()}
         >
-          <div className={cls(['controls', 'search-bar__controls'])} ref={dropdownTriggerRef}>
-            <button
-              className={cls(['search-bar__search-button', 'no-style'])}
-              type="button"
-              {...getToggleButtonProps()}
-              aria-label="toggle dropdown"
-            >
-              <BiSearchAlt />
-            </button>
-            <input {...getInputProps({ ref: searchInputRef })} onFocus={(e) => e.target.select()} />
-            {currentSearchInput ? (
-              <button
-                className={cls(['search-bar__clear-button', 'no-style'])}
-                type="button"
-                onClick={handleClear}
-                aria-label="clear selection"
-              >
-                <CgClose />
-              </button>
+          <div ref={dropdownTriggerRef}>
+            <IconButton {...getToggleButtonProps()} color="secondary" aria-label="toggle dropdown">
+              <Search />
+            </IconButton>
+            <S.Input
+              {...getInputProps()}
+              variant="outlined"
+              inputRef={searchInputRef}
+              label="Search..."
+              onFocus={(e) => {
+                e.target.select();
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+            {query.length ? (
+              <IconButton onClick={handleClear} aria-label="clear selection">
+                <Close />
+              </IconButton>
             ) : null}
           </div>
-          <Dropdown {...dropdownProps} />
+          <Dropdown {...dropdownProps}>
+            {Array.isArray(inputItems) && (
+              <S.List>
+                {inputItems.map((item, index) => {
+                  return (
+                    <ListItem
+                      {...getItemProps({ item, index })}
+                      key={item.id}
+                      className={cls([
+                        'search-bar__list-item',
+                        { 'search-bar__list-item--highlighted': highlightedIndex === index },
+                      ])}
+                    >
+                      <Link
+                        to={item.path}
+                        //  onClick={handleSelect}
+                      >
+                        <ListItemText>{item.title}</ListItemText>
+                      </Link>
+                    </ListItem>
+                  );
+                })}
+              </S.List>
+            )}
+          </Dropdown>
         </form>
       </>
     );
   };
 
   return (
-    <S.Container className={cls(['search-bar'])}>
+    <S.SearchBar className={cls(['search-bar'])}>
       <ComboBox />
-    </S.Container>
+    </S.SearchBar>
   );
 };
 

@@ -11,11 +11,6 @@ export const ListItem = styled.li`
 export const ListItemCol = styled.div`
   ${({ theme }) => {
     return `
-      button {
-        svg {
-          width: ${theme.iconSizes[1]}
-        }
-      }
     `;
   }}
 `;

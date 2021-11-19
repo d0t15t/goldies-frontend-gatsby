@@ -1,25 +1,15 @@
-import styled from 'styled-components';
-// ${({ theme }) => {
-//   return `
+// import styled from 'styled-components';
+import { styled } from '@mui/system';
+import { AppBar, Toolbar } from '@mui/material';
 
-//   `;
-// }}
-export const Container = styled.div`
-  ${({ theme }) => {
-    return `
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 998;
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-      // color: ${theme.colors.light};
-  `;
-  }}
+export const Navigation = styled(AppBar)`
+  background-color: unset;
+`;
+export const Inner = styled(Toolbar)`
+  justify-content: space-between;
+  height: 100px;
 `;
 
-export const Unit = styled.span`
+export const Unit = styled('span')`
   display: flex;
-  /* padding: 0.3em; */
 `;

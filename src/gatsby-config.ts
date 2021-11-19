@@ -47,7 +47,6 @@ const gatsbyConfig: GatsbyConfig = {
         '~static': path.join(__dirname, '../static'),
       },
     },
-
     {
       resolve: `gatsby-theme-shopify-manager`,
       options: {
@@ -139,18 +138,19 @@ const gatsbyConfig: GatsbyConfig = {
         name: 'assets',
       },
     },
-    {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `./src/utils/typography`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-typography`,
+    //   options: {
+    //     pathToConfigModule: `./src/utils/typography`,
+    //   },
+    // },
     'gatsby-plugin-svgr',
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-sitemap',
+    // 'gatsby-plugin-material-ui',
     // 'gatsby-plugin-use-query-params',
     // 'gatsby-plugin-portal',
     // 'gatsby-plugin-preact',

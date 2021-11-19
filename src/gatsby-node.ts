@@ -28,7 +28,7 @@ exports.createPages = async ({ graphql, actions }) => {
     return nodes.forEach((node) => {
       createPage({
         // component: getComponent(U.capitalizeFirstLetter(nodeType)),
-        component: path.resolve(`./src/templates/Page/Page.tsx`),
+        component: path.resolve(`./src/components/_Page/Page.tsx`),
         path: getPath(node),
         context: {
           id: node.id,

@@ -18,9 +18,8 @@
       "~utils/*": ["src/utils/*"],
       "~hooks/*": ["./src/hooks/*"],
       "~src/*": ["./src/*"],
-      "~static/*": ["./static/*"],
+      "~static/*": ["./static/*"]
     }
   },
-  "include": ["./src/**/*"],
-  
+  "include": ["./src/**/*"]
 }

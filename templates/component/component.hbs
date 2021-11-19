@@ -6,7 +6,7 @@ interface {{name}}Props {
 }
 
 export const {{name}}: FC<{{name}}Props> = ({children}) => {
-  return <S.Container>{{name}}{children}</S.Container>;
+  return <S.{{name}}>{{name}}{children}</S.{{name}}>;
 };
 
 export default {{name}};

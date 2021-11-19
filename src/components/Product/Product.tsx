@@ -50,11 +50,13 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants }) 
             />
             <Price value={currentVariant.price} />
             <Counter {...counterProps} />
-            <ProductVariants
-              items={variants}
-              current={currentVariant}
-              updateCurrentId={updateCurrentVariantId}
-            />
+            {variants.length > 1 && (
+              <ProductVariants
+                items={variants}
+                current={currentVariant}
+                updateCurrentId={updateCurrentVariantId}
+              />
+            )}
           </S.ControlsInner>
         </form>
       </S.Controls>

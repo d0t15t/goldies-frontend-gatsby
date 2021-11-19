@@ -1,9 +1,11 @@
 import React, { FC, ReactNode, useCallback, useContext, useEffect, useRef } from 'react';
 import { useDimensions } from 'react-hook-dimensions';
 import useEventListener from '@use-it/event-listener';
-import { useKeyPress, useDispatch } from '~hooks';
+import cls from 'classnames';
+import { Box, Modal as MuiModal } from '@mui/material';
 import { Context } from '~context';
-import { CloseButton, Overlay, Portal } from '~components';
+import { useKeyPress, useDispatch } from '~hooks';
+import { CloseButton } from '~components';
 import * as S from './Modal.styled';
 
 interface ModalCloseProps {
@@ -11,10 +13,9 @@ interface ModalCloseProps {
 }
 
 const ModalClose: FC<ModalCloseProps> = ({ handleClose }) => (
-  <CloseButton
-    handleClick={handleClose}
-    iconStyles={{ color: 'black', className: 'modal-close' }}
-  />
+  <CloseButton handleClick={handleClose} name="Close modal">
+    <span className="visually-hidden">Close modal</span>
+  </CloseButton>
 );
 
 interface ModalProps {
@@ -25,49 +26,30 @@ interface ModalProps {
 
 export const Modal = () => {
   const modalInnerId = 'modal-overlay';
-  const [{ modalIsOpen, modalContent }, dispatch] = useContext(Context);
+  const [{ modalIsOpen, modalContent, modalStyle }, dispatch] = useContext(Context);
 
   const [modalRef, modalDimensions] = useDimensions({
     dependencies: [modalIsOpen],
   });
 
-  const updateModalIsOpen = useCallback((status: boolean, content: ReactNode) => {
-    useDispatch('modalIsOpen', status, dispatch);
-    useDispatch('modalContent', content, dispatch);
-  }, []);
+  const updateModalIsOpen = useCallback(
+    (status: boolean, content: ReactNode, style: string | null) => {
+      useDispatch('modalIsOpen', status, dispatch);
+      useDispatch('modalContent', content, dispatch);
+    },
+    []
+  );
 
-  // Close by outside click
-  useEventListener('click', (e) => {
-    // if (!modalIsOpen) return;
-    // if (modalRef?.current?.contains(e.target)) {
-    //   return;
-    // }
-    // updateModalIsOpen(false, null);
-  });
-
-  // Close by esc. key.
-  const key = 'Escape';
-  const kp = useKeyPress(key);
-  useEffect(() => {
-    if (kp === true) updateModalIsOpen(false, null);
-  }, [kp, updateModalIsOpen]);
+  const handleClose = () => updateModalIsOpen(false, null);
 
   return (
-    <>
-      {modalIsOpen && (
-        <Portal>
-          <Overlay>
-            <S.Container>
-              <S.Inner id={modalInnerId} ref={modalRef}>
-                {modalContent}
-              </S.Inner>
-            </S.Container>
-            <S.CloseButtonWrapper position={{ ...modalDimensions }}>
-              <ModalClose handleClose={() => updateModalIsOpen(false, null)} />
-            </S.CloseButtonWrapper>
-          </Overlay>
-        </Portal>
-      )}
-    </>
+    <S.Modal
+      open={modalIsOpen}
+      onClose={handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <S.Inner className={cls(['modal-content'])}>{modalContent}</S.Inner>
+    </S.Modal>
   );
 };

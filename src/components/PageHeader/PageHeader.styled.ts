@@ -1,13 +1,13 @@
-import styled from 'styled-components';
+// import styled from 'styled-components';
+import { styled } from '@mui/system';
+import { Box } from '@mui/material';
 
-export const Container = styled.header`
-  ${(props) => {
-    let { theme, themeStyle } = props;
-    themeStyle ??= 'secondary';
-    return `
-      
-    `;
-  }}
-`;
-export const Headline = styled.div``;
-export const Body = styled.div``;
+export const Header = styled('header')``;
+export const Headline = styled(Box)(({ theme }) => {
+  return {
+    // '& h1': {
+    //   ...theme.typography.h1,
+    // },
+  };
+});
+export const Body = styled(Box)``;

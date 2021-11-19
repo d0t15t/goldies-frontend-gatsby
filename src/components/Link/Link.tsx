@@ -9,15 +9,15 @@ interface LinkProps {
   children: ReactNode;
   classNames: string;
   handleClick: Function;
-  url: string;
+  to: string;
 }
 
-export const Link: FC<LinkProps> = ({ handleClick, url, children, classNames }) => {
-  return (
-    <GatsbyLink to={url} className={cls(['link', classNames])} onClick={handleClick}>
+export const Link: FC<LinkProps> = ({ handleClick, to, children, classNames }) => {
+  return to ? (
+    <GatsbyLink to={to} className={cls(['link', classNames])} onClick={handleClick}>
       {children}
     </GatsbyLink>
-  );
+  ) : null;
 };
 
 export default Link;

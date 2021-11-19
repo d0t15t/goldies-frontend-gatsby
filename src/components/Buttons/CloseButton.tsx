@@ -1,6 +1,16 @@
 import React, { FC, ReactNode } from 'react';
-import { IconContext } from 'react-icons';
-import { CgClose } from 'react-icons/cg';
+import {
+  Box,
+  Divider,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  IconButton,
+  InputLabel,
+} from '@mui/material';
+import { Close } from '@mui/icons-material';
+
 import { Button } from './Button';
 
 interface CloseButtonProps {
@@ -15,14 +25,13 @@ export const CloseButton: FC<CloseButtonProps> = ({
   children,
   iconStyles,
   handleClick,
+  name,
 }) => {
   return (
-    <Button onClick={handleClick} styles={buttonStyles} type="button">
-      <IconContext.Provider value={iconStyles}>
-        <CgClose />
-      </IconContext.Provider>
+    <IconButton onClick={handleClick}>
+      <Close />
       {children}
-    </Button>
+    </IconButton>
   );
 };
 

@@ -312,7 +312,7 @@ export const largeImageFragment = graphql`
 `;
 
 export const menuLinkFragment = graphql`
-  fragment menuLinkFragment on MenuLinkContentMenuLinkContent {
+  fragment menuLinkFragment on menu_link_content__menu_link_content {
     id
     internal {
       type
@@ -333,19 +333,17 @@ export const menuFooterMenuFragment = graphql`
   fragment menuFooterMenuFragment on Query {
     menuItems: allMenuLinkContentMenuLinkContent(filter: { menu_name: { eq: "footer" } }) {
       nodes {
-        id
-        internal {
-          type
-        }
-        title
-        langcode
-        link {
-          alias: uri_alias
-        }
-        menuName: menu_name
-        parent {
-          id
-        }
+        ...menuLinkFragment
+      }
+    }
+  }
+`;
+
+export const menuSidebarMenuFragment = graphql`
+  fragment menuSidebarMenuFragment on Query {
+    menuItems: allMenuLinkContentMenuLinkContent(filter: { menu_name: { eq: "sidebar" } }) {
+      nodes {
+        ...menuLinkFragment
       }
     }
   }

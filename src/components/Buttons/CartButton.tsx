@@ -1,50 +1,41 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext } from 'react';
 import { useCartCount } from 'gatsby-theme-shopify-manager';
-import { useDimensions } from 'react-hook-dimensions';
-import useEventListener from '@use-it/event-listener';
-import { BiCart } from 'react-icons/bi';
-import { IoBagOutline } from 'react-icons/io5';
-import { Button, Cart, Link, Portal } from '~components';
-import * as U from '~utils';
+import { IconButton } from '@mui/material';
+import { LocalMallOutlined } from '@mui/icons-material';
+import { Context, useDispatch } from '~context';
+import { Cart, Link } from '~components';
 import * as S from './CartButton.styled';
 
 export const CartButton = () => {
-  const [cartIsOpen, setCartIsOpen] = useState(false);
   const cartCount = useCartCount();
-  const [dropdownTriggerRef, dropdownTriggerStyles, dropdownTriggerCalculate] = useDimensions({
-    dependencies: [],
-  });
-  const buttonId = 'cart-button';
-  const dropdownRef = useRef();
-  useEventListener('click', (e) => {
-    if (U.isCartButtonClick(e, buttonId, dropdownRef)) {
-      return;
-    }
-    setCartIsOpen(false);
-  });
 
-  useEventListener('resize', (e) => dropdownTriggerCalculate());
-  const handleClick = () => setCartIsOpen(!cartIsOpen);
+  const [context, dispatch] = useContext(Context);
 
-  return cartCount ? (
-    <S.Container>
-      <Button onClick={handleClick} id="cart-button">
-        <IoBagOutline />
+  const handleChange = (status, content) => {
+    useDispatch('modalIsOpen', status, dispatch);
+    useDispatch('modalContent', content, dispatch);
+  };
+
+  const CartContent = () => {
+    return (
+      <>
+        <p>Your Bag</p>
+        <Cart context="menu" />
+        <Link url="/cart" handleClick={() => handleChange(false, null)}>
+          Go to bag
+        </Link>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <IconButton onClick={() => handleChange(true, <CartContent />)}>
+        <LocalMallOutlined />
         <S.Count>{cartCount > 9 ? '9+' : cartCount}</S.Count>
-      </Button>
-      {cartIsOpen && (
-        <Portal>
-          <S.Cart ref={dropdownRef}>
-            <p>Your Bag</p>
-            <Cart context="menu" />
-            <Link url="/cart" handleClick={() => setCartIsOpen(false)}>
-              Go to bag
-            </Link>
-          </S.Cart>
-        </Portal>
-      )}
-    </S.Container>
-  ) : null;
+      </IconButton>
+    </>
+  );
 };
 
 export default CartButton;

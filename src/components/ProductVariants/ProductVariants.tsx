@@ -3,7 +3,9 @@ import { useSelect } from 'downshift';
 import { useDimensions } from 'react-hook-dimensions';
 import useEventListener from '@use-it/event-listener';
 import cls from 'classnames';
-import { BsChevronDown } from 'react-icons/bs';
+
+import { FormControl, Button, FormLabel, List, ListItem, ListItemButton } from '@mui/material';
+import { ExpandMore } from '@mui/icons-material';
 import { Dropdown } from '~components';
 import * as S from './ProductVariants.styled';
 import * as SB from '~components/Buttons/Button.styled';
@@ -29,7 +31,9 @@ interface ProductVariantsProps {
 
 export const ProductVariants: FC<ProductVariantsProps> = ({ items, current, updateCurrentId }) => {
   const handleSelect = ({ selectedItem }) => {
-    updateCurrentId(selectedItem?.shopifyId);
+    if (selectedItem?.shopifyId) {
+      updateCurrentId(selectedItem?.shopifyId);
+    }
   };
   const itemToString = (selectedItem) => (selectedItem?.title ? selectedItem.title : current);
   const {
@@ -51,6 +55,8 @@ export const ProductVariants: FC<ProductVariantsProps> = ({ items, current, upda
     dependencies: [],
   });
 
+  const getCurrentSelectedTitle = (current) => current.id;
+
   useEventListener('resize', (e) => dropdownTriggerCalculate());
 
   const dropdownProps = {
@@ -62,36 +68,79 @@ export const ProductVariants: FC<ProductVariantsProps> = ({ items, current, upda
     items,
     styles: dropdownTriggerStyles,
   };
+
   return (
     <>
-      <S.Container>
-        <label
-          className={cls(['proudct-variants-select-label', 'visually-hidden'])}
-          {...getLabelProps()}
-          htmlFor="product-variant-selector-button"
-        >
-          Choose a product variant:
-        </label>
-        <SB.BasicButton
-          // themeStyle="secondary"
-          // theme={{ foo: 'bar' }}
-          className={cls(['product-variant-selector-button'])}
-          type="button"
+      <FormControl>
+        <FormLabel {...getLabelProps()}>Choose size:</FormLabel>
+        <Button
+          // labelId="product-variant-select-label"
+          id="product-variant-select"
+          // value={getCurrentSelectedTitle(selectedItem)}
+          label="Product size"
+          onChange={handleSelect}
+          {...getToggleButtonProps()}
           {...getToggleButtonProps({ ref: dropdownTriggerRef })}
-          name="product-variant-selector-button"
-          id="product-variant-selector-button"
-          aria-label="toggle selections"
         >
-          {selectedItem.title}
-          <BsChevronDown />
-        </SB.BasicButton>
-      </S.Container>
-      <Dropdown
-        {...dropdownProps}
-        // target="product-variant-dropdown-portal"
-      />
+          {selectedItem ? itemToString(selectedItem) : null}
+          <ExpandMore />
+        </Button>
+      </FormControl>
+      <Dropdown {...dropdownProps}>
+        <List {...getMenuProps()}>
+          {isOpen &&
+            items.map((item, index) => {
+              return (
+                <ListItem
+                  key={item.id}
+                  // className={index === highlightedIndex ? classes.highlighted : undefined}
+                >
+                  <ListItemButton
+                    style={highlightedIndex === index ? { backgroundColor: '#bde4ff' } : {}}
+                    {...getItemProps({
+                      item,
+                      index,
+                    })}
+                  >
+                    {itemToString(item)}
+                  </ListItemButton>
+                </ListItem>
+              );
+            })}
+        </List>
+      </Dropdown>
     </>
   );
+  // return (
+  //   <>
+  //     <S.Container>
+  //       <label
+  //         className={cls(['proudct-variants-select-label', 'visually-hidden'])}
+  //         {...getLabelProps()}
+  //         htmlFor="product-variant-selector-button"
+  //       >
+  //         Choose a product variant:
+  //       </label>
+  //       <SB.BasicButton
+  //         // themeStyle="secondary"
+  //         // theme={{ foo: 'bar' }}
+  //         className={cls(['product-variant-selector-button'])}
+  //         type="button"
+  //         {...getToggleButtonProps({ ref: dropdownTriggerRef })}
+  //         name="product-variant-selector-button"
+  //         id="product-variant-selector-button"
+  //         aria-label="toggle selections"
+  //       >
+  //         {selectedItem.title}
+  //         <BsChevronDown />
+  //       </SB.BasicButton>
+  //     </S.Container>
+  //     <Dropdown
+  //       {...dropdownProps}
+  //       // target="product-variant-dropdown-portal"
+  //     />
+  //   </>
+  // );
 };
 
 export default ProductVariants;
