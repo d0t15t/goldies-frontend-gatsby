@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC } from 'react';
+import cls from 'classnames';
+import { visuallyHidden } from '@mui/utils';
 import { Image, Link } from '~components/index';
 import * as S from './Teaser.styled';
 
@@ -15,16 +17,20 @@ export const Teaser: FC<TeaserProps> = ({ teaserStyle, title, subTitle, link, im
   const TeaserInner = () => {
     return (
       <>
-        <S.TitleWrapper>
-          <S.Text variant="h5">{title}</S.Text>
-          <S.Text variant="subtitle1">{subTitle}</S.Text>
+        <S.TitleWrapper className={cls(['teaser-text'])}>
+          <S.Text variant="h5" sx={visuallyHidden}>
+            {title}
+          </S.Text>
+          <S.Text variant="subtitle1" sx={visuallyHidden}>
+            {subTitle}
+          </S.Text>
         </S.TitleWrapper>
         {image && <Image data={image} alt={title || ''} />}
       </>
     );
   };
   return (
-    <S.Teaser>
+    <S.Teaser className={cls(['teaser'])}>
       {link ? (
         <Link to={link}>
           <TeaserInner />

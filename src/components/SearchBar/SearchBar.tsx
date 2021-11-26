@@ -1,16 +1,18 @@
 import React, { useContext, useRef, useState } from 'react';
-import cls from 'classnames';
 import { graphql, navigate, useStaticQuery } from 'gatsby';
+import cls from 'classnames';
 import { useFlexSearch } from 'react-use-flexsearch';
 import { useCombobox } from 'downshift';
 import { useDimensions } from 'react-hook-dimensions';
 import useEventListener from '@use-it/event-listener';
-
 import {
+  FormControl,
   FormLabel,
   IconButton,
   Input,
   InputBase,
+  InputLabel,
+  OutlinedInput,
   List,
   ListItem,
   ListItemText,
@@ -120,19 +122,22 @@ export const SearchBar = () => {
           onSubmit={(e) => e.preventDefault()}
         >
           <div ref={dropdownTriggerRef}>
-            <IconButton {...getToggleButtonProps()} color="secondary" aria-label="toggle dropdown">
+            <div className="search-icon-wrapper">
               <Search />
-            </IconButton>
-            <S.Input
-              {...getInputProps()}
-              variant="outlined"
-              inputRef={searchInputRef}
-              label="Search..."
-              onFocus={(e) => {
-                e.target.select();
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            </div>
+            <FormControl>
+              <S.StyledInputLabel htmlFor="search-input">Search...</S.StyledInputLabel>
+              <OutlinedInput
+                variant="outlined"
+                {...getInputProps()}
+                id="search-input"
+                inputRef={searchInputRef}
+                label="Search..."
+                onFocus={(e) => {
+                  e.target.select();
+                }}
+              />
+            </FormControl>
             {query.length ? (
               <IconButton onClick={handleClear} aria-label="clear selection">
                 <Close />

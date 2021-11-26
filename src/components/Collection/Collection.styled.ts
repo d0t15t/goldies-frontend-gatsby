@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import { styled } from '@mui/system';
 
-export const Container = styled.div``;
-export const Headline = styled.h3`
+export const Collection = styled('div')``;
+export const Headline = styled('h3')`
   color: pink;
 `;
-export const Body = styled.p`
+export const Body = styled('p')`
   color: yellow;
 `;

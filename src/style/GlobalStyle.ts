@@ -3,11 +3,7 @@ import 'normalize.css';
 
 export const GlobalStyle = createGlobalStyle`
   ${({ theme }) => {
-    console.log('🚀 ~ file: GlobalStyle.ts ~ line 114 ~ theme', theme);
     return `
-
-
-
       // :root {
       //   font-size: 62.5%;
       // }

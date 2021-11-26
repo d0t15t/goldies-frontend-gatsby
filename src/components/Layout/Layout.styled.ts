@@ -3,7 +3,6 @@ import { styled } from '@mui/system';
 import { Box } from '@mui/material';
 
 export const Layout = styled(Box)(({ theme }) => {
-  console.log('🚀 ~ file: Layout.styled.ts ~ line 6 ~ Layout ~ theme', theme);
   return {
     '& h1': {
       ...theme.typography.h1,

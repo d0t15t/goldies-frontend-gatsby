@@ -9,11 +9,11 @@ interface CollectionProps {
 export const Collection: FC<CollectionProps> = ({ headline, body, products }) => {
   console.log('🚀 ~ file: Collection.tsx ~ line 10 ~ products', products);
   return (
-    <S.Container>
+    <S.Collection>
       <S.Headline>{headline}</S.Headline>
       {body && <S.Body>{body}</S.Body>}
       {products && <Teasers teasers={products} />}
-    </S.Container>
+    </S.Collection>
   );
 };
 

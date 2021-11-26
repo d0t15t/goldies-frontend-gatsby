@@ -8,8 +8,8 @@ interface ImageProps {
 
 export const Image: FC<ImageProps> = ({ alt, data }) => {
   return (
-    <S.Container>
-      <GatsbyImage image={getImage(data)} alt={alt ?? ''} />
-    </S.Container>
+    // <S.Container>
+    <GatsbyImage image={getImage(data)} alt={alt ?? ''} />
+    // </S.Container>
   );
 };
