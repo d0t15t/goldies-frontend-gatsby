@@ -1,27 +1,12 @@
 import { styled } from '@mui/system';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 
-// export const Teasers = styled(Box)`
-//   display: flex;
-//   flex-wrap: wrap;
-//   > * {
-//     width: 50%;
-//     padding: 20px;
-//   }
-// `;
-
-const sizing = [0.5, 0.5, 0.65, 0.35, 0.35];
-const getIndex = (i, l) => (i <= l ? i : l - i);
-const getWidth = (i) => {
-  return `${100 * sizing[getIndex(i, sizing.length)]}%`;
-};
-
-export const Grid = styled(Box)(({ theme }) => {
+export const FancyGrid = styled(Box)(({ theme }) => {
   return `
     display: grid;
-    grid-gap: ${theme.spacing(3)};
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 30vh 20vh 20vh 30vh;
+    grid-template-rows: 25vh 15vh 15vh 25vh;
+    grid-gap: ${theme.spacing(2)};
 
     > * {
       &:nth-child(1) { 
@@ -36,7 +21,6 @@ export const Grid = styled(Box)(({ theme }) => {
         grid-column-start: 1;
         grid-column-end: 9;
         grid-row-start: span 2;
-        // grid-row-end: 6;
       }
       &:nth-child(4) {
         grid-column-start: 9;
@@ -67,3 +51,13 @@ export const Grid = styled(Box)(({ theme }) => {
 
   `;
 });
+
+// export const TeaserWrapper = styled(Grid)(({ theme }) => {
+//   return {
+//     // padding: theme.spacing(2),
+//     paddingBottom: theme.spacing(2),
+//     [theme.breakpoints.up('sm')]: {
+//       paddingBottom: 0,
+//     },
+//   };
+// });

@@ -1,7 +1,9 @@
 /* eslint-disable camelcase */
-import React, { FC } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { graphql } from 'gatsby';
+import { useDimensions } from 'react-hook-dimensions';
 import { Typography } from '@mui/material';
+import { Context, useDispatch } from '~context';
 import { Link, SocialBlock } from '~components';
 
 //* @var PU */ Page Utilities */
@@ -10,7 +12,14 @@ import * as PU from './index';
 //* @var S */ Styled components */
 import * as S from './Page.styled';
 
-const PageWrapper: FC<pageWrapper> = ({ data }) => {
+const PageWrapper: FC<PageWrapper> = ({ data }) => {
+  const [context, dispatch] = useContext(Context);
+  const [ref, box] = useDimensions({
+    dependencies: [],
+  });
+  useEffect(() => {
+    useDispatch('pageDimensions', box, dispatch);
+  }, [box, dispatch]);
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
@@ -31,11 +40,13 @@ const PageWrapper: FC<pageWrapper> = ({ data }) => {
   };
 
   return node ? (
-    <S.Page>
+    <S.Page className="page-root">
       <PU.PageHeader {...headerData} />
-      <div id="main-content">{getPageBodyTemplate(bodyData, node.internal.type)}</div>
-      <SocialBlock />
-      <PU.PageFooter />
+
+      <div id="main-content" ref={ref}>
+        {getPageBodyTemplate(bodyData, node.internal.type)}
+      </div>
+      {/* <SocialBlock /> */}
     </S.Page>
   ) : null;
 };

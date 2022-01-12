@@ -248,8 +248,17 @@ export const productTeaserFragment = graphql`
       alias
     }
     rels: relationships {
-      media: field_media {
-        ...teaserMediaFragment
+      product: field_shopify_product {
+        rels: relationships {
+          image {
+            localFile {
+              ...teaserImageFragment
+            }
+          }
+          variants {
+            ...shopifyProductVariantFragment
+          }
+        }
       }
     }
   }
@@ -331,7 +340,23 @@ export const menuLinkFragment = graphql`
 
 export const menuFooterMenuFragment = graphql`
   fragment menuFooterMenuFragment on Query {
-    menuItems: allMenuLinkContentMenuLinkContent(filter: { menu_name: { eq: "footer" } }) {
+    footerMenuItems: allMenuLinkContentMenuLinkContent(
+      filter: { menu_name: { eq: "footer" } }
+      sort: { fields: weight }
+    ) {
+      nodes {
+        ...menuLinkFragment
+      }
+    }
+  }
+`;
+
+export const menuFooterContactMenuFragment = graphql`
+  fragment menuFooterContactMenuFragment on Query {
+    footerContactMenuItems: allMenuLinkContentMenuLinkContent(
+      filter: { menu_name: { eq: "footer-1" } }
+      sort: { fields: weight }
+    ) {
       nodes {
         ...menuLinkFragment
       }
@@ -341,9 +366,32 @@ export const menuFooterMenuFragment = graphql`
 
 export const menuSidebarMenuFragment = graphql`
   fragment menuSidebarMenuFragment on Query {
-    menuItems: allMenuLinkContentMenuLinkContent(filter: { menu_name: { eq: "sidebar" } }) {
+    sidebarMenuItems: allMenuLinkContentMenuLinkContent(
+      filter: { menu_name: { eq: "sidebar" } }
+      sort: { fields: weight }
+    ) {
       nodes {
         ...menuLinkFragment
+      }
+    }
+  }
+`;
+
+export const ctaFragment = graphql`
+  fragment ctaFragment on Query {
+    notices: allNodeCta {
+      nodes {
+        id
+        internal {
+          type
+        }
+        body {
+          markup: processed
+        }
+        link: field_link {
+          title
+          uri
+        }
       }
     }
   }

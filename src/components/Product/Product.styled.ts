@@ -7,7 +7,7 @@ export const Headline = styled.h3`
 `;
 
 export const Body = styled.p`
-  color: yellow;
+  /* color: yellow; */
 `;
 
 export const Controls = styled.div``;

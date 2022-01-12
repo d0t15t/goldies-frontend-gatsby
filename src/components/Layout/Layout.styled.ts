@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 
 export const Layout = styled(Box)(({ theme }) => {
   return {
+    position: 'relative',
     '& h1': {
       ...theme.typography.h1,
     },
@@ -27,6 +28,15 @@ export const Layout = styled(Box)(({ theme }) => {
     },
     '& .body2': {
       ...theme.typography.body2,
+    },
+    '&&': {
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+
+      '& .page-root': {
+        flexGrow: 1,
+      },
     },
   };
 });

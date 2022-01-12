@@ -7,6 +7,7 @@ module.exports = {
       '~templates/*': ['./src/templates/*'],
       '~utils/*': ['./src/utils/*'],
       '~hooks/*': ['./src/hooks/*'],
+      '~styles/*': ['./src/style/*'],
       '~src/*': ['./src/*'],
       '~static/*': ['./static/*'],
     },

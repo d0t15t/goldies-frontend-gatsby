@@ -1,6 +1,8 @@
 import React, { FC, ReactNode } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Link, Logo, Menu, NewsletterBlock } from '~components';
+import cls from 'classnames';
+import { Box, Typography } from '@mui/material';
+import { Link, Logo, Menu, NewsletterBlock, SocialBlock } from '~components';
 import * as U from '~utils';
 import * as S from './PageFooter.styled';
 
@@ -9,26 +11,39 @@ export interface PageFooterProps {
 }
 
 export const PageFooter: FC<PageFooterProps> = ({ children }) => {
-  const { menuItems } = useStaticQuery(graphql`
+  const { footerMenuItems, footerContactMenuItems } = useStaticQuery(graphql`
     query {
       ...menuFooterMenuFragment
+      ...menuFooterContactMenuFragment
     }
   `);
   return (
-    <S.Footer>
-      <NewsletterBlock />
-      <S.Lower>
+    <S.Footer as="footer">
+      <S.Inner>
+        <NewsletterBlock />
+        {/* <S.Lower> */}
         {/* <div> */}
-        <Menu items={U.getMenuItems(menuItems)} />
+        <Box className={cls('menu-block')}>
+          <Typography variant="h6">Goldies</Typography>
+          <Menu items={U.getMenuItems(footerMenuItems)} vertical={1} />
+        </Box>
+        <Box className={cls('menu-block')}>
+          <Typography variant="h6">Info</Typography>
+          <Menu items={U.getMenuItems(footerContactMenuItems)} vertical={1} />
+        </Box>
         {/* </div> */}
-        <p>☮</p>
-        <S.Identity>
+        <Box className="social-block">
+          <SocialBlock />
+        </Box>
+        <S.Identity className="identity">
+          <p className="peace">☮</p>
           <Link to="/">
             <Logo />
           </Link>
-          <p>© Goldie's Natural Beauty {new Date().getFullYear()} </p>
+          <p>© Goldies Natural Beauty {new Date().getFullYear()} </p>
         </S.Identity>
-      </S.Lower>
+        {/* </S.Lower> */}
+      </S.Inner>
     </S.Footer>
   );
 };

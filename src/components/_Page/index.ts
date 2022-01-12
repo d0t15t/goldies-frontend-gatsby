@@ -6,7 +6,7 @@ import { PageFooterProps } from '~components/PageFooter/PageFooter';
 
 export * from '~components/PageHeader/PageHeader';
 // export * from '~components/PageBody/PageBody';
-export * from '~components/PageFooter/PageFooter';
+// export * from '~components/PageFooter/PageFooter';
 
 export * from '~components/Collection/Collection';
 export * from '~components/Product/Product';
@@ -59,6 +59,7 @@ export const getTileNodeTeaser = (teaser) => {
     ...teaser,
     image: getNodeImageData(teaser),
     link: getTileTeaserNodeUrl(teaser),
+    teaserStyle: 'image-only',
   };
 };
 
@@ -88,11 +89,23 @@ export const getNodeTiles = (tiles) => {
 /*
  * Collection functions.
  */
+
+export const getProductTeaserImageData = (product) => {
+  return product?.rels?.product?.rels?.image?.localFile?.teaserImage;
+};
+
+export const getProductTeaserVariantData = (product) => {
+  const variant = product?.rels?.product?.rels?.variants[0];
+  return { ...variant, shopifyId: U.getProductVariantGid(variant.shopifyId) };
+};
+
 export const getCollectionNodeProduct = (product) => {
   return {
     ...product,
-    image: getNodeImageData(product),
+    // teaserStyle: 'product',
+    image: getProductTeaserImageData(product),
     link: getNodeUrl(product),
+    variant: getProductTeaserVariantData(product),
   };
 };
 
@@ -103,7 +116,7 @@ export const getCollectionNodeProducts = (node) => {
 };
 
 export const getCollectionNodeData = (node) => {
-  return { headline: getHeadline(node), products: getCollectionNodeProducts(node) };
+  return { products: getCollectionNodeProducts(node) };
 };
 
 /*

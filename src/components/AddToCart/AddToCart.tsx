@@ -12,7 +12,13 @@ interface AddToCartProps {
   variant: Object[];
 }
 
-export const AddToCart: FC<AddToCartProps> = ({ children, quantity, shopifyId, title }) => {
+export const AddToCart: FC<AddToCartProps> = ({
+  children,
+  quantity,
+  shopifyId,
+  title,
+  variant,
+}) => {
   const [{ modalIsOpen, modalContent }, dispatch] = useContext(Context);
 
   const addItemsToCart = useAddItemsToCart();
@@ -55,7 +61,11 @@ export const AddToCart: FC<AddToCartProps> = ({ children, quantity, shopifyId, t
     }
   };
 
-  return <Button onClick={() => handleClick()}>{children || 'Add to cart'}</Button>;
+  return (
+    <Button onClick={() => handleClick()} variant={variant}>
+      {children || 'Add to cart'}
+    </Button>
+  );
 };
 
 export default AddToCart;

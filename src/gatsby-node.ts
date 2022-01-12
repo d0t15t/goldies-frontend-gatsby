@@ -36,7 +36,6 @@ exports.createPages = async ({ graphql, actions }) => {
       });
       return true;
     });
-    return true;
   };
 
   const processQueryItems = (data) => {

@@ -8,6 +8,8 @@ import path, { resolve } from 'path';
 import dotenv from 'dotenv';
 import * as Promise from 'bluebird';
 
+import theme from 'src/style/theme';
+
 // global.Promise = Promise;
 
 dotenv.config({
@@ -27,14 +29,35 @@ const drupalVars = {
 
 const gatsbyConfig: GatsbyConfig = {
   siteMetadata: {
-    title: 'Gatsby Skeleton',
-    description: 'Gatsby starter featuring TypeScript, ESLint, Prettier and more...',
-    keywords: ['gatsby', 'starter', 'typescript', 'eslint', 'prettier', 'layout', 'seo'],
-    siteUrl: 'https://gatsby-starter-skeleton.netlify.app',
-    imageUrl: '/social.jpg',
+    title: 'Goldies Natural Beauty',
+    description:
+      'Natural candles, beauty products, soaps, and more. Handmade in Rockaway Beach, NY.',
+    keywords: [
+      'beauty products',
+      'natural',
+      'soap',
+      'soaps',
+      'herbal',
+      'woman owned business',
+      'rockaway beach',
+    ],
+    siteUrl: 'https://goldiessoap.com/gatsby-starter-skeleton.netlify.app',
+    imageUrl: '/favicon_io/apple-touch-icon.png',
     language: 'en',
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'Goldies Natural Beauty',
+        short_name: 'Goldies',
+        start_url: `/`,
+        // background_color: theme.palette.primary.light,
+        // theme_color: theme.palette.primary.main,
+        display: `standalone`,
+        icon: `static/favicon_io/apple-touch-icon.png`,
+      },
+    },
     {
       resolve: 'gatsby-plugin-root-import',
       options: {
@@ -43,6 +66,7 @@ const gatsbyConfig: GatsbyConfig = {
         '~templates': path.join(__dirname, './templates'),
         '~utils': path.join(__dirname, './utils'),
         '~hooks': path.join(__dirname, './hooks'),
+        '~styles': path.join(__dirname, './style'),
         '~src': path.join(__dirname, './'),
         '~static': path.join(__dirname, '../static'),
       },
@@ -138,12 +162,13 @@ const gatsbyConfig: GatsbyConfig = {
         name: 'assets',
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-typography`,
-    //   options: {
-    //     pathToConfigModule: `./src/utils/typography`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Nunito\:400,400i,700`, `Libre Baskerville\:400,400i`],
+        display: 'swap',
+      },
+    },
     'gatsby-plugin-svgr',
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',

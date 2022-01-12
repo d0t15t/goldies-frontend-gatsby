@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useCartCount } from 'gatsby-theme-shopify-manager';
-import { IconButton } from '@mui/material';
-import { LocalMallOutlined } from '@mui/icons-material';
+import { IconButton, Typography } from '@mui/material';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { Context, useDispatch } from '~context';
 import { Cart, Link } from '~components';
 import * as S from './CartButton.styled';
@@ -19,10 +19,10 @@ export const CartButton = () => {
   const CartContent = () => {
     return (
       <>
-        <p>Your Bag</p>
+        <p>Your Cart</p>
         <Cart context="menu" />
         <Link url="/cart" handleClick={() => handleChange(false, null)}>
-          Go to bag
+          Go to cart
         </Link>
       </>
     );
@@ -31,8 +31,10 @@ export const CartButton = () => {
   return (
     <>
       <IconButton onClick={() => handleChange(true, <CartContent />)}>
-        <LocalMallOutlined />
-        <S.Count>{cartCount > 9 ? '9+' : cartCount}</S.Count>
+        <ShoppingCartOutlinedIcon />
+        <S.Count>
+          <Typography variant="overline">{cartCount > 9 ? '9+' : cartCount}</Typography>
+        </S.Count>
       </IconButton>
     </>
   );

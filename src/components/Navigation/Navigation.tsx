@@ -1,45 +1,42 @@
-import React, { useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-// import { Portal } from 'react-portal';
-import { Context } from '~context';
-import { useDispatch } from '~hooks';
-// import { Toolbar } from '@mui/material';
-import {
-  Cart,
-  CartButton,
-  LeftDrawer,
-  DrawerButton,
-  DrawerContent,
-  IconButton,
-  Modal,
-  Portal,
-  SearchBar,
-} from '~components';
+import cls from 'classnames';
+import { useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { Context, useDispatch } from '~context';
+
+import { Link, Logo, CartButton, LeftDrawer, Portal, SearchBar } from '~components';
 import * as S from './Navigation.styled';
 
 export const Navigation = () => {
-  // const [drawerIsOpen, setDrawerIsOpen] = useState(false)
+  const [context, dispatch] = useContext(Context);
+  const ref = useRef();
+  const theme = useTheme();
+  const mqSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
-  const cartButtonClick = (e) => {
-    // useDispatch('modalIsOpen', true, dispatch);
-    // useDispatch('modalContent', <Cart />, dispatch);
-  };
+  const logo = (
+    <Link to="/">
+      <Logo />
+    </Link>
+  );
 
   return (
     <>
-      {/* <Portal target="navigation-portal" status> */}
-      <S.Navigation id="navigation">
+      <S.AppBarStyled id="navigation">
         <S.Inner>
           <S.Unit>
+            {/* <Portal> */}
             <LeftDrawer />
-            <SearchBar />
+            {/* </Portal> */}
+            {mqSmUp && <SearchBar parentRef={ref} classes={cls('search-bar__nav')} />}
           </S.Unit>
+          {!mqSmUp && logo}
           <S.Unit>
-            <CartButton handleClick={cartButtonClick} />
+            <CartButton />
+            {mqSmUp && logo}
           </S.Unit>
         </S.Inner>
-      </S.Navigation>
-      {/* </Portal> */}
+      </S.AppBarStyled>
     </>
   );
 };

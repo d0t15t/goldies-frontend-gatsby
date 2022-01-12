@@ -8,11 +8,11 @@ interface TeasersFancyProps {
 
 export const TeasersFancy: FunctionComponent<TeasersFancyProps> = ({ teasers }) => {
   return (
-    <S.Grid>
+    <S.FancyGrid>
       {teasers.map((teaser) => {
         return <Teaser {...teaser} key={teaser.id} />;
       })}
-    </S.Grid>
+    </S.FancyGrid>
   );
 };
 

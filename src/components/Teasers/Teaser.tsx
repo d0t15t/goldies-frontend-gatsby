@@ -14,31 +14,38 @@ export interface TeaserProps {
 }
 
 export const Teaser: FC<TeaserProps> = ({ teaserStyle, title, subTitle, link, image }) => {
-  const TeaserInner = () => {
-    return (
-      <>
-        <S.TitleWrapper className={cls(['teaser-text'])}>
-          <S.Text variant="h5" sx={visuallyHidden}>
+  const textStyle = teaserStyle === 'image-only' ? visuallyHidden : null;
+
+  const getStyledTeaser = (teaserStyle) => {
+    const template = {
+      'image-only': S.StyledImageTeaser,
+      product: S.StyledProductTeaser,
+      slide: S.StyledSlideTeaser,
+    };
+    return teaserStyle in template ? template[teaserStyle] : S.StyledTeaser;
+  };
+
+  const wrapWithLink = (path, content) => <Link to={path}>{content}</Link>;
+
+  const TeaserStyled = getStyledTeaser(teaserStyle);
+  return (
+    <TeaserStyled as="article" className={cls(['teaser'])}>
+      {image && wrapWithLink(link, <Image data={image} alt={title} />)}
+      <S.TitleWrapper className={cls(['teaser-text'])}>
+        {wrapWithLink(
+          link,
+          <S.Text variant="h5" sx={textStyle}>
             {title}
           </S.Text>
-          <S.Text variant="subtitle1" sx={visuallyHidden}>
+        )}
+        {wrapWithLink(
+          link,
+          <S.Text variant="subtitle1" sx={textStyle}>
             {subTitle}
           </S.Text>
-        </S.TitleWrapper>
-        {image && <Image data={image} alt={title || ''} />}
-      </>
-    );
-  };
-  return (
-    <S.Teaser className={cls(['teaser'])}>
-      {link ? (
-        <Link to={link}>
-          <TeaserInner />
-        </Link>
-      ) : (
-        <TeaserInner />
-      )}
-    </S.Teaser>
+        )}
+      </S.TitleWrapper>
+    </TeaserStyled>
   );
 };
 

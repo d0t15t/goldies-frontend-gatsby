@@ -1,17 +1,20 @@
 import styled from 'styled-components';
+import { Box } from '@mui/material';
 
-export const Page = styled.div`
+export const Page = styled(Box)`
   ${({ theme }) => {
-    // console.log('🚀 ~ file: Page.styled.ts ~ line 16 ~ theme', theme);
     return `
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
       color: ${theme.palette.primary};
-
-      #main-content {
-        flex: 1;
+      max-width: ${theme.maxWidth};
+      margin: auto;
+      padding: ${theme.spacing(2)};
+      padding-top: ${theme.spacing(3)};
+        
+      ${theme.breakpoints.up('md')} {
+        padding-left: ${theme.spacing(3)};
+        padding-right: ${theme.spacing(3)};
       }
+      
     `;
   }}
 `;

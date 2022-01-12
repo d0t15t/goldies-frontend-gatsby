@@ -2,14 +2,14 @@ import 'styled-components';
 import { Theme } from '@mui/material/styles';
 
 interface CustomTheme {
-  bg: {
-    main: string;
-    light: string;
+  palette: {
+    primary: {
+      main: string;
+      light: string;
+      dark: string;
+    };
   };
-  text: {
-    main: string;
-    light: string;
-  };
+  maxWidth: string;
 }
 
 declare module '@mui/material/styles' {

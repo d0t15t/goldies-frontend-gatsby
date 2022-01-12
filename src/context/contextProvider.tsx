@@ -10,6 +10,7 @@ const initialState = {
   modalContent: null,
   modalStyle: null,
   currentSearchInput: '',
+  pageDimensions: {},
   // modalId: 0,
   // modalContent: null,
   // modalHandleClose: null,

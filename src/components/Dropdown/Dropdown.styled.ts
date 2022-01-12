@@ -17,11 +17,24 @@ const getDirectionalStyles = ({ dir, coordinates }) => {
 };
 
 export const DropDown = styled.div`
-  background: lightgrey;
   position: absolute;
   z-index: 996;
-  /* max-height: 500px; */
-  overflow-y: scroll;
+
+  ${({ theme }) => {
+    return `
+      background: ${theme.palette.background.default};
+      border: 1px solid ${theme.palette.secondary.main};
+      margin-top: -1px;
+      border-radius: 4px;
+      // margin-top: ${theme.spacing(1)};
+      
+      li + li {
+        // margin-top: ${theme.spacing(1)};
+      }
+
+
+    `;
+  }}
 
   ${({ ltr, parentCoordinates, theme }) => {
     const attr = ['left', 'top', 'width', 'height'];

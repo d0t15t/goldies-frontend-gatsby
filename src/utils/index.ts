@@ -105,3 +105,5 @@ export const getMenuItems = (menuItems) => {
     };
   });
 };
+
+export const stripTags = (str: string) => str.replace(/(<([^>]+)>)/gi, '');

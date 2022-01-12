@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import cls from 'classnames';
+import { useTheme } from '@mui/material/styles';
 import {
   Box,
   Divider,
@@ -10,15 +12,20 @@ import {
   IconButton,
   InputLabel,
   SwipeableDrawer,
+  useMediaQuery,
+  Typography,
 } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { visuallyHidden } from '@mui/utils';
-import { CloseButton, Menu } from '~components';
+import { Context, useDispatch } from '~context';
+import { CloseButton, Menu, SearchBar } from '~components';
 import * as U from '~utils';
 import * as S from './LeftDrawer.styled';
 
 export const LeftDrawer = () => {
-  const { menuItems } = useStaticQuery(graphql`
+  const [context, dispatch] = useContext(Context);
+
+  const { sidebarMenuItems: menuItems } = useStaticQuery(graphql`
     query {
       ...menuSidebarMenuFragment
     }
@@ -34,6 +41,9 @@ export const LeftDrawer = () => {
     onOpen: handleDrawerOpen,
   };
 
+  const theme = useTheme();
+  const mqMdUp = useMediaQuery(theme.breakpoints.up('md'));
+
   const openDrawerButtonId = 'open-drawer-menu-button';
   const closeDrawerButtonId = 'close-drawer-menu-button';
   return (
@@ -44,18 +54,19 @@ export const LeftDrawer = () => {
         </InputLabel>
         <MenuIcon />
       </IconButton>
-      <SwipeableDrawer {...drawerProps}>
+      <S.Drawer {...drawerProps} className={cls('left-drawer')}>
         <S.Inner>
-          <CloseButton id={closeDrawerButtonId} handleClick={handleDrawerClose}>
+          {/* <CloseButton id={closeDrawerButtonId} handleClick={handleDrawerClose}>
             <InputLabel sx={visuallyHidden} htmlFor={closeDrawerButtonId}>
               Close menu
             </InputLabel>
-          </CloseButton>
+          </CloseButton> */}
           <Box>
+            <SearchBar />
             <Menu items={U.getMenuItems(menuItems)} vertical={1} />
           </Box>
         </S.Inner>
-      </SwipeableDrawer>
+      </S.Drawer>
     </>
   );
 };

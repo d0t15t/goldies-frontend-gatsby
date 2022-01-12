@@ -13,6 +13,7 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
+import { visuallyHidden } from '@mui/utils';
 import { ExpandMore } from '@mui/icons-material';
 
 import { BsChevronDown } from 'react-icons/bs';
@@ -50,21 +51,23 @@ export const Counter: FC<CounterProps> = ({
   return (
     <S.Counter>
       <Button
-        name="increase-quantity"
+        aria-label="increase-quantity"
         onClick={() => handleClick(change)}
         disabled={isDisabled.maximum()}
         type="button"
+        variant="outlined"
       >
-        + <span className="visually-hidden">Increase amount</span>
+        +
       </Button>
       <input disabled value={currentCount} />
       <Button
-        name="decrease-quantity"
+        aria-label="decrease-quantity"
         onClick={() => handleClick(change * -1)}
         disabled={isDisabled.minimum()}
         type="button"
+        variant="outlined"
       >
-        - <span className="visually-hidden">Decrease amount</span>
+        -
       </Button>
     </S.Counter>
   );

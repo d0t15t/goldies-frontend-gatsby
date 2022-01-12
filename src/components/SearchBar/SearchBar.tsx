@@ -5,7 +5,9 @@ import { useFlexSearch } from 'react-use-flexsearch';
 import { useCombobox } from 'downshift';
 import { useDimensions } from 'react-hook-dimensions';
 import useEventListener from '@use-it/event-listener';
+import { useTheme } from '@mui/material/styles';
 import {
+  Box,
   FormControl,
   FormLabel,
   IconButton,
@@ -17,8 +19,8 @@ import {
   ListItem,
   ListItemText,
   TextField,
+  useMediaQuery,
 } from '@mui/material';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
 import { Close, Search } from '@mui/icons-material';
 import { visuallyHidden } from '@mui/utils';
@@ -26,6 +28,7 @@ import { visuallyHidden } from '@mui/utils';
 import { Context, useDispatch } from '~context';
 import { Dropdown, Link } from '~components';
 import * as S from './SearchBar.styled';
+// import theme from '~styles/theme';
 
 interface InputItemProps {
   id: string;
@@ -33,7 +36,8 @@ interface InputItemProps {
   title: string;
 }
 
-export const SearchBar = () => {
+export const SearchBar = ({ parentRef, classes }) => {
+  const theme = useTheme();
   const [{ currentSearchInput }, dispatch] = useContext(Context);
 
   const [dropdownTriggerRef, dropdownTriggerStyles, dropdownTriggerCalculate] = useDimensions({
@@ -57,6 +61,8 @@ export const SearchBar = () => {
     `);
 
     const [query, setQuery] = useState('');
+
+    const [hasFocus, setHasFocus] = useState(false);
 
     const searchResults = useFlexSearch(query, index, store);
 
@@ -108,11 +114,11 @@ export const SearchBar = () => {
       isOpen,
       items: inputItems,
       // items: inputItems.filter((item) => item.id !== currentSearchInput.id),
-      styles: dropdownTriggerStyles,
+      // styles: dropdownTriggerStyles,
     };
 
     return (
-      <>
+      <div className={classes}>
         <FormLabel {...getLabelProps()} sx={visuallyHidden}>
           Search products:
         </FormLabel>
@@ -121,56 +127,76 @@ export const SearchBar = () => {
           className={cls(['form', 'form__search-bar'])}
           onSubmit={(e) => e.preventDefault()}
         >
-          <div ref={dropdownTriggerRef}>
-            <div className="search-icon-wrapper">
+          <S.FormInner
+            ref={dropdownTriggerRef}
+            className={cls('form__search-bar--inner', {
+              'form__search-bar--inner__has_value':
+                query.length || searchInputRef.current?.value.length,
+              'form__search-bar--inner__has_focus': hasFocus,
+            })}
+          >
+            <div className="form__search-bar-icon">
               <Search />
             </div>
-            <FormControl>
-              <S.StyledInputLabel htmlFor="search-input">Search...</S.StyledInputLabel>
-              <OutlinedInput
-                variant="outlined"
+            <S.StyledFormControl
+              className={cls('search-form-control')}
+              // focused={{ borderColor: 'pink' }}
+            >
+              <S.StyledInputLabel
+                htmlFor="search-input"
+                className={cls({ 'form__search-bar--has_value': query.length })}
+              >
+                Search...
+              </S.StyledInputLabel>
+              <S.StyledInput
+                // variant="outlined"
                 {...getInputProps()}
+                // color="secondary"
                 id="search-input"
                 inputRef={searchInputRef}
                 label="Search..."
                 onFocus={(e) => {
+                  setHasFocus(true);
                   e.target.select();
                 }}
+                onBlur={(e) => {
+                  setHasFocus(false);
+                }}
               />
-            </FormControl>
-            {query.length ? (
+            </S.StyledFormControl>
+            {query.length || searchInputRef.current?.value.length ? (
               <IconButton onClick={handleClear} aria-label="clear selection">
                 <Close />
               </IconButton>
             ) : null}
-          </div>
-          <Dropdown {...dropdownProps}>
-            {Array.isArray(inputItems) && (
-              <S.List>
-                {inputItems.map((item, index) => {
-                  return (
-                    <ListItem
-                      {...getItemProps({ item, index })}
-                      key={item.id}
-                      className={cls([
-                        'search-bar__list-item',
-                        { 'search-bar__list-item--highlighted': highlightedIndex === index },
-                      ])}
-                    >
-                      <Link
-                        to={item.path}
-                        //  onClick={handleSelect}
-                      >
-                        <ListItemText>{item.title}</ListItemText>
-                      </Link>
-                    </ListItem>
-                  );
-                })}
-              </S.List>
-            )}
-          </Dropdown>
+          </S.FormInner>
         </form>
-      </>
+        <Dropdown {...dropdownProps}>
+          {Array.isArray(inputItems) && (
+            <S.List>
+              {inputItems.map((item, index) => {
+                return (
+                  <ListItem
+                    {...getItemProps({ item, index })}
+                    key={item.id}
+                    className={cls([
+                      'search-bar__list-item',
+                      { 'search-bar__list-item--highlighted': highlightedIndex === index },
+                    ])}
+                  >
+                    <Link
+                      to={item.path}
+                      //  onClick={handleSelect}
+                    >
+                      <ListItemText>{item.title}</ListItemText>
+                    </Link>
+                  </ListItem>
+                );
+              })}
+            </S.List>
+          )}
+        </Dropdown>
+      </div>
     );
   };
 
