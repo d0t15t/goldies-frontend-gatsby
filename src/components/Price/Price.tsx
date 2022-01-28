@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import * as CurrencyFormat from 'react-currency-format';
+import cls from 'classnames';
 import * as S from './Price.styled';
 
 interface PriceProps {
@@ -9,16 +10,22 @@ interface PriceProps {
   value: number | string;
 }
 
-export const Price: FC<PriceProps> = (props) => {
-  const { displayType, prefix, thousandSeparator, value } = props;
+export const Price: FC<PriceProps> = ({ displayType, prefix, thousandSeparator, value }) => {
+  const sanitizeValue = (val) => {
+    return val.replace('.00', '');
+  };
   const currencyProps = {
-    ...props,
+    // ...props,
     displayType: displayType ?? 'text',
     thousandSeparator: thousandSeparator ?? true,
     prefix: prefix ?? '$',
-    value,
+    value: sanitizeValue(value),
   };
-  return <CurrencyFormat {...currencyProps} />;
+  return (
+    <S.Price className="price">
+      <CurrencyFormat {...currencyProps} className={cls('price-element')} />
+    </S.Price>
+  );
 };
 
 export default Price;

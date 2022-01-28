@@ -105,7 +105,6 @@ export const collectionPageFragment = graphql`
   fragment collectionPageFragment on Query {
     node__collection: nodeCollection(id: { eq: $id }) {
       id
-      title
       internal {
         type
       }
@@ -115,9 +114,7 @@ export const collectionPageFragment = graphql`
       body {
         markup: processed
       }
-      headline: field_headline {
-        markup: processed
-      }
+      headline: title
       rels: relationships {
         products: field_products {
           ...productTeaserFragment

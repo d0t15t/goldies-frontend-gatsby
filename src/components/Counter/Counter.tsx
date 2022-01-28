@@ -3,6 +3,7 @@ import {
   FormControl,
   InputLabel,
   Box,
+  Input,
   MenuItem,
   Button,
   ButtonGroup,
@@ -12,6 +13,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  Typography,
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { ExpandMore } from '@mui/icons-material';
@@ -49,26 +51,36 @@ export const Counter: FC<CounterProps> = ({
     maximum: () => false,
   };
   return (
-    <S.Counter>
-      <Button
-        aria-label="increase-quantity"
-        onClick={() => handleClick(change)}
-        disabled={isDisabled.maximum()}
-        type="button"
-        variant="outlined"
-      >
-        +
-      </Button>
-      <input disabled value={currentCount} />
-      <Button
-        aria-label="decrease-quantity"
-        onClick={() => handleClick(change * -1)}
-        disabled={isDisabled.minimum()}
-        type="button"
-        variant="outlined"
-      >
-        -
-      </Button>
+    <S.Counter className="counter-wrapper">
+      <Typography className="label" variant="overline">
+        Quantity
+      </Typography>
+      <ButtonGroup className="counter">
+        <Button
+          aria-label="increase-quantity"
+          onClick={() => handleClick(change)}
+          disabled={isDisabled.maximum()}
+          type="button"
+          variant="outlined"
+          color="secondary"
+        >
+          +
+        </Button>
+        {/* <Input disabled disableUnderline={true} value={currentCount} /> */}
+        <Button disabled>{currentCount}</Button>
+        {currentCount > 1 && (
+          <Button
+            aria-label="decrease-quantity"
+            onClick={() => handleClick(change * -1)}
+            disabled={isDisabled.minimum()}
+            type="button"
+            variant="outlined"
+            color="secondary"
+          >
+            -
+          </Button>
+        )}
+      </ButtonGroup>
     </S.Counter>
   );
 };

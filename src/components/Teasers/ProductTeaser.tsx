@@ -36,7 +36,6 @@ export const ProductTeaser: FC<TeaserProps> = ({
 }) => {
   const ref = useRef(null);
   const isHover = useHover(ref);
-  console.log('🚀 ~ file: ProductTeaser.tsx ~ line 34 ~ variant', variant);
   const wrapWithLink = (path, content) => <Link to={path}>{content}</Link>;
   return (
     <S.StyledProductTeaser

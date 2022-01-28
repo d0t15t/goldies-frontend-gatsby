@@ -48,7 +48,7 @@ export const AddToCart: FC<AddToCartProps> = ({
     const items = [
       {
         variantId: shopifyId,
-        quantity,
+        quantity: quantity ?? 1,
       },
     ];
 
@@ -56,13 +56,14 @@ export const AddToCart: FC<AddToCartProps> = ({
       await addItemsToCart(items);
       dispatch({ type: 'modalIsOpen', payload: true });
       dispatch({ type: 'modalContent', payload: <ModalContent /> });
-    } catch {
+    } catch (error) {
       console.warn('There was a problem adding that item to your cart.');
+      console.error(error);
     }
   };
 
   return (
-    <Button onClick={() => handleClick()} variant={variant}>
+    <Button onClick={() => handleClick()} variant={variant || 'contained'} color="primary">
       {children || 'Add to cart'}
     </Button>
   );

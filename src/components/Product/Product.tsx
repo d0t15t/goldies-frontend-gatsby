@@ -1,5 +1,15 @@
+/* eslint-disable react/no-danger */
 import React, { FC, useState } from 'react';
-import { AddToCart, Counter, FancyImageBox, Price, ProductVariants } from '~components/index';
+import { useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import {
+  AddToCart,
+  Counter,
+  FancyImageBox,
+  Image,
+  Price,
+  ProductVariants,
+} from '~components/index';
 
 import * as U from '~utils';
 import * as S from './Product.styled';
@@ -35,33 +45,46 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants }) 
     minimumValue: 1,
   };
 
-  return (
-    <S.Container>
-      {/* <S.Headline>{headline}</S.Headline>
-      {body ? <S.Body>{body}</S.Body> : null} */}
+  const decodeHTML = (html) => {
+    const txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+  };
 
-      <S.Controls>
-        <form>
-          <S.ControlsInner>
+  const theme = useTheme();
+  const mqMdUp = useMediaQuery(theme.breakpoints.up('md'));
+
+  return (
+    <S.Product>
+      {images.teaserImages.length > 1 ? (
+        <FancyImageBox {...images} />
+      ) : (
+        <Image data={images.teaserImages[0]} alt="foo" />
+      )}
+      <div className="product-info-wrapper">
+        <S.Controls>
+          <div className="price-wrapper">
+            <Price value={currentVariant.price} />
             <AddToCart
               shopifyId={currentVariantId}
               quantity={addToCartAmount}
               title={productVariantTitle}
             />
-            <Price value={currentVariant.price} />
-            <Counter {...counterProps} />
-            {variants.length > 1 && (
-              <ProductVariants
-                items={variants}
-                current={currentVariant}
-                updateCurrentId={updateCurrentVariantId}
-              />
-            )}
-          </S.ControlsInner>
-        </form>
-      </S.Controls>
-      <FancyImageBox {...images} />
-    </S.Container>
+          </div>
+          <Counter {...counterProps} />
+        </S.Controls>
+        {/* {!mqMdUp && form} */}
+        {body ? (
+          <div
+            className="product-body"
+            dangerouslySetInnerHTML={{
+              __html: decodeHTML(body),
+            }}
+          />
+        ) : null}
+        {/* {mqMdUp && form} */}
+      </div>
+    </S.Product>
   );
 };
 

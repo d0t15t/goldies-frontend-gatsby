@@ -9,7 +9,7 @@ export const Header = styled('header')(({ theme }) => {
     // marginTop: theme.spacing(2),
     // marginBottom: theme.spacing(1),
     // padding: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
+    // paddingBottom: theme.spacing(2),
 
     // [theme.breakpoints.up('md')]: {
     //   marginTop: theme.spacing(4),
@@ -19,7 +19,7 @@ export const Header = styled('header')(({ theme }) => {
     '& > *': {},
     '& h1': {
       fontSize: '1.5rem',
-      marginBottom: theme.spacing(1),
+      // marginBottom: theme.spacing(1),
 
       [theme.breakpoints.up('md')]: {
         fontSize: '3rem',
@@ -38,7 +38,7 @@ export const Header = styled('header')(({ theme }) => {
     '& h2': {
       margin: 'unset',
       fontSize: '1.5rem',
-      marginBottom: theme.spacing(1),
+      // marginBottom: theme.spacing(1),
       fontStyle: 'italic',
       // color: theme.palette.secondary.light,
     },

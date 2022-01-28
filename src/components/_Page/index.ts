@@ -23,9 +23,9 @@ export interface pageData {
 /*
  * Page element helper functions.
  */
-export const getHeadline = (node: pageBase): string | undefined => {
-  return node?.headline?.markup;
-};
+// export const getHeadline = (node: pageBase): string | undefined => {
+//   return node?.headline?.markup;
+// };
 
 export const getBody = (node: pageBase): string | undefined => {
   return node?.body?.markup;
@@ -190,6 +190,7 @@ export const getProductNodeData = (node) => {
   return {
     headline: getNodeTitle(node),
     ...shopifyProduct,
+    body: shopifyProduct.body?.markup,
     variants: getProductNodeShopifyProductVariants(shopifyProduct),
     images: getProductNodeShopifyProductImageSet(shopifyProduct),
   };
@@ -225,7 +226,8 @@ export const getPageNodeData = (node) => {
       body: getBody(node) || null,
       children: null,
       display: getNodeTitleDisplay(node),
-      headline: getHeadline(node) || `<h1>${getNodeTitle(node)}</h1>`,
+      headline: getNodeTitle(node),
+      // headline: getHeadline(node) || getNodeTitle(node),
     },
     bodyData:
       node?.internal.type in pageDataTemplate ? pageDataTemplate[node?.internal.type]() : null,

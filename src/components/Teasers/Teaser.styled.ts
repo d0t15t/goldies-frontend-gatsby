@@ -27,12 +27,14 @@ export const StyledProductTeaser = styled(StyledTeaser)`
         }
 
         ${theme.breakpoints.up('md')} {
-          font-size: 1vw;
+          font-size: 1.1vw;
         }
       }
       
       .teaser-text--lower {
         margin-top: ${theme.spacing(1)};
+        margin-bottom: 2px;
+        padding-top: ${theme.spacing(1)};
         display: flex;
         align-items: center;
         justify-content: center;

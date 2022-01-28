@@ -18,6 +18,14 @@ export const GlobalStyle = createGlobalStyle`
           font-family: Nunito, sans serif;
         }
 
+        p, a {
+          line-height: 1.6em;
+
+          ${theme.breakpoints.up('md')} {
+            line-height: 2em;
+          }
+        }
+
         ul {
           padding: 0;
         }
