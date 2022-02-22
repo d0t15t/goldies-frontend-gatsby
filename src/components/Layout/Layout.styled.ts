@@ -5,6 +5,8 @@ import { Box } from '@mui/material';
 export const Layout = styled(Box)(({ theme }) => {
   return {
     position: 'relative',
+    maxWidth: '100%',
+
     '& h1': {
       ...theme.typography.h1,
     },
@@ -25,6 +27,7 @@ export const Layout = styled(Box)(({ theme }) => {
     },
     '& .body1': {
       ...theme.typography.body1,
+      // lineHeight:
     },
     '& .body2': {
       ...theme.typography.body2,

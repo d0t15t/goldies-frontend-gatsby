@@ -5,11 +5,9 @@ export const Page = styled(Box)`
   ${({ theme }) => {
     return `
 
-      max-width: ${theme.maxWidth};
       margin: auto;
-      padding: ${theme.spacing(3)};
-      padding-top: ${theme.spacing(3)};
-        
+      max-width: 100%;
+
       ${theme.breakpoints.up('sm')} {
         padding-left: ${theme.spacing(5)};
         padding-right: ${theme.spacing(5)};
@@ -18,8 +16,27 @@ export const Page = styled(Box)`
       ${theme.breakpoints.up('md')} {
         padding-left: ${theme.spacing(3)};
         padding-right: ${theme.spacing(3)};
+        max-width: ${theme.maxWidth};
       }
       
+    `;
+  }}
+`;
+
+export const PageBreak = styled(Box)`
+  ${({ theme }) => {
+    return `
+      font-size: 1.5em;
+      z-index: 999;
+      display: flex;
+      justify-content: right;
+      padding-right: ${theme.spacing(1)};
+      opacity: 1;
+      transition: opacity 1s ease-out;
+
+      &.hidden {
+        opacity: 0;
+      }
     `;
   }}
 `;

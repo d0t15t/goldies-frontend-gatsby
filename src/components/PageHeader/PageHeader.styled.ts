@@ -4,22 +4,14 @@ import { Box } from '@mui/material';
 
 export const Header = styled('header')(({ theme }) => {
   return {
-    overflow: 'hidden',
     textAlign: 'center',
-    // marginTop: theme.spacing(2),
-    // marginBottom: theme.spacing(1),
-    // padding: theme.spacing(2),
-    // paddingBottom: theme.spacing(2),
 
-    // [theme.breakpoints.up('md')]: {
-    //   marginTop: theme.spacing(4),
-    //   marginBottom: theme.spacing(2),
-    // },
+    padding: theme.spacing(2),
 
     '& > *': {},
     '& h1': {
       fontSize: '1.5rem',
-      // marginBottom: theme.spacing(1),
+      marginBottom: theme.spacing(1),
 
       [theme.breakpoints.up('md')]: {
         fontSize: '3rem',

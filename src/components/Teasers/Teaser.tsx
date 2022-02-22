@@ -28,6 +28,7 @@ export const Teaser: FC<TeaserProps> = ({ teaserStyle, title, subTitle, link, im
   const wrapWithLink = (path, content) => <Link to={path}>{content}</Link>;
 
   const TeaserStyled = getStyledTeaser(teaserStyle);
+
   return (
     <TeaserStyled as="article" className={cls(['teaser'])}>
       {image && wrapWithLink(link, <Image data={image} alt={title} />)}

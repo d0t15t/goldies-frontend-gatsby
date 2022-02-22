@@ -20,19 +20,6 @@ export const Teasers: FC<TeasersProps> = ({ teasers, teaserStyle }) => {
   };
   const Template = teasersMap({ fancy });
   return <Template teasers={teasers} />;
-  // return fancy ? (
-  //   <TeasersFancy teasers={teasers} />
-  // ) : (
-  //   <Grid container spacing={{ xs: 0, sm: 2 }} className="teasers-grid">
-  //     {teasers.map((teaser) => {
-  //       return (
-  //         <S.TeaserWrapper item xs={12} sm={6} key={teaser.id}>
-  //           <Teaser {...teaser} />
-  //         </S.TeaserWrapper>
-  //       );
-  //     })}
-  //   </Grid>
-  // );
 };
 
 export default Teasers;

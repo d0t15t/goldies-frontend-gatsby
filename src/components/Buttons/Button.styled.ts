@@ -10,12 +10,7 @@ export const NoStyleButton = styled(MuiButton)`
     let { theme, themeStyle } = props;
     themeStyle ??= 'secondary';
     return `
-    // background: transparent;
-    // border: none;
     cursor: pointer;
-    // padding: 0;
-    // outline: none;
-    // color: ${theme.palette[themeStyle].main};
   `;
   }}
 `;

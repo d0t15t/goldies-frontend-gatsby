@@ -8,6 +8,7 @@ export { CTA } from '~components/CTA/CTA';
 export { Counter } from '~components/Counter/Counter';
 export { LeftDrawer } from '~components/LeftDrawer/LeftDrawer';
 export { Dropdown } from '~components/Dropdown/Dropdown';
+export { EmojiPointer } from '~components/EmojiPointer/EmojiPointer';
 export { FancyImageBox } from '~components/FancyImageBox/FancyImageBox';
 export { Image } from '~components/Image/Image';
 export { Link } from '~components/Link/Link';
