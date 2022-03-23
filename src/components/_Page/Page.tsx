@@ -1,10 +1,12 @@
 /* eslint-disable camelcase */
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
+import cls from 'classnames';
 import { useDimensions } from 'react-hook-dimensions';
 import { Typography } from '@mui/material';
 import { Context, useDispatch } from '~context';
-import { Link, SocialBlock } from '~components';
+import { useLocation } from '~hooks';
+import { Link, EmojiPointer, SocialBlock } from '~components';
 
 //* @var PU */ Page Utilities */
 import * as PU from './index';
@@ -13,13 +15,19 @@ import * as PU from './index';
 import * as S from './Page.styled';
 
 const PageWrapper: FC<PageWrapper> = ({ data }) => {
+  const path = typeof window !== 'undefined' ? window.location.pathname : '';
+
   const [context, dispatch] = useContext(Context);
   const [ref, box] = useDimensions({
     dependencies: [],
   });
-  useEffect(() => {
-    useDispatch('pageDimensions', box, dispatch);
-  }, [box, dispatch]);
+
+  useEffect(() => useDispatch('pageDimensions', box, dispatch), [box, dispatch]);
+
+  const location = useLocation();
+
+  useEffect(() => useDispatch('currentPage', location, dispatch), [dispatch, location]);
+
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
@@ -46,6 +54,16 @@ const PageWrapper: FC<PageWrapper> = ({ data }) => {
       <div id="main-content" ref={ref}>
         {getPageBodyTemplate(bodyData, node.internal.type)}
       </div>
+      {path === '/' && (
+        <S.PageBreak
+          className={cls(
+            'page-break'
+            // pbHidden && 'hidden'
+          )}
+        >
+          <EmojiPointer />
+        </S.PageBreak>
+      )}
       {/* <SocialBlock /> */}
     </S.Page>
   ) : null;

@@ -8,7 +8,6 @@ interface TeasersGridProps {
 }
 
 export const TeasersGrid: FC<TeasersGridProps> = ({ teasers }) => {
-  console.log('🚀 ~ file: TeasersGrid.tsx ~ line 11 ~ teasers', teasers);
   return (
     <Grid container spacing={{ xs: 0, sm: 2 }} className="teasers-grid">
       {teasers.map((teaser) => {

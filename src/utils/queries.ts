@@ -114,8 +114,14 @@ export const collectionPageFragment = graphql`
       body {
         markup: processed
       }
-      headline: title
+      description: field_description {
+        markup: processed
+      }
+      title
       rels: relationships {
+        featured: field_featured_products {
+          ...productTeaserFragment
+        }
         products: field_products {
           ...productTeaserFragment
         }
@@ -288,7 +294,12 @@ export const thumbnailImageFragment = graphql`
       type
     }
     thumbnailImage: childImageSharp {
-      gatsbyImageData(width: 100, placeholder: BLURRED, formats: [WEBP])
+      gatsbyImageData(
+        width: 100
+        placeholder: BLURRED
+        formats: [WEBP]
+        transformOptions: { fit: CONTAIN }
+      )
     }
   }
 `;
@@ -317,79 +328,79 @@ export const largeImageFragment = graphql`
   }
 `;
 
-export const menuLinkFragment = graphql`
-  fragment menuLinkFragment on menu_link_content__menu_link_content {
-    id
-    internal {
-      type
-    }
-    title
-    langcode
-    link {
-      alias: uri_alias
-    }
-    menuName: menu_name
-    parent {
-      id
-    }
-  }
-`;
+// export const menuLinkFragment = graphql`
+//   fragment menuLinkFragment on menu_link_content__menu_link_content {
+//     id
+//     internal {
+//       type
+//     }
+//     title
+//     langcode
+//     link {
+//       alias: uri_alias
+//     }
+//     menuName: menu_name
+//     parent {
+//       id
+//     }
+//   }
+// `;
 
-export const menuFooterMenuFragment = graphql`
-  fragment menuFooterMenuFragment on Query {
-    footerMenuItems: allMenuLinkContentMenuLinkContent(
-      filter: { menu_name: { eq: "footer" } }
-      sort: { fields: weight }
-    ) {
-      nodes {
-        ...menuLinkFragment
-      }
-    }
-  }
-`;
+// export const menuFooterMenuFragment = graphql`
+//   fragment menuFooterMenuFragment on Query {
+//     footerMenuItems: allMenuLinkContentMenuLinkContent(
+//       filter: { menu_name: { eq: "footer" } }
+//       sort: { fields: weight }
+//     ) {
+//       nodes {
+//         ...menuLinkFragment
+//       }
+//     }
+//   }
+// `;
 
-export const menuFooterContactMenuFragment = graphql`
-  fragment menuFooterContactMenuFragment on Query {
-    footerContactMenuItems: allMenuLinkContentMenuLinkContent(
-      filter: { menu_name: { eq: "footer-1" } }
-      sort: { fields: weight }
-    ) {
-      nodes {
-        ...menuLinkFragment
-      }
-    }
-  }
-`;
+// export const menuFooterContactMenuFragment = graphql`
+//   fragment menuFooterContactMenuFragment on Query {
+//     footerContactMenuItems: allMenuLinkContentMenuLinkContent(
+//       filter: { menu_name: { eq: "footer-1" } }
+//       sort: { fields: weight }
+//     ) {
+//       nodes {
+//         ...menuLinkFragment
+//       }
+//     }
+//   }
+// `;
 
-export const menuSidebarMenuFragment = graphql`
-  fragment menuSidebarMenuFragment on Query {
-    sidebarMenuItems: allMenuLinkContentMenuLinkContent(
-      filter: { menu_name: { eq: "sidebar" } }
-      sort: { fields: weight }
-    ) {
-      nodes {
-        ...menuLinkFragment
-      }
-    }
-  }
-`;
+// export const menuSidebarMenuFragment = graphql`
+//   fragment menuSidebarMenuFragment on Query {
+//     sidebarMenuItems: allMenuLinkContentMenuLinkContent(
+//       filter: { menu_name: { eq: "sidebar" } }
+//       sort: { fields: weight }
+//     ) {
+//       nodes {
+//         ...menuLinkFragment
+//       }
+//     }
+//   }
+// `;
 
-export const ctaFragment = graphql`
-  fragment ctaFragment on Query {
-    notices: allNodeCta {
-      nodes {
-        id
-        internal {
-          type
-        }
-        body {
-          markup: processed
-        }
-        link: field_link {
-          title
-          uri
-        }
-      }
-    }
-  }
-`;
+// export const ctaFragment = graphql`
+//   fragment ctaFragment on Query {
+//     notices: allNodeCta {
+//       nodes {
+//         id
+//         internal {
+//           type
+//         }
+//         body {
+//           markup: processed
+//         }
+//         link: field_link {
+//           title
+//           uri
+//         }
+//       }
+//     }
+//   }
+// `;

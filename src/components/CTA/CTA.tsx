@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React, { FC, ReactNode } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import cls from 'classnames';
@@ -17,7 +18,8 @@ export const CTA = () => {
     return (
       <S.Wrapper key={item.id} className={cls(['cta-item'])}>
         <S.Inner>
-          <Typography variant="overline">{item.body.markup}</Typography>
+          <Typography variant="overline" dangerouslySetInnerHTML={{ __html: item.body.markup }} />
+
           {/* <Button variant="text"> */}
           {/* <Typography variant="overline">
             <Link to={item.link.uri}>{item.link.title}</Link>

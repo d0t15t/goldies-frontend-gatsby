@@ -5,13 +5,21 @@ export const Modal = styled(MuiModal)`
   padding: ${({ theme }) => theme.spacing(5)}px;
 `;
 
-export const Inner = styled.div`
-  max-width: 1200px;
-  max-width: 75%;
-  /* max-height: 75vh; */
-  margin: auto;
-  padding: ${({ theme }) => theme.spacing(5)}px;
-  background-color: ${({ theme }) => theme.palette.info.light};
+export const Inner = styled(Box)`
+  ${({ theme }) => {
+    return `
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400;
+      bgcolor: ${theme.palette.background.paper};
+      border: 2px solid #000;
+      box-shadow: 24;
+      background-color: ${theme.palette.background.paper};
+      padding: ${theme.spacing(2)};
+    `;
+  }}
 `;
 
 export const CloseButtonWrapper = styled.div`

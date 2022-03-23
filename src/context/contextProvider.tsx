@@ -11,10 +11,11 @@ const initialState = {
   modalStyle: null,
   currentSearchInput: '',
   pageDimensions: {},
+  currentPage: null,
   // modalId: 0,
   // modalContent: null,
   // modalHandleClose: null,
-  // drawersStatus,
+  // drawersIsOpen: true,
 };
 
 export const Context = createContext(initialState);

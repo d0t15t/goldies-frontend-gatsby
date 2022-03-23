@@ -10,6 +10,7 @@ export { LeftDrawer } from '~components/LeftDrawer/LeftDrawer';
 export { Dropdown } from '~components/Dropdown/Dropdown';
 export { EmojiPointer } from '~components/EmojiPointer/EmojiPointer';
 export { FancyImageBox } from '~components/FancyImageBox/FancyImageBox';
+export { FeaturedProducts } from '~components/FeaturedProducts/FeaturedProducts';
 export { Image } from '~components/Image/Image';
 export { Link } from '~components/Link/Link';
 export { Logo } from '~components/Logo/Logo';

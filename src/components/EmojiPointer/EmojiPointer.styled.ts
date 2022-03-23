@@ -5,6 +5,14 @@ export const Pointer = styled(Box)`
   ${({ theme }) => {
     return `    
       width: ${theme.spacing(3)};
+      height: 0;
+      position: relative;
+      transition: all 0.2s ease-in;
+      opacity: 1;
+
+      &.hidden {
+        opacity: 0;
+      }
       
       > * {
         position: relative;

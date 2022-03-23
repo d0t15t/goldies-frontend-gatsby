@@ -8,7 +8,6 @@ import * as S from './CartButton.styled';
 
 export const CartButton = () => {
   const cartCount = useCartCount();
-  console.log('🚀 ~ file: CartButton.tsx ~ line 11 ~ CartButton ~ cartCount', cartCount);
 
   const [context, dispatch] = useContext(Context);
 

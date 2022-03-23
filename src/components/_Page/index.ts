@@ -87,39 +87,6 @@ export const getNodeTiles = (tiles) => {
 };
 
 /*
- * Collection functions.
- */
-
-export const getProductTeaserImageData = (product) => {
-  return product?.rels?.product?.rels?.image?.localFile?.teaserImage;
-};
-
-export const getProductTeaserVariantData = (product) => {
-  const variant = product?.rels?.product?.rels?.variants[0];
-  return { ...variant, shopifyId: U.getProductVariantGid(variant.shopifyId) };
-};
-
-export const getCollectionNodeProduct = (product) => {
-  return {
-    ...product,
-    // teaserStyle: 'product',
-    image: getProductTeaserImageData(product),
-    link: getNodeUrl(product),
-    variant: getProductTeaserVariantData(product),
-  };
-};
-
-export const getCollectionNodeProducts = (node) => {
-  return node.rels?.products
-    ? node.rels.products.map((product) => getCollectionNodeProduct(product))
-    : [];
-};
-
-export const getCollectionNodeData = (node) => {
-  return { products: getCollectionNodeProducts(node) };
-};
-
-/*
  * Product functions.
  */
 
@@ -190,9 +157,69 @@ export const getProductNodeData = (node) => {
   return {
     headline: getNodeTitle(node),
     ...shopifyProduct,
-    body: shopifyProduct.body?.markup,
+    body: shopifyProduct?.body?.markup,
     variants: getProductNodeShopifyProductVariants(shopifyProduct),
     images: getProductNodeShopifyProductImageSet(shopifyProduct),
+  };
+};
+
+/*
+ * Collection functions.
+ */
+
+export const getProductTeaserImageData = (product) => {
+  return product?.rels?.product?.rels?.image?.localFile?.teaserImage;
+};
+
+export const getProductTeaserVariantData = (product) => {
+  const variant = product?.rels?.product?.rels?.variants[0];
+  return { ...variant, shopifyId: U.getProductVariantGid(variant.shopifyId) };
+};
+
+export const getProductTeaserVariantsData = (product) => {
+  return product?.rels?.product?.rels?.variants.map((variant) => {
+    return { ...variant, shopifyId: U.getProductVariantGid(variant.shopifyId) };
+  });
+};
+
+export const getCollectionNodeProduct = (product) => {
+  return {
+    ...product,
+    // teaserStyle: 'product',
+    image: getProductTeaserImageData(product),
+    link: getNodeUrl(product),
+    variant: getProductTeaserVariantData(product),
+  };
+};
+
+export const getCollectionFeaturedProduct = (product) => {
+  return {
+    ...product,
+    // teaserStyle: 'product',
+    image: getProductTeaserImageData(product),
+    link: getNodeUrl(product),
+    variants: getProductTeaserVariantsData(product),
+  };
+};
+
+export const getCollectionNodeProducts = (node) => {
+  return node.rels?.products
+    ? node.rels.products.map((product) => getCollectionNodeProduct(product))
+    : [];
+};
+
+export const getCollectionFeaturedProducts = (node) => {
+  return node.rels?.featured
+    ? node.rels.featured.map((product) => getCollectionFeaturedProduct(product))
+    : [];
+};
+
+export const getCollectionNodeData = (node) => {
+  return {
+    id: node.id,
+    description: node?.description?.markup,
+    featured: getCollectionFeaturedProducts(node),
+    products: getCollectionNodeProducts(node),
   };
 };
 

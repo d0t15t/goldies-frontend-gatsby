@@ -16,11 +16,12 @@ export const StyledProductTeaser = styled(StyledTeaser)`
       }
 
       && h5 {
-        padding: 0 ${theme.spacing(2)} ${theme.spacing(1)} ${theme.spacing(2)};
-        border-bottom: 1px solid;
+        padding: ${theme.spacing(2)} ${theme.spacing(2)} 4px ${theme.spacing(2)};
+        border-bottom: 1px solid ${theme.palette.grey[400]};
         display: inline;
         color: black;
         font-size: 4vw;
+        line-height: 2;
 
         ${theme.breakpoints.up('sm')} {
           font-size: 2vw;
@@ -32,9 +33,9 @@ export const StyledProductTeaser = styled(StyledTeaser)`
       }
       
       .teaser-text--lower {
-        margin-top: ${theme.spacing(1)};
+        // margin-top: ${theme.spacing(1)};
         margin-bottom: 2px;
-        padding-top: ${theme.spacing(1)};
+        // padding-top: ${theme.spacing(1)};
         display: flex;
         align-items: center;
         justify-content: center;

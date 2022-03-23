@@ -1,23 +1,28 @@
-import React, { FC, ReactNode, useContext } from 'react';
+import React, { FC, ReactNode, useContext, useEffect } from 'react';
 import { useAddItemsToCart } from 'gatsby-theme-shopify-manager';
+import { Box, Typography } from '@mui/material';
 import { Context } from '~context';
 import { Button, Link } from '~components';
 import * as S from './AddToCart.styled';
 
 interface AddToCartProps {
   children: ReactNode;
+  image: ReactNode;
   quantity: number;
   shopifyId: string;
   title: string;
   variant: Object[];
+  url: string;
 }
 
 export const AddToCart: FC<AddToCartProps> = ({
   children,
+  image,
   quantity,
   shopifyId,
   title,
   variant,
+  url,
 }) => {
   const [{ modalIsOpen, modalContent }, dispatch] = useContext(Context);
 
@@ -30,17 +35,22 @@ export const AddToCart: FC<AddToCartProps> = ({
 
   const ModalContent = () => {
     return (
-      <>
-        <p>
-          <strong>{title}</strong> was added to your cart.
-        </p>
-        <p>
-          <Link url="/cart" handleClick={handleClose}>
+      <S.ModalWrapper className="modal--added-to-cart">
+        <Typography>
+          <Link to="url">{title}</Link> was added to your cart.
+        </Typography>
+        <Box
+        // sx={{ width: 200 }}
+        >
+          {image}
+        </Box>
+        <Typography>
+          <Link to="/cart" handleClick={handleClose}>
             Go to cart
           </Link>
-          , or <Button>continue shopping</Button>?
-        </p>
-      </>
+          <Button onClick={handleClose}>Continue shopping</Button>
+        </Typography>
+      </S.ModalWrapper>
     );
   };
 

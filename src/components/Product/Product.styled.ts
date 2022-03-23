@@ -3,6 +3,12 @@ import styled from 'styled-components';
 export const Product = styled('div')`
   ${({ theme }) => {
     return `
+      .gatsby-image-wrapper {
+        img {
+          height: auto;
+        }
+      }
+
       .product-body {
         margin-top: ${theme.spacing(3)};
       }
@@ -17,20 +23,13 @@ export const Product = styled('div')`
 
       ${theme.breakpoints.up('sm')} {
         display: flex;
+        gap: ${theme.spacing(2)};
         > * {
           width: 50%;
         }
       }
     `;
   }}
-`;
-
-export const Headline = styled.h3`
-  color: pink;
-`;
-
-export const Body = styled.p`
-  /* color: yellow; */
 `;
 
 export const Controls = styled.div`

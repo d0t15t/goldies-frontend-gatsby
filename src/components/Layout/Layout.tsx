@@ -14,10 +14,10 @@ export const Layout: FC<Omit<PageProps, 'children'>> = ({ children, location }) 
       <GlobalStyle />
       <SEO location={location} />
       <S.Layout className={cls(['layout-wrapper'])}>
-        <Navigation />
-        <CTA />
+        {/* <Navigation /> */}
+        {/* <CTA /> */}
         {children}
-        <PageFooter />
+        {/* <PageFooter /> */}
         <Modal />
       </S.Layout>
     </>

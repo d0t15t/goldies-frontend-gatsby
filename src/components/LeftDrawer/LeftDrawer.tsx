@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import cls from 'classnames';
 import { useTheme } from '@mui/material/styles';
@@ -24,6 +24,7 @@ import * as S from './LeftDrawer.styled';
 
 export const LeftDrawer = () => {
   const [context, dispatch] = useContext(Context);
+  const { currentPage } = context;
 
   const { sidebarMenuItems: menuItems } = useStaticQuery(graphql`
     query {
@@ -33,6 +34,8 @@ export const LeftDrawer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleDrawerOpen = () => setIsOpen(true);
   const handleDrawerClose = () => setIsOpen(false);
+
+  useEffect(() => handleDrawerClose(), [currentPage]);
 
   const drawerProps = {
     variant: 'temporary',

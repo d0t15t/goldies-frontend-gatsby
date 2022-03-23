@@ -53,7 +53,12 @@ export const ProductTeaser: FC<TeaserProps> = ({
         {/* <Box className="price-wrapper"> */}
         <Price value={variant.price} />
         {/* </Box> */}
-        <AddToCart shopifyId={variant.shopifyId} title={title} variant="text" />
+        <AddToCart
+          shopifyId={variant.shopifyId}
+          title={title}
+          variant="text"
+          image={<Image data={image} alt={title} />}
+        />
       </Box>
     </S.StyledProductTeaser>
   );

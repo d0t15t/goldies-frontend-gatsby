@@ -1,5 +1,9 @@
 import styled from 'styled-components';
+import { Box } from '@mui/system';
 
-export const Button = styled.button``;
-
-export const Link = styled.button``;
+export const ModalWrapper = styled(Box)`
+  text-align: center;
+  > * {
+    padding-bottom: 20px;
+  }
+`;

@@ -51,7 +51,7 @@
     "gatsby-plugin-svgr": "3.0.0-beta.0",
     "gatsby-plugin-typography": "^4.0.0",
     "gatsby-plugin-use-query-params": "^1.0.1",
-    "gatsby-source-drupal": "^4.11.0",
+    "gatsby-source-drupal": "4.4.0",
     "gatsby-source-drupal-menu-links": "^2.0.0",
     "gatsby-source-filesystem": "^3.13.0",
     "gatsby-source-shopify": "3.5.0",
