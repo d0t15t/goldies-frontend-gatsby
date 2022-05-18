@@ -8,6 +8,10 @@ export const Wrapper = styled(Box)(({ theme }) => {
     '&& a, a:link, a:visited': {
       color: theme.palette.secondary.contrastText,
     },
+
+    p: {
+      display: 'inline',
+    },
   };
 });
 

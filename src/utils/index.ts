@@ -101,7 +101,6 @@ export const getMenuItems = (menuItems) => {
   return menuItems.nodes.map((menuItem) => {
     return {
       ...menuItem,
-      link: menuItem.link.alias,
     };
   });
 };

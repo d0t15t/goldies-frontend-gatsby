@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const Price = styled.div`
+export const Price = styled.span`
   ${({ theme }) => {
     return `
-      font-size: 2vh;
-      // line-height: 4vh;
+      // font-size: 1em;
+      letter-spacing: 2px;
 
   `;
   }}

@@ -4,26 +4,28 @@ import 'normalize.css';
 export const GlobalStyle = createGlobalStyle`
   ${({ theme }) => {
     return `
-      // // :root {
-      // //   font-size: 62.5%;
-      // // }
 
       .layout-wrapper.MuiBox-root {
         
         h1, h2, h3, h4, h5, h6 {
           font-family: Libre Baskerville, serif;
+          margin: 0;
         }
   
         p, span, a {
           font-family: Nunito, sans serif;
         }
 
-        p, a {
+        p, a, span {
           line-height: 1.6em;
 
           ${theme.breakpoints.up('md')} {
             line-height: 2em;
           }
+        }
+
+        p:last-child {
+          margin-bottom: unset;
         }
 
         ul {
@@ -38,6 +40,11 @@ export const GlobalStyle = createGlobalStyle`
         // text-transform: none;
       }
 
+      .gatsby-image-wrapper {
+        img {
+          height: auto;
+        }
+      }
     
       // *,
       // *::before,

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-danger */
 import React, { FC, useState } from 'react';
-import { useMediaQuery } from '@mui/material';
+import cls from 'classnames';
+import { Box, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import {
   AddToCart,
@@ -59,7 +60,7 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants }) 
       {images.teaserImages.length > 1 ? (
         <FancyImageBox {...images} />
       ) : (
-        <Image data={images.teaserImages[0]} alt="foo" />
+        <Image data={images.teaserImages[0]} alt={headline} />
       )}
       <div className="product-info-wrapper">
         <S.Controls>
@@ -75,8 +76,8 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants }) 
         </S.Controls>
         {/* {!mqMdUp && form} */}
         {body ? (
-          <div
-            className="product-body"
+          <Box
+            className={('product-body', 'body1')}
             dangerouslySetInnerHTML={{
               __html: decodeHTML(body),
             }}

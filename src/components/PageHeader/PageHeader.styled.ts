@@ -10,8 +10,9 @@ export const Header = styled('header')(({ theme }) => {
 
     '& > *': {},
     '& h1': {
-      fontSize: '1.5rem',
+      fontSize: '1.5em',
       marginBottom: theme.spacing(1),
+      lineHeight: '1.5em',
 
       [theme.breakpoints.up('md')]: {
         fontSize: '3rem',
@@ -50,4 +51,10 @@ export const Headline = styled(Box)(({ theme }) => {
   };
 });
 
-export const Body = styled(Box)``;
+export const Body = styled(Box)`
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+`;

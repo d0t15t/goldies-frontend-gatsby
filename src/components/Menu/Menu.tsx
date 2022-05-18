@@ -20,16 +20,11 @@ export const Menu: FC<MenuProps> = ({ items, vertical }) => {
   return (
     <S.Menu vertical={vertical} className="menu">
       {items.map((item) => {
-        const { handleClick, id, title, link } = item;
-        return link ? (
+        const { handleClick, id, title, url } = item;
+        const listItemText = <ListItemText>{title}</ListItemText>;
+        return (
           <ListItem key={id} className="menu-item">
-            <Link to={link}>
-              <ListItemText>{title}</ListItemText>
-            </Link>
-          </ListItem>
-        ) : (
-          <ListItem key={id} className="menu-item">
-            <ListItemText>{title}</ListItemText>
+            {url ? <Link to={url}>{listItemText}</Link> : listItemText}
           </ListItem>
         );
       })}

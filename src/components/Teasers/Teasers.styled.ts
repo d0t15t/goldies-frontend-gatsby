@@ -46,6 +46,7 @@ export const FancyGrid = styled(Box)(({ theme }) => {
 
       img {
         object-fit: cover;
+        height: 100%;
       }
     }
 

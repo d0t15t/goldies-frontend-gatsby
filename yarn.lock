@@ -3898,9 +3898,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001243, caniuse-lite@^1.0.30001248, caniuse-lite@^1.0.30001251:
-  version "1.0.30001251"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001251.tgz#6853a606ec50893115db660f82c094d18f096d85"
-  integrity sha512-HOe1r+9VkU4TFmnU70z+r7OLmtR+/chB1rdcJUeQlAinjEeb0cKL20tlAtOagNZhbrtLnCvV19B4FmF1rgzl6A==
+  version "1.0.30001325"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001325.tgz"
+  integrity sha512-sB1bZHjseSjDtijV1Hb7PB2Zd58Kyx+n/9EotvZ4Qcz2K3d0lWB8dB4nb8wN/TsOGFq3UuAm0zQZNQ4SoR7TrQ==
 
 ccount@^1.0.0:
   version "1.1.0"
@@ -6890,10 +6890,19 @@ gatsby-recipes@^0.22.0:
     xstate "^4.9.1"
     yoga-layout-prebuilt "^1.9.6"
 
-gatsby-source-drupal-menu-links@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-drupal-menu-links/-/gatsby-source-drupal-menu-links-2.0.0.tgz#d4c9f2b745c01f48bcf9c98a9a6f5c7360da0044"
-  integrity sha512-mOn0f43bOUZTmy1zhcWCIruW9A/RsQ5KeFV7K7fk4hAXrWd8EFSJTO9KOL4pUoBISuiVm032bzfd4BYm9SxCog==
+gatsby-source-custom-api@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/gatsby-source-custom-api/-/gatsby-source-custom-api-2.3.6.tgz#98b73dae9e29809e6437585c2a2a7488c5945fbc"
+  integrity sha512-s6KotnHnw7z4d3wI1MuxsNYjoincLkUWeYNDWN+r7EksfhuedNydOKsg4kS+IzQcsz17UcA+Ko8+/Palz5oHEQ==
+  dependencies:
+    gatsby-source-filesystem "^2.0.29"
+    node-fetch "^2.6.1"
+    uuid "^3.3.2"
+
+gatsby-source-drupal-menu-links@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-source-drupal-menu-links/-/gatsby-source-drupal-menu-links-3.0.1.tgz#f101412bf8027dccb1d4870de482b71aa3cb370d"
+  integrity sha512-dqvfTKkaxU4SYBUCa5EFVaoQ8AJWjkncLvFyqed+qE1kmKhsabWvJNUv4RDwS2uPb74lcJD+aa80xthqOZBfCA==
   dependencies:
     "@babel/runtime" "^7.13.10"
     es6-promise latest
@@ -6912,7 +6921,7 @@ gatsby-source-drupal@4.4.0:
     lodash "^4.17.21"
     tiny-async-pool "^1.2.0"
 
-gatsby-source-filesystem@^2.6.0:
+gatsby-source-filesystem@^2.0.29, gatsby-source-filesystem@^2.6.0:
   version "2.11.1"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.11.1.tgz#c90f49c096c4bdafd8e68462966b3a6e21fd746b"
   integrity sha512-Ao526Mmhm8KkF+0Tvf9Le5kKnqX7kgC1wecp82BW2KLQgdtG7UIgmHvG6PkjuFNiJ2ghXPC3vRK3J/vDPyLtkA==

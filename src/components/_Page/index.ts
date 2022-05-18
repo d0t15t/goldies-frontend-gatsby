@@ -182,6 +182,14 @@ export const getProductTeaserVariantsData = (product) => {
   });
 };
 
+export const getCollectionImage = (collection) => {
+  const getImage = ({ index, localFile }) => {
+    return localFile ? { ...localFile, ...localFile[index] } : null;
+  };
+  const image = collection.rels?.media?.rels?.image?.localFile;
+  return getImage({ index: 'largeImage', localFile: image });
+};
+
 export const getCollectionNodeProduct = (product) => {
   return {
     ...product,
@@ -218,8 +226,11 @@ export const getCollectionNodeData = (node) => {
   return {
     id: node.id,
     description: node?.description?.markup,
+    featuredDescription: node?.featuredDescription?.markup,
     featured: getCollectionFeaturedProducts(node),
+    image: getCollectionImage(node),
     products: getCollectionNodeProducts(node),
+    title: node.title,
   };
 };
 

@@ -49,6 +49,7 @@ export const LeftDrawer = () => {
 
   const openDrawerButtonId = 'open-drawer-menu-button';
   const closeDrawerButtonId = 'close-drawer-menu-button';
+
   return (
     <>
       <IconButton id={openDrawerButtonId} onClick={handleDrawerOpen}>

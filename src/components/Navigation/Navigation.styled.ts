@@ -26,6 +26,10 @@ export const Inner = styled(Toolbar)`
   .search-bar {
     padding-left: ${({ theme }) => theme.spacing(1)};
   }
+
+  & > a {
+    line-height: unset !important;
+  }
 `;
 
 export const Unit = styled('span')`

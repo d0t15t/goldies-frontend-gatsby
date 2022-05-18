@@ -4,7 +4,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import { AddToCart, Price } from '~components';
 import { TeasersGrid, ProductTeaser } from '~components/Teasers';
 import * as S from './FeaturedProducts.styled';
-
+// eslint-disable prettier/prettier
 interface FeaturedProductsProps {
   children: ReactNode;
   description: string;
@@ -13,22 +13,23 @@ interface FeaturedProductsProps {
 
 const FeaturedProducts: FC<FeaturedProductsProps> = ({ products }) => {
   return (
-    <Grid>
+    <S.Wrapper className={cls(['featured-products'])}>
       {products.map((product) => {
         return product.variants.map((variant) => {
           const { shopifyId, title, price } = variant;
 
           return (
-            <Box item xs={12} sm={6} md={4} key={variant.id}>
-              <Typography variant="button">
-                {title} ~ <Price value={variant.price} />
-              </Typography>
+            <S.Item key={variant.id}>
+              <span className={cls(['featured-products--title'])}>
+                <Typography variant="span">{title} ~ </Typography>
+                <Price value={variant.price} />
+              </span>
               <AddToCart shopifyId={shopifyId} title={title} />
-            </Box>
+            </S.Item>
           );
         });
       })}
-    </Grid>
+    </S.Wrapper>
   );
 };
 

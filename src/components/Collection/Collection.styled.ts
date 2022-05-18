@@ -1,10 +1,50 @@
-import { styled } from '@mui/system';
+import styled from 'styled-components';
 import { Box, Grid } from '@mui/material';
 
 export const Wrapper = styled(Grid)`
   ${({ theme }) => {
     return `
+    `;
+  }}
+`;
+
+export const Upper = styled(Box)`
+  ${({ theme }) => {
+    return `
+
+      ${theme.breakpoints.up('sm')} {
+        display: flex;
+        gap: ${theme.spacing(2)};
+
+        > * {
+          width: 50%;
+        }
+      }
+      
+    `;
+  }}
+`;
+
+export const ProductsGrid = styled(Grid)`
+  ${({ theme }) => {
+    return `
       padding: 0 ${theme.spacing(2)} 0 ${theme.spacing(2)};
+    `;
+  }}
+`;
+
+export const FeaturedWrapper = styled(Box)`
+  ${({ theme }) => {
+    return `
+      padding: ${theme.spacing(2)};
+
+      .featured-products--title {
+        text-align: right;
+      }
+
+      .collection--featured-products-text {
+        text-align: center;
+      }
     `;
   }}
 `;
@@ -24,9 +64,7 @@ export const TeaserWrapper = styled(Grid)`
 export const Description = styled(Box)`
   ${({ theme }) => {
     return `
-      * {
-        font-size: 1em;
-      }
+      padding: ${theme.spacing(3)};
     `;
   }}
 `;

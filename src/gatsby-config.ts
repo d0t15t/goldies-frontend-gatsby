@@ -93,6 +93,19 @@ const gatsbyConfig: GatsbyConfig = {
         // },
       },
     },
+    {
+      resolve: `gatsby-source-drupal-menu-links`,
+      options: {
+        baseUrl: drupalVars.url,
+        apiBase: 'jsonapi',
+        menus: ['main', 'footer', 'footer-1'],
+        basicAuth: {
+          username: drupalVars.user,
+          password: drupalVars.password,
+        },
+      },
+    },
+
     // {
     //   resolve: 'gatsby-source-drupal-rest',
     //   options: {
