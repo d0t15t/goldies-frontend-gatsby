@@ -88,9 +88,13 @@ const gatsbyConfig: GatsbyConfig = {
           username: drupalVars.user,
           password: drupalVars.password,
         },
-        // filters: {
-        //   nodes: `${process.env.GATSBY_DRUPAL_ROOT}jsonapi/node/page`,
-        // },
+        concurrentFileRequests: 1,
+        links: {
+          page: `${process.env.GATSBY_DRUPAL_ROOT}jsonapi/node/page`,
+          product: `${process.env.GATSBY_DRUPAL_ROOT}jsonapi/node/product`,
+          collection: `${process.env.GATSBY_DRUPAL_ROOT}jsonapi/node/collection`,
+          stockist: `${process.env.GATSBY_DRUPAL_ROOT}jsonapi/node/stockist`,
+        },
       },
     },
     {
@@ -105,7 +109,6 @@ const gatsbyConfig: GatsbyConfig = {
         },
       },
     },
-
     // {
     //   resolve: 'gatsby-source-drupal-rest',
     //   options: {

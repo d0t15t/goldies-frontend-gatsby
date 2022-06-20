@@ -5,6 +5,7 @@ import * as U from '~utils';
 import * as S from './SocialBlock.styled';
 
 export const SocialBlock = () => {
+  return null;
   const theme = useTheme();
   // const items = [{ id: 'email', button: EmailShareButton, icon: EmailIcon, props: {} }];
   const url = typeof window !== 'undefined' ? window.location.href : '';

@@ -15,7 +15,10 @@ import * as PU from './index';
 import * as S from './Page.styled';
 
 const PageWrapper: FC<PageWrapper> = ({ data }) => {
-  const path = typeof window !== 'undefined' ? window.location.pathname : '';
+  const [path, setPath] = useState('');
+  useEffect(() => setPath(typeof window !== 'undefined' ? window.location.pathname : ''));
+
+  // const path = typeof window !== 'undefined' ? window.location.pathname : '';
 
   const [context, dispatch] = useContext(Context);
   const [ref, box] = useDimensions({
@@ -24,9 +27,9 @@ const PageWrapper: FC<PageWrapper> = ({ data }) => {
 
   useEffect(() => useDispatch('pageDimensions', box, dispatch), [box, dispatch]);
 
-  const location = useLocation();
+  // const location = useLocation();
 
-  useEffect(() => useDispatch('currentPage', location, dispatch), [dispatch, location]);
+  // useEffect(() => useDispatch('currentPage', location, dispatch), [dispatch, location]);
 
   const node = PU.getNode(data);
 
@@ -54,7 +57,7 @@ const PageWrapper: FC<PageWrapper> = ({ data }) => {
       <div id="main-content" ref={ref}>
         {getPageBodyTemplate(bodyData, node.internal.type)}
       </div>
-      {path === '/' && (
+      {/* {path === '/' && (
         <S.PageBreak
           className={cls(
             'page-break'
@@ -63,7 +66,7 @@ const PageWrapper: FC<PageWrapper> = ({ data }) => {
         >
           <EmojiPointer />
         </S.PageBreak>
-      )}
+      )} */}
       {/* <SocialBlock /> */}
     </S.Page>
   ) : null;

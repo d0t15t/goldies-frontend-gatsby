@@ -46,11 +46,12 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants }) 
     minimumValue: 1,
   };
 
-  const decodeHTML = (html) => {
-    const txt = document.createElement('textarea');
-    txt.innerHTML = html;
-    return txt.value;
-  };
+  // const decodeHTML = (html) => {
+  //   if (typeof document === undefined) return '';
+  //   const txt = document.createElement('textarea');
+  //   txt.innerHTML = html;
+  //   return txt.value;
+  // };
 
   const theme = useTheme();
   const mqMdUp = useMediaQuery(theme.breakpoints.up('md'));
@@ -79,8 +80,11 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants }) 
           <Box
             className={('product-body', 'body1')}
             dangerouslySetInnerHTML={{
-              __html: decodeHTML(body),
+              __html: body,
             }}
+            // dangerouslySetInnerHTML={{
+            //   __html: decodeHTML(body),
+            // }}
           />
         ) : null}
         {/* {mqMdUp && form} */}
