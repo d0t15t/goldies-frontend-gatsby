@@ -1,6 +1,7 @@
 import { utils } from '~utils/index';
 
 export { AddToCart } from '~components/AddToCart/AddToCart';
+export { Breadcrumbs } from '~components/Breadcrumbs/Breadcrumbs'
 export * from '~components/Buttons';
 export { Cart } from '~components/Cart/Cart';
 export { CartItem } from '~components/CartItem/CartItem';

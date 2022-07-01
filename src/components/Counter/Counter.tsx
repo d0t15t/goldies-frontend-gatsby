@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react';
+import cls from 'classnames';
 import {
   FormControl,
   InputLabel,
@@ -51,10 +52,10 @@ export const Counter: FC<CounterProps> = ({
     maximum: () => false,
   };
   return (
-    <S.Counter className="counter-wrapper">
-      <Typography className="label" variant="overline">
-        Quantity
-      </Typography>
+    <S.Counter className="counter--wrapper">
+      <FormLabel className={ cls('counter--label') } variant="overline">
+        Quantity:
+      </FormLabel>
       <ButtonGroup className="counter">
         <Button
           aria-label="increase-quantity"

@@ -35,6 +35,25 @@ export const getNodeTitleDisplay = (node: pageBase): boolean => {
   return node?.titleDisplay || false;
 };
 
+export const hasShiftedHeadline = (pathname: string): boolean => {
+  const arr = pathname.split('/');
+  if (arr[1] !== undefined && arr[1] === 'product') return true;
+  return false;
+};
+
+export const getBreadcrumbs = (data): array | undefined => {
+  const bcType = data.internal.type;
+  const bcData = data[`breadcrumb__${ bcType }`];
+  const dataKeys = Object.keys(bcData);
+  console.log(dataKeys);
+  
+  return [
+    { label: null, items: [{ title: 'Home', path: '/', id: 0 }]}, 
+    { label: dataKeys[0] ?? '', items: bcData[dataKeys[0]] }, 
+    { Current: [{ title: data.title}] },
+  ];
+}
+
 /*
  * Node helper functions.
  */
@@ -272,3 +291,4 @@ export const getPageNodeData = (node) => {
     footerData: {},
   };
 };
+

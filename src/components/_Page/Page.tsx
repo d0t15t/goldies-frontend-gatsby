@@ -6,7 +6,7 @@ import { useDimensions } from 'react-hook-dimensions';
 import { Typography } from '@mui/material';
 import { Context, useDispatch } from '~context';
 import { useLocation } from '~hooks';
-import { Link, EmojiPointer, SocialBlock } from '~components';
+import { Breadcrumbs, Link, EmojiPointer, SocialBlock } from '~components';
 
 //* @var PU */ Page Utilities */
 import * as PU from './index';
@@ -14,11 +14,9 @@ import * as PU from './index';
 //* @var S */ Styled components */
 import * as S from './Page.styled';
 
-const PageWrapper: FC<PageWrapper> = ({ data }) => {
-  const [path, setPath] = useState('');
-  useEffect(() => setPath(typeof window !== 'undefined' ? window.location.pathname : ''));
-
-  // const path = typeof window !== 'undefined' ? window.location.pathname : '';
+const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
+  
+  const path = location.pathname;
 
   const [context, dispatch] = useContext(Context);
   const [ref, box] = useDimensions({
@@ -30,10 +28,12 @@ const PageWrapper: FC<PageWrapper> = ({ data }) => {
   // const location = useLocation();
 
   // useEffect(() => useDispatch('currentPage', location, dispatch), [dispatch, location]);
+  //useDispatch('breadcrumbs', )
 
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
+  const breadcrumbs = PU.getBreadcrumbs(node); 
 
   const getPageBodyTemplate = (data, type) => {
     const pageBodyTemplate = {
@@ -50,14 +50,18 @@ const PageWrapper: FC<PageWrapper> = ({ data }) => {
     return type in pageBodyTemplate ? pageBodyTemplate[type]() : null;
   };
 
+  const hasShiftedHeadline = PU.hasShiftedHeadline(path);
+
   return node ? (
     <S.Page className="page-root">
-      <PU.PageHeader {...headerData} />
+      <PU.PageHeader {...headerData} hasShiftedHeadline={hasShiftedHeadline}/>
+
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
 
       <div id="main-content" ref={ref}>
         {getPageBodyTemplate(bodyData, node.internal.type)}
       </div>
-      {/* {path === '/' && (
+      {path === '/' && (
         <S.PageBreak
           className={cls(
             'page-break'
@@ -66,8 +70,8 @@ const PageWrapper: FC<PageWrapper> = ({ data }) => {
         >
           <EmojiPointer />
         </S.PageBreak>
-      )} */}
-      {/* <SocialBlock /> */}
+      )}
+      <SocialBlock />
     </S.Page>
   ) : null;
 };
@@ -79,5 +83,6 @@ export const query = graphql`
     ...pageTilesFragment
     ...collectionPageFragment
     ...productPageFragment
+    ...breadcrumbsFragment
   }
 `;

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, ReactNode, Fragment } from 'react';
 import { graphql, navigate, useStaticQuery } from 'gatsby';
 import cls from 'classnames';
 import {
@@ -7,9 +7,12 @@ import {
   useRemoveItemFromCart,
   useUpdateItemQuantity,
 } from 'gatsby-theme-shopify-manager';
-import { Button, CartItem, Link, PaymentMethods } from '~components';
+import { Typography } from '@material-ui/core';
+import { Button, CartItem, Link, PaymentMethods, Price } from '~components';
 import * as U from '~utils';
 import * as S from './Cart.styled';
+import { Box } from '@mui/material';
+import { log } from 'util';
 
 interface CartProps {
   children: ReactNode;
@@ -45,7 +48,13 @@ export const Cart: FC<CartProps> = ({ children, context }) => {
 
   const removeItemFromCart = useRemoveItemFromCart();
 
+  const getCartTotal = (cartItems) => {
+    return cartItems.reduce((acc, i) => acc + (i.quantity * i.variant.price), 0);
+  };
+
   const handleRemove = async (variantId) => {
+    console.log(variantId);
+    
     if (cartItems.length < 1) {
       return;
     }
@@ -79,36 +88,43 @@ export const Cart: FC<CartProps> = ({ children, context }) => {
 
   return (
     <S.Container>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={'cart--form'}>
+        <hr className={'cart--line'}/>
         <S.List>
-          {cartItems.map((item) => {
+          {cartItems.map((item, i) => {
             return (
-              <CartItem
-                {...item}
-                context={context}
-                key={item.id}
-                handleRemove={handleRemove}
-                handleUpdateQuantity={handleUpdateQuantity}
-                linkPath={U.getVariantProductNodePathAlias({
-                  variants: variantNodes,
-                  current: item,
-                })}
-                classes={cls(['cart-item', `cart-item--${context}`])}
-              />
+              <Fragment key={i}>
+                {i ? <hr className={'cart--line'}/> : null}
+                <CartItem
+                  {...item}
+                  cartItemsCount={cartItems.length}
+                  context={context}
+                  key={item.id}
+                  handleRemove={handleRemove}
+                  handleUpdateQuantity={handleUpdateQuantity}
+                  linkPath={U.getVariantProductNodePathAlias({
+                    variants: variantNodes,
+                    current: item,
+                  })}
+                  classes={cls(['cart-item', `cart-item--${context}`])}
+                />
+              </Fragment>
             );
           })}
         </S.List>
+        <hr className={'cart--line'}/>
+        <Box className={cls(['cart--total'])}>
+          <Typography variant={'overline'} className={cls(['cart-subtotal'])}>Subtotal:</Typography>
+          <Price value={getCartTotal(cartItems)} />  
+        </Box>
+
         {/* {checkoutUrl && <Link url={checkoutUrl}>Proceed to Checkout</Link>} */}
-        {U.cartIsDefaultViewMode(context) && checkoutUrl && (
-          <Button type="submit">Proceed to Checkout</Button>
-        )}
+        <Box className={'cart--actions'}><Button type="submit" className={'cart--button-checkout'}>Proceed to Checkout</Button></Box>
       </form>
-      {U.cartIsDefaultViewMode(context) && (
-        <>
-          <p>Checkout will commence on Shopify.com</p>
-          <PaymentMethods />
-        </>
-      )}
+      <Box className={'cart--lower'}>
+        <Typography className={'cart--lower__info'}>Checkout will commence on Shopify.com</Typography>
+        <PaymentMethods />
+      </Box>
     </S.Container>
   );
 };

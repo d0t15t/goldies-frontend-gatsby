@@ -29,14 +29,14 @@ export const CartButton = () => {
   };
 
   return (
-    <>
-      <IconButton onClick={() => handleChange(true, <CartContent />)}>
+    <S.Wrapper>
+      <Link to="/cart">
         <ShoppingCartOutlinedIcon />
         <S.Count>
           <Typography variant="overline">{cartCount > 9 ? '9+' : cartCount}</Typography>
         </S.Count>
-      </IconButton>
-    </>
+        </Link>
+    </S.Wrapper>
   );
 };
 

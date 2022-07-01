@@ -1,5 +1,21 @@
 import { graphql } from 'gatsby';
 
+export const breadcrumbsFragment = graphql`
+  fragment breadcrumbsFragment on Query {
+    node__product: nodeProduct(id: {eq: $id}) {
+      breadcrumb__node__product: relationships {
+        Collections: node__collection {
+          title
+          id
+          path {
+            alias
+          }
+        }
+      }
+    }
+  } 
+`;
+
 export const pageTilesFragment = graphql`
   fragment pageTilesFragment on Query {
     node__page: nodePage(id: { eq: $id }) {

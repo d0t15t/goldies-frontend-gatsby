@@ -1,12 +1,23 @@
 import React, { FC, ReactNode } from 'react';
 import * as S from './Breadcrumbs.styled';
 
-interface BreadcrumbsProps {
-  children: ReactNode;
-}
+export const Breadcrumbs = ({breadcrumbs, children}) => {
+  
+  return breadcrumbs ? (
+    <S.Breadcrumbs>
+      {breadcrumbs.map(item => {
+        //const [name, arr] = Object.entries(item)
+        Object.values(item).map((e, i) => {
+          console.log(i, e);
+        })
+        Object.entries(item).forEach(([i, e]) => {
+          
+        });
+      })}
+      {children}
+    </S.Breadcrumbs>
 
-export const Breadcrumbs: FC<BreadcrumbsProps> = ({children}) => {
-  return <S.Breadcrumbs>Breadcrumbs{children}</S.Breadcrumbs>;
+  ) : null;
 };
 
 export default Breadcrumbs;

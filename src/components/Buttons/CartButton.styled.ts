@@ -1,10 +1,18 @@
 // import { styled } from '@mui/system';
 import styled from 'styled-components';
 import { IconButton, Typography } from '@mui/material';
+//import { Cart, Link } from '~components';
 
-export const CartButton = styled('span')`
-  > * {
+
+export const Wrapper = styled('span')`
+  display: flex;
+  align-items: stretch;
+
+  > a, a:link, a:visited {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.7);
   }
 `;
 
@@ -23,6 +31,5 @@ export const Count = styled(Typography)`
     left: 50%;
     transform: translate(-50%, -50%);
     height: 100%;
-    margin-top: -1.5px;
   }
 `;

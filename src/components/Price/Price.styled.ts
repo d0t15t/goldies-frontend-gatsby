@@ -5,7 +5,7 @@ export const Price = styled.span`
     return `
       // font-size: 1em;
       letter-spacing: 2px;
-
+      
   `;
   }}
 `;

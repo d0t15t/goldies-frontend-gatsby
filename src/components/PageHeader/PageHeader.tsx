@@ -11,12 +11,13 @@ export interface PageHeaderProps {
   children: ReactNode | null;
   display: boolean;
   headline: string | null;
+  hasShiftedHeadline: string;
 }
 
-export const PageHeader: FC<PageHeaderProps> = ({ body, children, headline }) => {
+export const PageHeader: FC<PageHeaderProps> = ({ body, children, headline, hasShiftedHeadline }) => {
   return (
-    <S.Header className={cls('page-header-with-text')}>
-      <Typography variant="h1">{headline}</Typography>
+    <S.Header className={cls('page-header', {'page-header--shifted': hasShiftedHeadline})}>
+      <Typography variant="h1" className={cls(['page-headline'])}>{headline}</Typography>
       {body ? <S.Body className="body1" dangerouslySetInnerHTML={{ __html: `${body}` }} /> : null}
       {/* {breadcrumbs ? } */}
     </S.Header>

@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 export const Button: FC<ButtonProps> = (props) => {
-  const { buttonTemplate, children, styles, type } = props;
+  const { buttonTemplate, children, classes, styles, type } = props;
   const templateMap = {
     basic: S.BasicButton,
     default: S.DefaultButton,

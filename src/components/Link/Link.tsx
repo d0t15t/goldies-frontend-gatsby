@@ -12,9 +12,10 @@ interface LinkProps {
   to: string;
 }
 
-export const Link: FC<LinkProps> = ({ handleClick, to, children, classNames }) => {
+export const Link: FC<LinkProps> = (props) => {
+  const { handleClick, to, children, className } = props;
   return to ? (
-    <GatsbyLink to={to} className={cls(['link', classNames])} onClick={handleClick}>
+    <GatsbyLink {...props} to={to} className={cls(['link', className])} onClick={handleClick}>
       {children}
     </GatsbyLink>
   ) : null;

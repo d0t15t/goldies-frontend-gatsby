@@ -34,7 +34,7 @@ export const FancyImageBox: FC<FancyImageBoxProps> = ({
       style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
       loop
       spaceBetween={10}
-      navigation
+//      navigation
       thumbs={{ swiper: thumbsSwiper }}
       className="teaser-swiper"
       keyboard={{
@@ -70,7 +70,7 @@ export const FancyImageBox: FC<FancyImageBoxProps> = ({
         style={{ '--swiper-navigation-color': '#000', '--swiper-pagination-color': '#000' }}
         loop
         spaceBetween={10}
-        navigation
+  //      navigation
         thumbs={{ swiper: thumbsSwiper }}
         className="teaser-swiper"
         keyboard={{

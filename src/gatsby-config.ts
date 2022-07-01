@@ -109,30 +109,6 @@ const gatsbyConfig: GatsbyConfig = {
         },
       },
     },
-    // {
-    //   resolve: 'gatsby-source-drupal-rest',
-    //   options: {
-    //     endpoints: [
-    //       // `${drupalVars.url}/rest/menu-item`,
-    //       // `${drupalVars.url}/rest/meta-tags?type=node&bundle=page`,
-    //       // `${drupalVars.url}/rest/meta-tags?type=node&bundle=collection`,
-    //       // `${drupalVars.url}/rest/meta-tags?type=node&bundle=product`,
-    //     ],
-    //     basicAuth: {
-    //       username: drupalVars.user,
-    //       password: drupalVars.password,
-    //     },
-    //     concurrentFileRequests: 1,
-    //   },
-    // },
-    // {
-    //   resolve: `gatsby-source-drupal-menu-links`,
-    //   options: {
-    //     baseUrl: process.env.GATSBY_DRUPAL_ROOT,
-    //     apiBase: 'jsonapi',
-    //     menus: ['main', 'sidebar', 'footer'],
-    //   },
-    // },
     {
       resolve: 'gatsby-plugin-local-search',
       options: {

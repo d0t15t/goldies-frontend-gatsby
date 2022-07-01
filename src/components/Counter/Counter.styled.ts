@@ -4,6 +4,9 @@ export const Counter = styled('div')`
   ${({ theme }) => {
     return `
       
+      label {
+        // hidden
+      }
       button {
         &:hover {
           color: ${theme.palette.primary.main};

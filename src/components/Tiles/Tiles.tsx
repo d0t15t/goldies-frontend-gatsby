@@ -15,7 +15,7 @@ export const Tiles: FC<TilesProps> = ({ tiles }) => {
   const tileMap = {
     paragraph__tiles: ({ teasers, id }) => <Teasers teasers={teasers} key={id} />,
     // paragraph__text: ({ teasers, id }) => <TextBlock key={id} />,
-    // paragraph__cart: ({ teasers, id }) => <Cart key={id} />,
+    paragraph__cart: ({ teasers, id }) => <Cart key={id} />,
   };
 
   return (

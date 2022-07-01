@@ -15,6 +15,7 @@ import {
 } from '@mui/icons-material';
 import { Button } from './Button';
 import * as S from './Button.styled';
+import { Console } from 'console';
 
 interface IconButtonProps {
   buttonStyles: object;
@@ -27,8 +28,8 @@ interface IconButtonProps {
 }
 
 export const IconButton: FC<IconButtonProps> = (props) => {
-  const { buttonStyles, buttonTemplate, children, direction, iconStyles, iconName, handleClick } =
-    props;
+  console.log(props)
+  const { buttonStyles, buttonTemplate, children, direction, iconStyles, iconName, handleClick } = props;
 
   const iconTemplate = {
     bag: <LocalMallOutlined />,
@@ -42,7 +43,7 @@ export const IconButton: FC<IconButtonProps> = (props) => {
   const buttonProps = { ...props, iconName: null };
   return (
     <Button
-    //  {...buttonProps}
+      {...buttonProps}
     >
       {!direction && children}
 

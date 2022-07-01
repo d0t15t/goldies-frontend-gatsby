@@ -4,7 +4,7 @@ import { useDimensions } from 'react-hook-dimensions';
 import useEventListener from '@use-it/event-listener';
 import cls from 'classnames';
 
-import { FormControl, Button, FormLabel, List, ListItem, ListItemButton } from '@mui/material';
+import { FormControl, Button, FormLabel, List, ListItem, ListItemButton, Typography } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import { Dropdown } from '~components';
 import * as S from './ProductVariants.styled';
@@ -74,6 +74,8 @@ export const ProductVariants: FC<ProductVariantsProps> = ({ items, current, upda
       <FormControl>
         <FormLabel {...getLabelProps()}>Choose size:</FormLabel>
         <Button
+          variant="contained"
+          color="secondary"
           // labelId="product-variant-select-label"
           id="product-variant-select"
           // value={getCurrentSelectedTitle(selectedItem)}
@@ -102,7 +104,9 @@ export const ProductVariants: FC<ProductVariantsProps> = ({ items, current, upda
                       index,
                     })}
                   >
+                  <Typography variant="span" className={cls('variant-list-item')}>
                     {itemToString(item)}
+                  </Typography>
                   </ListItemButton>
                 </ListItem>
               );

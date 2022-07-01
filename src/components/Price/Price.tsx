@@ -12,7 +12,9 @@ interface PriceProps {
 
 export const Price: FC<PriceProps> = ({ displayType, prefix, thousandSeparator, value }) => {
   const sanitizeValue = (val) => {
-    return val.replace('.00', '');
+
+return val    
+    return val && val.replace('.00', '');
   };
   const currencyProps = {
     // ...props,
