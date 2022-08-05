@@ -7,7 +7,7 @@ import * as S from './Link.styled';
 
 interface LinkProps {
   children: ReactNode;
-  classNames: string;
+  className: string;
   handleClick: Function;
   to: string;
 }

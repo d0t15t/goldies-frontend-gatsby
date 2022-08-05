@@ -4,6 +4,7 @@
 import webpack from 'web';
 import path from 'path';
 import * as U from './utils';
+import { NodeType } from 'gatsby-plugin-local-search/dist/types';
 
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -27,25 +28,58 @@ exports.createPages = async ({ graphql, actions }) => {
   const doCreateNodes = ({ nodeType, nodes }) => {
     return nodes.forEach((node) => {
       createPage({
-        // component: getComponent(U.capitalizeFirstLetter(nodeType)),
         component: path.resolve(`./src/components/_Page/Page.tsx`),
         path: getPath(node),
         context: {
           id: node.id,
         },
       });
-      return true;
+      //return true;
     });
   };
 
   const processQueryItems = (data) => {
     return Object.keys(data).forEach((nodeType) => {
       const nodes = data[nodeType]?.nodes;
+      if (nodeType === 'category') {
+        const categories_subset = nodes.map((e, i) => {
+          const path = U.getCategoryPath(e);
+          return {...e, path};
+        }).filter(e => e?.rels?.node__product);
+        
+        return doCreateNodes({ nodeType, 'nodes': categories_subset });
+      } else 
       return doCreateNodes({ nodeType, nodes });
     });
   };
 
   const pageQuerySets = {
+    category: graphql(`
+      {
+        category: allTaxonomyTermShopifyTags(sort: { fields: drupal_internal__tid }) {
+          nodes {
+            id
+            internal {
+              type
+            }
+            nid: drupal_internal__tid
+            name
+            rels: relationships {
+              node__product {
+                id
+              }
+            }
+          }
+        }
+      }
+    `)
+      .then((result) => {
+        processQueryItems(result?.data);
+        return true;
+      })
+      .catch(() => {
+        console.error('Error');
+      }),
     collection: graphql(`
       {
         collection: allNodeCollection(sort: { fields: drupal_internal__nid }) {
@@ -120,3 +154,4 @@ exports.onCreateWebpackConfig = ({ actions, stage, plugins }) => {
     });
   }
 };
+

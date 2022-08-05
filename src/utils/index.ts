@@ -106,3 +106,12 @@ export const getMenuItems = (menuItems) => {
 };
 
 export const stripTags = (str: string) => str.replace(/(<([^>]+)>)/gi, '');
+
+export const getCategoryPath = (node) => {
+  const slug = `${node.name}`.toLocaleLowerCase()
+    .replace(/[^\w ]+/g, '')
+    .replace(/ +/g, '-');
+  const alias = `/category/${slug}`
+  return { alias }
+};
+

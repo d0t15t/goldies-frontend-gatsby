@@ -10,6 +10,8 @@ import * as Promise from 'bluebird';
 
 import theme from 'src/style/theme';
 
+import * as U from './utils';
+
 // global.Promise = Promise;
 
 dotenv.config({
@@ -117,7 +119,7 @@ const gatsbyConfig: GatsbyConfig = {
         engineOptions: '',
         query: `
           {
-            allNodeProduct(sort: { fields: drupal_internal__nid }) {
+            products: allNodeProduct(sort: { fields: drupal_internal__nid }) {
               nodes {
                 id
                 nid: drupal_internal__nid
@@ -125,19 +127,109 @@ const gatsbyConfig: GatsbyConfig = {
                 path {
                   alias
                 }
+                rels: relationships {
+                  tags: field_tags {
+                    id
+                    title: name
+                  }
+                  shopify_product: field_shopify_product {
+                    body: body_html {
+                      value
+                    }
+                  }
+                }
               }
-            }    
+            }
+            collections: allNodeCollection(sort: {fields: drupal_internal__nid}) {
+              nodes {
+                id
+                nid: drupal_internal__nid
+                title
+                path {
+                  alias
+                }
+                body {
+                  processed
+                }
+                rels: relationships {
+                  products: field_products {
+                    id
+                    rels: relationships {
+                      tags: field_tags {
+                        id
+                        title: name
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            categories: allTaxonomyTermShopifyTags(sort: {fields: name}) {
+              nodes {
+                id
+                nid: drupal_internal__tid
+                title: name
+                name
+                rels: relationships {
+                  products: node__product {
+                    id
+                    title
+                    path {
+                      alias
+                    }
+                  }
+                }
+              }
+            }
           }
         `,
         ref: 'id',
-        index: ['title', 'body'],
-        store: ['id', 'path', 'title'],
+        //index: ['title', 'body', 'tags', 'path'],
+        index: ['title', 'tags', 'body',],
+        store: ['title', 'tags', 'body', 'path', 'id',],
+        //store: ['id', 'path', 'title', 'tags'],
         normalizer: ({ data }) => {
-          return data.allNodeProduct.nodes.map((node) => ({
-            id: node.id,
-            path: node.path.alias,
-            title: node.title,
-          }));
+          const products = data.products.nodes.map((node) => {
+            return {
+              id: node.id,
+              path: node.path.alias,
+              body: node?.rels?.shopify_product?.body?.value || '',
+              title: node.title,
+              //tags: node?.rels?.tags.length ? node.rels.tags.map((e) => e.name) : [],
+              tags: node?.rels?.tags.length ? node.rels.tags.map((e) => e.title) : [],
+            };
+          });
+          const collections = data.collections.nodes.map((node) => {
+            const cps = node.rels?.products || [];
+            return {
+              id: node.id,
+              path: node.path.alias,
+              title: node.title,
+              body: node?.body?.processed,
+              tags: cps.map((e) =>
+                e.rels?.tags.length ? e.rels.tags.map((e) => e.title) : []
+              ),
+            };
+          });
+          const categories = data.categories.nodes.map((node) => {
+            const path = U.getCategoryPath(node);
+            const category_content_items = node?.rels?.products || [];
+            return category_content_items.length ? {
+              id: node.id,
+              path: path.alias,
+              title: node.title,
+              body: '',
+              tags: category_content_items.map(e => e.title),
+            } : null;
+          }).filter(e => e);
+          const items = [ 
+            ...products, 
+            ...collections, 
+            ...categories 
+          ].map(e => {
+            return {...e, tags: e.tags.join(' ')}
+          });
+          return items;
         },
       },
     },

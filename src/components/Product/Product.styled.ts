@@ -26,13 +26,13 @@ export const Product = styled('div')`
         padding: ${theme.spacing(1)} ${theme.spacing(3)};
 
         ${theme.breakpoints.up('sm')} {
-          margin-top: ${theme.spacing(2)};
+          //margin-top: ${theme.spacing(2)};
           border-top: inherit;
         }
 
         h1 {
           font-size: 1.5em;
-          margin-top: ${theme.spacing(1)};
+          //margin-top: ${theme.spacing(1)};
           margin-bottom: ${theme.spacing(2)};
         }
 
@@ -57,7 +57,8 @@ export const Product = styled('div')`
           }
 
           .${fnb}--quantity {
-            grid-area: 2 / 1 / 3 / 2;
+            //grid-area: 2 / 1 / 3 / 2;
+            grid-area: 1 / 1 / 2 / 2;
             justify-content: right;
             //padding-right: ${theme.spacing(2)};
           }
@@ -68,7 +69,8 @@ export const Product = styled('div')`
           }
 
           .${fnb}--actions {
-            grid-area: 2 / 2 / 3 / 3;
+            grid-area: 1 / 2 / 2 / 3;
+            //grid-area: 2 / 2 / 3 / 3;
             align-items: flex-start;
             justify-content: left;
 
@@ -110,6 +112,11 @@ export const Product = styled('div')`
           font-style: italic;
         }
       }
+
+      .${cnb}--related {
+        text-align: center;
+      }
+
 
     `;
   }}

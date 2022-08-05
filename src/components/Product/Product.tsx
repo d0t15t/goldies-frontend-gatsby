@@ -7,6 +7,7 @@ import {
   AddToCart,
   Counter,
   FancyImageBox,
+  Link,
   Image,
   Price,
   ProductVariants,
@@ -26,7 +27,7 @@ interface UpdateCounterProps {
   quantity: number;
 }
 
-export const Product: FC<ProductProps> = ({ body, headline, images, variants }) => {
+export const Product: FC<ProductProps> = ({ body, headline, images, variants, relatedItems }) => {
   const [addToCartAmount, setAddToCartAmount] = useState(1);
 
   const [currentVariantId, setCurrentVariantId] = useState(variants[0].shopifyId);
@@ -62,53 +63,71 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants }) 
   const fnb = formNameBase;
 
   return (
-    <S.Product className={cls([cnb])}>
-      {images.teaserImages.length > 1 ? (
-        <FancyImageBox {...images} />
-      ) : (
-        <Image data={images.teaserImages[0]} alt={headline} />
-      )}
-      <div className={cls( `${cnb}--info-wrapper` )}>
-        <Typography variant="h1" aria-hidden={true}>{headline}</Typography>
-        <form id={ `${formNameBase}`} name={ `${formNameBase}`} className={ cls(`${formNameBase}`, { [ `${fnb}--quantity-over-1` ]: addToCartAmount > 1})}>
-          <Box className={cls(`${fnb}--price`)}>
-            <Price value={currentVariant.price} />
-          </Box>
-          {variants.length > 1 && (
-            <Box className={cls(`${fnb}--variants`)}>
-              <ProductVariants
-                items={variants}
-                current={currentVariant}
-                updateCurrentId={updateCurrentVariantId}
+    <>
+      <S.Product className={cls([cnb])}>
+        {images.teaserImages.length > 1 ? (
+          <FancyImageBox {...images} />
+        ) : (
+          <Image data={images.teaserImages[0]} alt={headline} />
+        )}
+        <div className={cls( `${cnb}--info-wrapper` )}>
+          <Typography variant="h1" aria-hidden={true}>{headline}</Typography>
+          <form id={ `${formNameBase}`} name={ `${formNameBase}`} className={ cls(`${formNameBase}`, { [ `${fnb}--quantity-over-1` ]: addToCartAmount > 1})}>
+            <Box className={cls(`${fnb}--price`)}>
+              <Price value={currentVariant.price} />
+            </Box>
+            {variants.length > 1 && (
+              <Box className={cls(`${fnb}--variants`)}>
+                <ProductVariants
+                  items={variants}
+                  current={currentVariant}
+                  updateCurrentId={updateCurrentVariantId}
+                />
+              </Box>
+            )}
+            <Box className={cls(`${fnb}--quantity`)}>
+              <Counter {...counterProps} />
+            </Box>
+            <Box className={cls(`${fnb}--actions`)}>
+              <AddToCart
+                shopifyId={currentVariantId}
+                quantity={addToCartAmount}
+                title={productVariantTitle}
               />
             </Box>
-          )}
-          <Box className={cls(`${fnb}--quantity`)}>
-            <Counter {...counterProps} />
-          </Box>
-          <Box className={cls(`${fnb}--actions`)}>
-            <AddToCart
-              shopifyId={currentVariantId}
-              quantity={addToCartAmount}
-              title={productVariantTitle}
+          </form>
+          {/* {!mqMdUp && form} */}
+          {body ? (
+            <Box
+              className={cls(`${cnb}--product-body`)}
+              //dangerouslySetInnerHTML={{
+              //  __html: body,
+              //}}
+              dangerouslySetInnerHTML={{
+                __html: decodeHTML(body),
+              }}
             />
-          </Box>
-        </form>
-        {/* {!mqMdUp && form} */}
-        {body ? (
-          <Box
-            className={cls(`${cnb}--product-body`)}
-            //dangerouslySetInnerHTML={{
-            //  __html: body,
-            //}}
-            dangerouslySetInnerHTML={{
-              __html: decodeHTML(body),
-            }}
-          />
-        ) : null}
-        {/* {mqMdUp && form} */}
-      </div>
-    </S.Product>
+          ) : null}
+          {/* {mqMdUp && form} */}
+        </div>
+      </S.Product>
+      <Box className={cls(`${cnb}--related`)}>
+        <Typography variant="h4">More in collections:</Typography>
+        <Box as="ul">
+         { relatedItems.filter(e => e.id === 'Collections').map(relatedItem => {
+           return (
+            <li key={relatedItem.id}>
+             <Link to={relatedItem?.path?.alias}>
+               <Typography variant="caption">
+                 { relatedItem.label }
+               </Typography>
+             </Link>
+             </li>
+           );
+         }) }
+        </Box>
+      </Box>
+    </>
   );
 };
 

@@ -30,10 +30,11 @@ export const Navigation = () => {
             {/* </Portal> */}
             {mqSmUp && <SearchBar parentRef={ref} classes={cls('search-bar__nav')} />}
           </S.Unit>
-          {!mqSmUp && logo}
-          <S.Unit>
+          <Link to="/" className='logo-link'>
+            <Logo />
+          </Link>
+          <S.Unit className={cls('cart-button')}>
             <CartButton />
-            {mqSmUp && logo}
           </S.Unit>
         </S.Inner>
       </S.AppBarStyled>

@@ -117,6 +117,24 @@ export const tileTeaserFragment = graphql`
   }
 `;
 
+export const categoryPageFragment = graphql`
+  fragment categoryPageFragment on Query {
+    taxonomy_term__shopify_tags: taxonomyTermShopifyTags(id: { eq: $id }) {
+      id
+      internal {
+        type
+      }
+      title: name
+      rels: relationships {
+        products: node__product {
+          ...productTeaserFragment
+        }
+      }
+    }
+  }
+`;
+
+
 export const collectionPageFragment = graphql`
   fragment collectionPageFragment on Query {
     node__collection: nodeCollection(id: { eq: $id }) {
@@ -217,6 +235,37 @@ export const shopifyProductVariantFragment = graphql`
       }
     }
   }
+`;
+
+export const shopifyTagFragment = graphql`
+  fragment shopifyTagFragment on taxonomy_term__shopify_tags {
+    id
+    internal {
+      type
+    }
+    name
+    relationships {
+      node__product {
+        id
+        internal {
+          type
+        }
+        title
+        path {
+          alias
+        }
+        relationships {
+          field_shopify_product {
+            relationships {
+              image {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+}
 `;
 
 export const shopifyProductFragment = graphql`

@@ -61,7 +61,7 @@ export const SearchBar = ({ parentRef, classes }) => {
     `);
 
     const [query, setQuery] = useState('');
-
+    
     const [hasFocus, setHasFocus] = useState(false);
 
     const searchResults = useFlexSearch(query, index, store);

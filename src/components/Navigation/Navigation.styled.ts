@@ -21,14 +21,23 @@ export const Inner = styled(Toolbar)`
 
   ${({ theme }) => theme.breakpoints.up('sm')} {
     padding-right: ${({ theme }) => theme.spacing(2)};
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+
+    .cart-button {
+      align-items: end;
+      flex-direction: column;
+    } 
   }
 
   .search-bar {
     padding-left: ${({ theme }) => theme.spacing(1)};
   }
 
-  & > a {
+  .logo-link {
     line-height: unset !important;
+    justify-content: center;
+    text-align: center;
   }
 `;
 

@@ -9,6 +9,7 @@ export * from '~components/PageHeader/PageHeader';
 // export * from '~components/PageFooter/PageFooter';
 
 export * from '~components/Collection/Collection';
+export * from '~components/Category/Category';
 export * from '~components/Product/Product';
 export * from '~components/Tiles/Tiles';
 
@@ -41,18 +42,26 @@ export const hasShiftedHeadline = (pathname: string): boolean => {
   return false;
 };
 
-export const getBreadcrumbs = (data): array | undefined => {
+export const getBreadcrumbs = (data, currentPath: string): array | undefined => {
   const bcType = data.internal.type;
-  const bcData = data[`breadcrumb__${ bcType }`];
+  const bcData = data[`breadcrumb__${bcType}`] ?? null;
+  if (!bcData) return [];
   const dataKeys = Object.keys(bcData);
-  console.log(dataKeys);
-  
   return [
-    { label: null, items: [{ title: 'Home', path: '/', id: 0 }]}, 
-    { label: dataKeys[0] ?? '', items: bcData[dataKeys[0]] }, 
-    { Current: [{ title: data.title}] },
+    { id: 'home', items: [{ title: 'Home', path: { alias: '/' }, id: 0 }] },
+    {
+      id: dataKeys[0] ?? '',
+      path: { alias: '/collections' },
+      label: dataKeys[0] ?? '',
+      items: bcData[dataKeys[0]],
+    },
+    {
+      id: 'Current',
+      label: 'Current',
+      items: [{ title: data.title, id: 1, path: { alias: currentPath } }],
+    },
   ];
-}
+};
 
 /*
  * Node helper functions.
@@ -61,7 +70,9 @@ export const getNodeImageData = (node) => {
   return node.rels?.media?.rels?.mediaImage?.localFile?.teaserImage;
 };
 
-export const getNodeUrl = (node) => node.path.alias;
+export const getNodeUrl = (node) => {
+  return node.path.alias;
+}
 
 export const getNodeTitle = (node) => node.title;
 
@@ -253,9 +264,32 @@ export const getCollectionNodeData = (node) => {
   };
 };
 
-/*
- * Helper functions.
- */
+/** Shopify Tag Functtions */
+
+export const getCategoryNodeData = (node) => {
+  return {
+    id: node.id,
+    //image: getCollectionImage(node),
+    path: U.getCategoryPath(node),
+    products: getCollectionNodeProducts(node),
+    title: node.name,
+  };
+};
+
+export const getCategoryProducts = (node) => {
+  return node?.rels?.products || [];
+};
+
+/* export const getCategoryPath = (node) => {
+  const slug = `${e.name}`.toLocaleLowerCase()
+    .replace(/[^\w ]+/g, '')
+    .replace(/ +/g, '-');
+  const alias = `/category/${slug}`
+  return { alias }
+}*/
+
+/* Helper functions. */
+
 export const getNodeType = (data: pageWrapper): string => {
   return Object.values(data).find((e) => e?.internal?.type)?.internal?.type || '';
 };
@@ -268,7 +302,9 @@ export const getNode = (data: pageWrapper): pageBase => {
 export const getPageNodeData = (node) => {
   const pageDataTemplate = {
     node__page: () => {
-      return { tiles: getNodeTiles(node?.rels.tiles) };
+      return {
+        tiles: getNodeTiles(node?.rels.tiles),
+      };
     },
     node__collection: () => {
       return getCollectionNodeData(node);
@@ -276,8 +312,10 @@ export const getPageNodeData = (node) => {
     node__product: () => {
       return getProductNodeData(node);
     },
+    taxonomy_term__shopify_tags: () => {
+      return getCategoryNodeData(node);
+    },
   };
-
   return {
     headerData: {
       body: getBody(node) || null,
@@ -291,4 +329,3 @@ export const getPageNodeData = (node) => {
     footerData: {},
   };
 };
-

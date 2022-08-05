@@ -15,7 +15,6 @@ import * as PU from './index';
 import * as S from './Page.styled';
 
 const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
-  
   const path = location.pathname;
 
   const [context, dispatch] = useContext(Context);
@@ -29,22 +28,28 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
 
   // useEffect(() => useDispatch('currentPage', location, dispatch), [dispatch, location]);
   //useDispatch('breadcrumbs', )
-
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
-  const breadcrumbs = PU.getBreadcrumbs(node); 
+  
+  const breadcrumbs = PU.getBreadcrumbs(node, path);
 
   const getPageBodyTemplate = (data, type) => {
     const pageBodyTemplate = {
+      
       node__page: () => {
         return <PU.Tiles {...data} />;
       },
       node__collection: () => {
-        return <PU.Collection {...data} />;
+        return <PU.Collection {...data} relatedItems={breadcrumbs} />;
       },
       node__product: () => {
-        return <PU.Product {...data} />;
+        return <PU.Product {...data} relatedItems={breadcrumbs} />;
+      },
+      taxonomy_term__shopify_tags: () => {
+        //return <h1>we got tags!</h1>
+        
+        return <PU.Category {...data} relatedItems={breadcrumbs} />;
       },
     };
     return type in pageBodyTemplate ? pageBodyTemplate[type]() : null;
@@ -54,7 +59,7 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
 
   return node ? (
     <S.Page className="page-root">
-      <PU.PageHeader {...headerData} hasShiftedHeadline={hasShiftedHeadline}/>
+      <PU.PageHeader {...headerData} hasShiftedHeadline={hasShiftedHeadline} />
 
       <Breadcrumbs breadcrumbs={breadcrumbs} />
 
@@ -80,6 +85,7 @@ export default PageWrapper;
 
 export const query = graphql`
   query ($id: String) {
+    ...categoryPageFragment
     ...pageTilesFragment
     ...collectionPageFragment
     ...productPageFragment
