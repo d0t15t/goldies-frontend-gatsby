@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from 'react';
+import cls from 'classnames';
 import {
   Box,
   Divider,
@@ -17,19 +18,24 @@ interface MenuProps {
 }
 
 export const Menu: FC<MenuProps> = ({ items, vertical }) => {
-  return (
-    <S.Menu vertical={vertical} className="menu">
-      {items.map((item) => {
-        const { handleClick, id, title, url } = item;
-        const listItemText = <ListItemText>{title}</ListItemText>;
-        return (
-          <ListItem key={id} className="menu-item">
-            {url ? <Link to={url}>{listItemText}</Link> : listItemText}
-          </ListItem>
-        );
-      })}
-    </S.Menu>
-  );
+  const renderMenuTree = ( arr, depth = 0 ) => {
+    
+    return arr.length ? (
+      <S.Menu vertical={vertical} className={cls('menu', 'menu--left-drawer')} menu-depth={depth}>
+       {arr.map((item) => {
+         const { handleClick, id, title, url } = item;
+         const listItemText = <Typography as="span">{title}</Typography>;
+         return (
+           <li key={id} className={cls("menu-item", {'menu-item--with-children': item?.children.length})}>
+             {url ? <Link to={url}>{listItemText}</Link> : listItemText}
+             {item?.children.length ? renderMenuTree(item.children, depth++) : null }
+           </li>
+         );
+        })} 
+      </S.Menu>
+    ) : null;
+  } 
+  return renderMenuTree(items);
 };
 
 export default Menu;

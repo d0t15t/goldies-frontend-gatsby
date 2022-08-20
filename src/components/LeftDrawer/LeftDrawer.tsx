@@ -59,7 +59,7 @@ export const LeftDrawer = () => {
         <MenuIcon />
       </IconButton>
       <S.Drawer {...drawerProps} className={cls('left-drawer')}>
-        <S.Inner>
+        <S.Inner className={cls('left-drawer-inner')}>
           {/* <CloseButton id={closeDrawerButtonId} handleClick={handleDrawerClose}>
             <InputLabel sx={visuallyHidden} htmlFor={closeDrawerButtonId}>
               Close menu
@@ -67,7 +67,9 @@ export const LeftDrawer = () => {
           </CloseButton> */}
           <Box>
             <SearchBar />
-            <Menu items={U.getMenuItems(menuItems)} vertical={1} />
+            <S.MenuWrapper className={cls('drawer-menu-wrapper')}>
+              <Menu items={U.getMenuItems(menuItems)} vertical={1} />
+            </S.MenuWrapper>
           </Box>
         </S.Inner>
       </S.Drawer>

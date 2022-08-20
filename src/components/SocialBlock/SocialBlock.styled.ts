@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 
 export const SocialItems = styled.ul`
-  display: flex;
-  flex-direction: column;
-  ${({ theme }) => {
+    ${({ theme }) => {
     return `
+      display: flex;
+      flex-direction: column;
+      margin-left: ${theme.spacing(4)} !important;
+
       > a {
         & + a {
-          padding-top: ${theme.spacing(1)}
+          margin-top: ${theme.spacing(1)}
         }
       }
 
@@ -16,8 +18,8 @@ export const SocialItems = styled.ul`
         > a {
 
           & + a {
-            padding-top: ${theme.spacing(0)};
-            padding-left: ${theme.spacing(1)}
+            margin-top: ${theme.spacing(0)};
+            margin-left: ${theme.spacing(1)}
           }
         }
       }

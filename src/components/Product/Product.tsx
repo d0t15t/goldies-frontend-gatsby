@@ -11,6 +11,7 @@ import {
   Image,
   Price,
   ProductVariants,
+  Related
 } from '~components/index';
 
 import * as U from '~utils';
@@ -70,9 +71,15 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants, re
         ) : (
           <Image data={images.teaserImages[0]} alt={headline} />
         )}
-        <div className={cls( `${cnb}--info-wrapper` )}>
-          <Typography variant="h1" aria-hidden={true}>{headline}</Typography>
-          <form id={ `${formNameBase}`} name={ `${formNameBase}`} className={ cls(`${formNameBase}`, { [ `${fnb}--quantity-over-1` ]: addToCartAmount > 1})}>
+        <div className={cls(`${cnb}--info-wrapper`)}>
+          <Typography variant="h1" aria-hidden={true}>
+            {headline}
+          </Typography>
+          <form
+            id={`${formNameBase}`}
+            name={`${formNameBase}`}
+            className={cls(`${formNameBase}`, { [`${fnb}--quantity-over-1`]: addToCartAmount > 1 })}
+          >
             <Box className={cls(`${fnb}--price`)}>
               <Price value={currentVariant.price} />
             </Box>
@@ -111,23 +118,8 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants, re
           {/* {mqMdUp && form} */}
         </div>
       </S.Product>
-      <Box className={cls(`${cnb}--related`)}>
-        <Typography variant="h4">More in collections:</Typography>
-        <Box as="ul">
-         { relatedItems.filter(e => e.id === 'Collections').map(relatedItem => {
-           return (
-            <li key={relatedItem.id}>
-             <Link to={relatedItem?.path?.alias}>
-               <Typography variant="caption">
-                 { relatedItem.label }
-               </Typography>
-             </Link>
-             </li>
-           );
-         }) }
-        </Box>
-      </Box>
-    </>
+    <Related items={relatedItems} />
+</>
   );
 };
 

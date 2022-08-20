@@ -48,20 +48,12 @@ export const GlobalStyle = createGlobalStyle`
       }
 
       .visually-hidden {
-        visibility: hidden;
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-        font-size: 0;
-        width: 1px;
-        height: 1px;
-        display: inline-block;
-        overflow: hidden;
-        border: 0!important;
-        padding: 0!important;
-        margin: 0!important;
-        clip: rect(1px,1px,1px,1px);
+        position:absolute;
+        left:-10000px;
+        top:auto;
+        width:1px;
+        height:1px;
+        overflow:hidden;
       }
     
       // *,

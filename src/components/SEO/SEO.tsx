@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { Helmet } from 'react-helmet';
 import { useSiteMetadata } from '../../hooks/useSiteMetadata';
-import Favicon from '../../assets/favicon.ico';
+//import Favicon from '../../assets/favicon.ico';
 
 export interface SEOProps {
   location: Location;
@@ -21,7 +21,6 @@ export const SEO: FunctionComponent<SEOProps> = ({ location, pageMetadata }) => 
   return (
     <Helmet title={pageMetadata?.title} defaultTitle={title} titleTemplate={`${title} - %s`}>
       <html lang={pageMetadata?.language || language} />
-      <link rel="icon" type="image/ico" href={Favicon} />
       <meta name="description" content={pageMetadata?.description || description} />
       <meta name="keywords" content={(pageMetadata?.keywords || keywords).join(', ')} />
       <meta property="og:title" content={pageMetadata?.title || title} />

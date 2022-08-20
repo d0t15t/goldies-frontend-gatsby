@@ -43,8 +43,8 @@ const gatsbyConfig: GatsbyConfig = {
       'woman owned business',
       'rockaway beach',
     ],
-    siteUrl: 'https://goldiessoap.com/gatsby-starter-skeleton.netlify.app',
-    imageUrl: '/favicon_io/apple-touch-icon.png',
+    siteUrl: 'https://goldies-frontend.netlify.app/',
+    imageUrl: '/favicon.png',
     language: 'en',
   },
   plugins: [
@@ -57,7 +57,7 @@ const gatsbyConfig: GatsbyConfig = {
         // background_color: theme.palette.primary.light,
         // theme_color: theme.palette.primary.main,
         display: `standalone`,
-        icon: `static/favicon_io/apple-touch-icon.png`,
+        icon: `static/favicon.png`,
       },
     },
     {
@@ -239,13 +239,13 @@ const gatsbyConfig: GatsbyConfig = {
         displayName: process.env.NODE_ENV !== 'production',
       },
     },
-    {
+    /*{
       resolve: 'gatsby-source-filesystem',
       options: {
         path: resolve(__dirname, './assets'),
         name: 'assets',
       },
-    },
+    },*/
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {

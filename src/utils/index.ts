@@ -97,12 +97,31 @@ export const urlIsExternal = (url: string): boolean => {
   return array[1] !== process.env.GATSBY_BASE_HOSTNAME;
 };
 
-export const getMenuItems = (menuItems) => {
-  return menuItems.nodes.map((menuItem) => {
-    return {
-      ...menuItem,
-    };
+export const arrayToTree = (items, id = null, link = 'parent_id') => {
+return items
+    .filter(item => item[link] === id)
+    .map(item => ({ ...item, children: arrayToTree(items, item.id) }))
+    .sort((a, b) => a.weight - b.weight);
+};
+
+const decorateTree = (tree, depth = 0) => {
+  return tree.map(item => { 
+    const d = { depth, ...item };
+    if (d?.children.length) {
+      decorateTree(d?.children, depth++);
+    }
+    return d;
   });
+};
+
+export const getMenuItems = (menuItems) => {
+  const flattened = menuItems.nodes.map(item => {
+    return {
+      ...item, parent_id: item?.parent?.id ?? null,
+    }
+  });
+  const tree = arrayToTree(flattened);
+  return decorateTree(tree);
 };
 
 export const stripTags = (str: string) => str.replace(/(<([^>]+)>)/gi, '');

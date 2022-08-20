@@ -1,11 +1,10 @@
 import React, { FC, ReactNode } from 'react';
-import { SocialMediaIconsReact } from 'social-media-icons-react';
+import { SocialIcon } from 'react-social-icons';
 import { useTheme } from '@mui/material/styles';
 import * as U from '~utils';
 import * as S from './SocialBlock.styled';
 
 export const SocialBlock = () => {
-  return null;
   const theme = useTheme();
 
   // const items = [{ id: 'email', button: EmailShareButton, icon: EmailIcon, props: {} }];
@@ -17,14 +16,14 @@ export const SocialBlock = () => {
   ];
   const Button = ({ item }) => {
     return (
-      <SocialMediaIconsReact
-        borderColor="rgba(0,0,0,0)"
-        roundness={50}
-        icon={item.name}
-        iconColor={theme.palette.background.default}
-        backgroundColor={theme.palette.primary.light}
+      <SocialIcon
+        //borderColor="rgba(0,0,0,0)"
+        //roundness={50}
+        network={item.name}
+        style={{ height: 50, width: 50 }}
+        fgColor={theme.palette.background.default}
+        bgColor={theme.palette.primary.light}
         url={item.url}
-        size="48"
       />
     );
   };

@@ -15,34 +15,59 @@ export const Drawer = styled(SwipeableDrawer)`
     `;
   }}
 `;
-
+  
 export const Inner = styled(Box)`
   ${({ theme }) => {
     return `
-      display: flex;
-      flex-direction: column;
-      justify-content: right;
-      // align-items: flex-end;
       padding: ${theme.spacing(2)};
+    `;
+  }}
+`;
+
+export const MenuWrapper = styled(Box)`
+  ${({ theme }) => {
+    return `
+      padding-top: ${theme.spacing(2)};
 
       ul {
-        margin-top: ${theme.spacing(1)};
+        padding-bottom: 0;
+      }
 
-        li {
-          padding: ${theme.spacing(0)};
+      > ul > li {
+        padding-left: ${theme.spacing(2)};
+  
+        & > a {
+          font-style: italic;
+          font-size: 1.2em;
+        }
 
-          * {
-            padding-bottom: 0;
-            font-family: Libre Baskerville, serif;
-          }
-          a * {
-            font-family: Nunito, sans serif;
-          }
-          a {
-            padding: 0 0 ${theme.spacing(1)} ${theme.spacing(1)};
+        & > ul {
+          padding-left: ${theme.spacing(1)};
+
+          & > li {
+            padding-bottom: ${theme.spacing(1)};
           }
         }
+
+        & + li::before {
+          display: block;
+          content: '~';
+          padding-bottom: ${theme.spacing(1)};
+          color: ${theme.palette.secondary.dark};
+        }
       }
-    `;
+
+      a, a:link, a:visted {
+        font-size: 1.4rem;
+        
+        &::hover {
+          color: ${theme.palette.primary.main};
+        }
+      }
+
+      .MuiListItemText-root {
+        margin: 0;
+      }
+  `;
   }}
 `;

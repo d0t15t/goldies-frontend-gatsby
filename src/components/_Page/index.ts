@@ -63,6 +63,22 @@ export const getBreadcrumbs = (data, currentPath: string): array | undefined => 
   ];
 };
 
+export const getRelated = (data): array | undefined => {
+  const bcType = data.internal.type;
+  const bcData = data[`breadcrumb__${bcType}`] ?? null;
+  if (!bcData) return [];
+  const dataKeys = Object.keys(bcData);
+
+  return Object.keys(bcData).map(key => { 
+    return {
+      label: key,
+      items: bcData[key].map(item => {
+        return item;
+      }, 
+    )};
+  });
+};
+
 /*
  * Node helper functions.
  */

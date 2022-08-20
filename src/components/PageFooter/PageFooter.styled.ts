@@ -5,7 +5,7 @@ export const Footer = styled(Box)(({ theme }) => {
   return {
     ...theme.typography.body2,
     padding: theme.spacing(3),
-    paddingTop: theme.spacing(5),
+    paddingTop: theme.spacing(3),
     backgroundImage: `linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0),

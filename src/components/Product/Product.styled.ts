@@ -6,12 +6,12 @@ const cnb = classNameBase;
 const formNameBase = `${cnb}--add-to-cart-form`;
 const fnb = formNameBase;
 
-
-const named = tag => `${cnb}--${tag}`;
+const named = (tag) => `${cnb}--${tag}`;
 
 export const Product = styled('div')`
   ${({ theme }) => {
     return `
+      border-bottom: 1px dotted ${theme.palette.grey[600]};
 
       ${theme.breakpoints.up('sm')} {
         display: flex;
@@ -113,12 +113,8 @@ export const Product = styled('div')`
         }
       }
 
-      .${cnb}--related {
-        text-align: center;
-      }
-
-
     `;
   }}
 `;
+
 

@@ -7,11 +7,22 @@ export const Container = styled(Box)`
       max-width: 324px;
       width: 100%;
       margin: auto;
+      margin-bottom: ${theme.spacing(2)};
 
-      && h5, h6 {
+      &::before {
+        content: '☟';
+        display: block;
+        text-align: center;
+        font-size: 2em;
+        padding-bottom: ${theme.spacing(2)};
+        color: ${theme.palette.secondary.dark};
+        color: ${theme.palette.grey[500]};
+      }
+
+      && h5, && h6 {
         font-size: 1.25rem;
         text-align: center;
-        color: ${theme.palette.secondary.dark};
+        color: ${theme.palette.action.active};
         padding-bottom: ${theme.spacing(1)};
       }
 

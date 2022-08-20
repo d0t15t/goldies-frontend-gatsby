@@ -3,7 +3,7 @@ import React, { FC, useContext, useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import cls from 'classnames';
 import { useDimensions } from 'react-hook-dimensions';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { Context, useDispatch } from '~context';
 import { useLocation } from '~hooks';
 import { Breadcrumbs, Link, EmojiPointer, SocialBlock } from '~components';
@@ -24,15 +24,12 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
 
   useEffect(() => useDispatch('pageDimensions', box, dispatch), [box, dispatch]);
 
-  // const location = useLocation();
-
-  // useEffect(() => useDispatch('currentPage', location, dispatch), [dispatch, location]);
-  //useDispatch('breadcrumbs', )
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
   
   const breadcrumbs = PU.getBreadcrumbs(node, path);
+  const relatedItems = PU.getRelated(node);
 
   const getPageBodyTemplate = (data, type) => {
     const pageBodyTemplate = {
@@ -41,22 +38,20 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
         return <PU.Tiles {...data} />;
       },
       node__collection: () => {
-        return <PU.Collection {...data} relatedItems={breadcrumbs} />;
+        return <PU.Collection {...data} relatedItems={relatedItems} />;
       },
       node__product: () => {
-        return <PU.Product {...data} relatedItems={breadcrumbs} />;
+        return <PU.Product {...data} relatedItems={relatedItems} />;
       },
       taxonomy_term__shopify_tags: () => {
-        //return <h1>we got tags!</h1>
-        
-        return <PU.Category {...data} relatedItems={breadcrumbs} />;
+        return <PU.Category {...data} relatedItems={relatedItems} />;
       },
     };
     return type in pageBodyTemplate ? pageBodyTemplate[type]() : null;
   };
 
   const hasShiftedHeadline = PU.hasShiftedHeadline(path);
-
+  
   return node ? (
     <S.Page className="page-root">
       <PU.PageHeader {...headerData} hasShiftedHeadline={hasShiftedHeadline} />
@@ -76,7 +71,6 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
           <EmojiPointer />
         </S.PageBreak>
       )}
-      <SocialBlock />
     </S.Page>
   ) : null;
 };

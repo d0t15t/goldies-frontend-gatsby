@@ -24,6 +24,7 @@ export { PaymentMethods } from '~components/PaymentMethods/PaymentMethods';
 export { Price } from '~components/Price/Price';
 export { Portal } from '~components/Portal/Portal';
 export { ProductVariants } from '~components/ProductVariants/ProductVariants';
+export { Related } from '~components/RelatedItems/RelatedItems';
 // export { MenuMain } from '~components/MenuMain/MenuMain';
 export { SearchBar } from '~components/SearchBar/SearchBar';
 export { SocialBlock } from '~components/SocialBlock/SocialBlock';

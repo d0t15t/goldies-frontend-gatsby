@@ -11,9 +11,16 @@ export const breadcrumbsFragment = graphql`
             alias
           }
         }
+        Categories: field_tags {
+          title: name
+          id
+          path {
+            alias
+          }
+        }
       }
     }
-  } 
+  }
 `;
 
 export const pageTilesFragment = graphql`
@@ -134,6 +141,44 @@ export const categoryPageFragment = graphql`
   }
 `;
 
+export const categoriesOverviewFragment = graphql`
+  fragment categoriesOverviewFragment on Query {
+    allTaxonomyTermShopifyTags {
+      nodes {
+        name
+        id
+        internal {
+          type
+        }
+        path {
+          alias
+        }
+        relationships {
+          node__product {
+            id
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const collectionsOverviewFragment = graphql`
+  fragment collectionsOverviewFragment on Query {
+    all: allNodeCollection {
+      nodes {
+        title
+        id
+        internal {
+          type
+        }
+        path {
+          alias
+        }
+      }
+    }
+  }
+`;
 
 export const collectionPageFragment = graphql`
   fragment collectionPageFragment on Query {
@@ -413,6 +458,10 @@ export const menuLinkFragment = graphql`
     }
     title
     url
+    weight
+    parent {
+      id
+    }
   }
 `;
 

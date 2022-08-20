@@ -3,7 +3,7 @@ import { Box, Typography, List, ListItem } from '@mui/material';
 import { Link } from '~components'
 import * as S from './Breadcrumbs.styled'
 
-
+//@todo: add categories - they are already in query.
 export const Breadcrumbs = ({breadcrumbs, children}) => {
   
 
