@@ -17,7 +17,7 @@ export const Related = ({ items }) => {
       <Typography variant="h6">Find related products in:</Typography>
       <Box as="ul" className={cls(`product--related-items--set`)}>
         {items.map((itemSet, i) => {
-          return (
+          return itemSet.items.length ? (
             <li key={itemSet.label}>
               <Typography variant="body2" className={cls({'visually-hidden': i === 0})}>{itemSet.label}</Typography>
               <ul className={cls(`product--related-items--set-items`)}>
@@ -32,7 +32,7 @@ export const Related = ({ items }) => {
                 })}
               </ul>
             </li>
-          );
+          ) : null;
         })}
       </Box>
     </S.RelatedItems>

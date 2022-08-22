@@ -72,10 +72,10 @@ export const getRelated = (data): array | undefined => {
   return Object.keys(bcData).map(key => { 
     return {
       label: key,
-      items: bcData[key].map(item => {
+      items: bcData[key] ? bcData[key].map(item => {
         return item;
-      }, 
-    )};
+      }) : [],
+    };
   });
 };
 

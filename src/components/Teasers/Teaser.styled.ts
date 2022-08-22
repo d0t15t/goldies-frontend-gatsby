@@ -55,7 +55,23 @@ export const StyledProductTeaser = styled(StyledTeaser)`
 export const StyledImageTeaser = styled(StyledTeaser)`
   ${({ theme }) => {
     return `
+      position: relative;
 
+      .teaser--text-wrapper {
+        position: absolute;
+        padding: ${theme.spacing(2)};
+        background-color: rgba(255, 255, 255, 0.8);
+        top: 0;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 100ms linear;
+      }
+
+      &:hover {
+        .teaser--text-wrapper {
+          opacity: 1;
+        }
+      }
     `;
   }}
 `;
@@ -88,6 +104,7 @@ export const StyledSlideTeaser = styled(StyledTeaser)`
     `;
   }}
 `;
+
 export const Text = styled(Typography)``;
 export const SubTitle = styled('h5')``;
 export const TitleWrapper = styled(Box)``;
