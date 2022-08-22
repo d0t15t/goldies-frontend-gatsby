@@ -111,7 +111,8 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants, re
               //  __html: body,
               //}}
               dangerouslySetInnerHTML={{
-                __html: decodeHTML(body),
+                __html: body, 
+                //__html: decodeHTML(body),
               }}
             />
           ) : null}
