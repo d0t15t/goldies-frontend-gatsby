@@ -130,7 +130,26 @@ export const getCategoryPath = (node) => {
   const slug = `${node.name}`.toLocaleLowerCase()
     .replace(/[^\w ]+/g, '')
     .replace(/ +/g, '-');
-  const alias = `/category/${slug}`
-  return { alias }
+  const alias = `/category/${slug}`;
+  return { alias };
+};
+
+export const getCategoryNodeData = (node) => {
+  return {
+    id: node.id,
+    //image: getCollectionImage(node),
+    path: getCategoryPath(node),
+    products: getCategoryProducts(node),
+    title: node.name,
+  };
+};
+
+export const getCategoryProducts = (node) => {
+  return node?.rels?.products || [];
+};
+
+export const getValidCategories = (nodes) => {
+  const items = nodes.filter(node => getCategoryProducts(node).length);
+  return items.map(node => getCategoryNodeData(node));
 };
 

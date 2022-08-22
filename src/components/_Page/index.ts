@@ -281,6 +281,7 @@ export const getCollectionNodeData = (node) => {
 };
 
 /** Shopify Tag Functtions */
+/** @TODO: migrate these functions to utils */
 
 export const getCategoryNodeData = (node) => {
   return {

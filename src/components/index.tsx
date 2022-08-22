@@ -19,6 +19,7 @@ export { Menu } from '~components/Menu/Menu';
 export { Modal } from '~components/Modal/Modal';
 export { Navigation } from '~components/Navigation/Navigation';
 export { NewsletterBlock } from '~components/NewsletterBlock/NewsletterBlock';
+export { Overview } from '~components/Overview/Overview';
 export { PageFooter } from '~components/PageFooter/PageFooter';
 export { PaymentMethods } from '~components/PaymentMethods/PaymentMethods';
 export { Price } from '~components/Price/Price';

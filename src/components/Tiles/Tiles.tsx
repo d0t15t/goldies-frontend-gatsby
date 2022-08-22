@@ -3,7 +3,7 @@ import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import * as S from './Tiles.styled';
 import { Teasers, TeasersProps } from '~components/Teasers/Teasers';
-import { Cart, TextBlock } from '~components';
+import { Cart, TextBlock, Overview } from '~components';
 
 export interface TilesProps {
   tiles: TeasersProps[];
@@ -16,6 +16,7 @@ export const Tiles: FC<TilesProps> = ({ tiles }) => {
     paragraph__tiles: ({ teasers, id }) => <Teasers teasers={teasers} key={id} />,
     // paragraph__text: ({ teasers, id }) => <TextBlock key={id} />,
     paragraph__cart: ({ teasers, id }) => <Cart key={id} />,
+    paragraph__overview: ({ displayName, id }) => <Overview displayName={displayName} key={id} />,
   };
 
   return (

@@ -58,9 +58,34 @@ export const pageTilesFragment = graphql`
           ... on paragraph__cart {
             ...cartFragment
           }
+          ... on paragraph__overview {
+            ...overviewFragment
+          }
         }
       }
     }
+  }
+`;
+export const overviewFragment = graphql`
+  fragment overviewFragment on paragraph__overview {
+    id
+    internal {
+      type
+    }
+    displayName: field_view
+  }
+`;
+
+export const collectionOverviewFragment = graphql`
+  fragment collectionOverviewFragment on node__collection {
+    id
+    internal {
+      type
+    }
+    path {
+      alias
+    }
+    title
   }
 `;
 
@@ -141,40 +166,19 @@ export const categoryPageFragment = graphql`
   }
 `;
 
-export const categoriesOverviewFragment = graphql`
-  fragment categoriesOverviewFragment on Query {
-    allTaxonomyTermShopifyTags {
-      nodes {
-        name
-        id
-        internal {
-          type
-        }
-        path {
-          alias
-        }
-        relationships {
-          node__product {
-            id
-          }
-        }
-      }
+export const categoryOverviewFragment = graphql`
+  fragment categoryOverviewFragment on taxonomy_term__shopify_tags {
+    name
+    id
+    internal {
+      type
     }
-  }
-`;
-
-export const collectionsOverviewFragment = graphql`
-  fragment collectionsOverviewFragment on Query {
-    all: allNodeCollection {
-      nodes {
-        title
+    path {
+      alias
+    }
+    rels: relationships {
+      products: node__product {
         id
-        internal {
-          type
-        }
-        path {
-          alias
-        }
       }
     }
   }

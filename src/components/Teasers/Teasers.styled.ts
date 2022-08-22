@@ -5,7 +5,7 @@ export const FancyGrid = styled(Box)(({ theme }) => {
   return `
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 25vh 15vh 15vh 25vh;
+    grid-template-rows: 40vh 25vh 25vh 40vh;
     grid-gap: ${theme.spacing(2)};
 
     > * {
