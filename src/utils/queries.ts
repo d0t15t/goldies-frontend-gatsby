@@ -35,10 +35,10 @@ export const pageTilesFragment = graphql`
         alias
       }
       headline: field_headline {
-        markup: processed
+        markup: value
       }
       body {
-        markup: processed
+        markup: value
       }
       titleDisplay: field_bool
       rels: relationships {
@@ -49,7 +49,7 @@ export const pageTilesFragment = graphql`
               type
             }
             body: field_body {
-              markup: processed
+              markup: value
             }
           }
           ... on paragraph__tiles {
@@ -195,13 +195,14 @@ export const collectionPageFragment = graphql`
         alias
       }
       body {
-        markup: processed
+        markup: value
       }
+      displayFeatured: field_display_header
       featuredDescription: field_featured_description {
-        markup: processed
+        markup: value
       }
       description: field_description {
-        markup: processed
+        markup: value
       }
       title
       rels: relationships {
@@ -325,7 +326,7 @@ export const shopifyProductFragment = graphql`
     }
     handle
     body: body_html {
-      markup: processed
+      markup: value
     }
     title
     product_id
@@ -517,7 +518,7 @@ export const ctaFragment = graphql`
           type
         }
         body {
-          markup: processed
+          markup: value
         }
         link: field_link {
           title

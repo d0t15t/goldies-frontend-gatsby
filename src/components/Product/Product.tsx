@@ -105,14 +105,10 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants, re
           </form>
           {/* {!mqMdUp && form} */}
           {body ? (
-            <Box
+            <span
               className={cls(`${cnb}--product-body`)}
-              //dangerouslySetInnerHTML={{
-              //  __html: body,
-              //}}
               dangerouslySetInnerHTML={{
-                __html: body, 
-                //__html: decodeHTML(body),
+                __html: body,
               }}
             />
           ) : null}

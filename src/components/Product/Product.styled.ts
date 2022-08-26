@@ -24,6 +24,7 @@ export const Product = styled('div')`
       .${cnb}--info-wrapper {
         border-top: 1px solid ${theme.palette.grey[300]};
         padding: ${theme.spacing(1)} ${theme.spacing(3)};
+        margin-bottom: ${theme.spacing(3)};
 
         ${theme.breakpoints.up('sm')} {
           //margin-top: ${theme.spacing(2)};
@@ -64,7 +65,7 @@ export const Product = styled('div')`
           }
 
           .${fnb}--variants {
-            grid-area: 1 / 2 / 2 / 3;
+            grid-area: 2 / 2 / 3 / 3;
             justify-content: left;
           }
 

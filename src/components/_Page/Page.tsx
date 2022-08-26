@@ -25,7 +25,8 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
   useEffect(() => useDispatch('pageDimensions', box, dispatch), [box, dispatch]);
 
   const node = PU.getNode(data);
-
+  console.log(node);
+  
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
   
   const breadcrumbs = PU.getBreadcrumbs(node, path);

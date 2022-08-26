@@ -272,6 +272,7 @@ export const getCollectionNodeData = (node) => {
   return {
     id: node.id,
     description: node?.description?.markup,
+    displayFeatured: node?.displayFeatured,
     featuredDescription: node?.featuredDescription?.markup,
     featured: getCollectionFeaturedProducts(node),
     image: getCollectionImage(node),

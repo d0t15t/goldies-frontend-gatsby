@@ -16,15 +16,17 @@ interface CollectionProps {
 export const Collection: FC<CollectionProps> = ({
   image,
   featuredDescription,
+  displayFeatured,
   description,
   featured,
   products,
   id,
   title,
 }) => {
+  
   return (
     <S.Wrapper>
-      <S.Upper className="collection--upper">
+      {displayFeatured && (<S.Upper className="collection--upper">
         <Image data={image} alt={title} />
         <S.FeaturedWrapper className="collection--featured-products-wrapper">
           <FeaturedProducts products={featured} />
@@ -34,7 +36,7 @@ export const Collection: FC<CollectionProps> = ({
             className={cls('collection--featured-products-text')}
           />
         </S.FeaturedWrapper>
-      </S.Upper>
+      </S.Upper>)}
       <S.Description className="collection--description">
         <Typography variant="body1" dangerouslySetInnerHTML={{ __html: description }} />
       </S.Description>

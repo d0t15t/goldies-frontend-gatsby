@@ -64,7 +64,7 @@ export const TeaserWrapper = styled(Grid)`
 export const Description = styled(Box)`
   ${({ theme }) => {
     return `
-      padding: ${theme.spacing(3)};
+      padding: 0 ${theme.spacing(3)} ${theme.spacing(3)} ${theme.spacing(3)};
     `;
   }}
 `;
