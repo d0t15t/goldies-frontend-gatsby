@@ -28,7 +28,6 @@ interface IconButtonProps {
 }
 
 export const IconButton: FC<IconButtonProps> = (props) => {
-  console.log(props)
   const { buttonStyles, buttonTemplate, children, direction, iconStyles, iconName, handleClick } = props;
 
   const iconTemplate = {
