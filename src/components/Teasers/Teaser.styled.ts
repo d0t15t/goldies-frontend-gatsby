@@ -61,7 +61,8 @@ export const StyledImageTeaser = styled(StyledTeaser)`
         position: absolute;
         padding: ${theme.spacing(2)};
         background-color: rgba(255, 255, 255, 0.8);
-        top: 0;
+        top: 50%;
+        transform: translateY(-50%);
         width: 100%;
         opacity: 0;
         transition: opacity 100ms linear;

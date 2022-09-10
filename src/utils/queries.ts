@@ -132,15 +132,6 @@ export const tileTeaserFragment = graphql`
             alias
           }
         }
-        ... on node__product {
-          id
-          internal {
-            type
-          }
-          path {
-            alias
-          }
-        }
       }
       media: field_media {
         ...teaserMediaFragment
