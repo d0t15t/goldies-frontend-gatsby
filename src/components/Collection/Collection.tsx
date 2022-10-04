@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import cls from 'classnames';
 import { Box, Grid, Typography } from '@mui/material';
 import FeaturedProducts from '~components/FeaturedProducts/FeaturedProducts';
-import { TeasersGrid, ProductTeaser } from '~components/Teasers';
+import { ProductTeaser } from '~components/Teasers';
 import { Image } from '~components/index';
 import * as S from './Collection.styled';
 import { clearScreenDown } from 'readline';

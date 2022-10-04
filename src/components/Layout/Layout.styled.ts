@@ -9,9 +9,11 @@ export const Layout = styled(Box)(({ theme }) => {
 
     '& h1': {
       ...theme.typography.h1,
+      fontSize: '3rem',
     },
     '& h2': {
       ...theme.typography.h2,
+      fontSize: '1.5rem',
     },
     '& h3': {
       ...theme.typography.h3,

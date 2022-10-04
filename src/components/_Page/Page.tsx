@@ -16,7 +16,7 @@ import * as S from './Page.styled';
 
 const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
   const path = location.pathname;
-
+  const isFrontpage = path == '/';
   const [context, dispatch] = useContext(Context);
   const [ref, box] = useDimensions({
     dependencies: [],

@@ -6,6 +6,8 @@
 //   path: `.env.${process.env.NODE_ENV}`,
 // });
 
+import * as P from '~components/_Page/index';
+
 export const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 /**
@@ -151,5 +153,20 @@ export const getCategoryProducts = (node) => {
 export const getValidCategories = (nodes) => {
   const items = nodes.filter(node => getCategoryProducts(node).length);
   return items.map(node => getCategoryNodeData(node));
+};
+
+export const getValidProductNodes = (nodes) => {
+  return nodes.map(node => P.getCollectionNodeProduct(node));
+};
+
+export const getOverviewNodes = (displayName, dataSet) => {
+  switch (displayName) {
+    case 'categories':
+      return getValidCategories(dataSet);
+    case 'products':
+      return getValidProductNodes(dataSet);
+    default:
+      return dataSet;
+  }
 };
 

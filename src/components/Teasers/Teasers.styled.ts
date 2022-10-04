@@ -1,6 +1,9 @@
 import { styled } from '@mui/system';
 import { Box, Grid } from '@mui/material';
 
+export * from '~components/Collection/Collection.styled';
+
+
 export const FancyGrid = styled(Box)(({ theme }) => {
   return `
     display: grid;
@@ -53,12 +56,18 @@ export const FancyGrid = styled(Box)(({ theme }) => {
   `;
 });
 
-// export const TeaserWrapper = styled(Grid)(({ theme }) => {
-//   return {
-//     // padding: theme.spacing(2),
-//     paddingBottom: theme.spacing(2),
-//     [theme.breakpoints.up('sm')]: {
-//       paddingBottom: 0,
-//     },
-//   };
-// });
+export const TeasersGrid = styled('ul')`
+  ${({theme}) => {
+    return`
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 33%);
+      gap: ${theme.spacing(2)};
+      
+      > * {
+        //width: 33%;
+      }
+    `;
+  }}
+`;
+
