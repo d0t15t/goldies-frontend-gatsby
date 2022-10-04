@@ -4,7 +4,7 @@
   "private": true,
   "version": "3.0.0",
   "scripts": {
-    "build": "gatsby build",
+    "build": "export NODE_OPTIONS=\"--max-old-space-size=5120 --openssl-legacy-provider\"; gatsby build",
     "clean": "gatsby clean",
     "dev": "gatsby develop --host 0.0.0.0",
     "fix": "yarn fix:js && yarn fix:prettier",
