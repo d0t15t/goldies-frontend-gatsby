@@ -76,6 +76,20 @@ export const overviewFragment = graphql`
   }
 `;
 
+export const productOverviewFragment = graphql`
+  fragment productOverviewFragment on node__product {
+    id
+    internal {
+      type
+    }
+    path {
+      alias
+    }
+    title
+    ...productTeaserFragment
+  }
+`;
+
 export const collectionOverviewFragment = graphql`
   fragment collectionOverviewFragment on node__collection {
     id

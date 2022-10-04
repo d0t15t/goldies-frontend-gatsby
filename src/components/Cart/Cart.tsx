@@ -53,7 +53,6 @@ export const Cart: FC<CartProps> = ({ children, context }) => {
   };
 
   const handleRemove = async (variantId) => {
-    console.log(variantId);
     
     if (cartItems.length < 1) {
       return;

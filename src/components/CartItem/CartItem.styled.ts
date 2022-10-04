@@ -3,7 +3,6 @@ import { Box, Typography } from '@mui/material';
 
 export const ListItem = styled.li`
   ${({theme}) => {
-    //console.log(theme);
     return`
       padding: ${theme.spacing(3)};
       padding-bottom: 0;

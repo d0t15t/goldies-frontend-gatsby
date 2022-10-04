@@ -20,7 +20,6 @@ export const Upper = styled(Box)`
           width: 50%;
         }
       }
-      
     `;
   }}
 `;
