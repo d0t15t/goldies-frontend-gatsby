@@ -8,30 +8,31 @@ export interface TeasersProps {
   teasers: TeaserProps[];
 }
 
-export const Teasers: FC<TeasersProps> = ({ teasers, teaserStyle }) => {
-  switch (teaserStyle) {
+export const Teasers: FC<TeasersProps> = ({ teasers, listStyle, itemTemplate }) => {
+  const ItemTemplate = itemTemplate;
+  const items = teasers.map(item => {
+            return (
+              <li key={item.id}><ItemTemplate {...item} /></li>
+            );
+          });
+  switch (listStyle) {
     case 'grid':
       return (
         <S.TeasersGrid>
-          {teasers.map(item => {
-            return (
-              <li key={item.id}><ProductTeaser {...item} /></li>
-            );
-          })}
+          {items}
         </S.TeasersGrid>
       );
-    default:
+    case 'fancy':
       const theme = useTheme();
-      const fancy = useMediaQuery(theme.breakpoints.up('sm'));
-
-      const teasersMap = ({ fancy }) => {
-        if (fancy) {
-          return TeasersFancy;
-        }
-        return Swiper;
-      };
-      const Template = teasersMap({ fancy });
+      const isFancy = useMediaQuery(theme.breakpoints.up('sm'));
+      const Template = isFancy ? TeasersFancy : Swiper;
       return <Template teasers={teasers} />;
+    default:
+      return (
+        <S.TeasersBasic>
+          {items}
+        </S.TeasersBasic>
+      );
 
   }
 };

@@ -3,7 +3,6 @@ import { Box, Grid } from '@mui/material';
 
 export * from '~components/Collection/Collection.styled';
 
-
 export const FancyGrid = styled(Box)(({ theme }) => {
   return `
     display: grid;
@@ -56,10 +55,24 @@ export const FancyGrid = styled(Box)(({ theme }) => {
   `;
 });
 
-export const TeasersGrid = styled('ul')`
+export const TeasersBasic = styled('ul')`
   ${({theme}) => {
     return`
       list-style: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      > * {
+        text-align: center;
+      }
+    `;
+  }}
+`;
+
+export const TeasersGrid = styled(TeasersBasic)`
+  ${({theme}) => {
+    return`
       display: grid;
       grid-template-columns: repeat(3, 33%);
       gap: ${theme.spacing(2)};

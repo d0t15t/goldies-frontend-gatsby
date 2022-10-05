@@ -6,8 +6,6 @@
 //   path: `.env.${process.env.NODE_ENV}`,
 // });
 
-import * as P from '~components/_Page/index';
-
 export const capitalizeFirstLetter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
 /**
@@ -146,6 +144,30 @@ export const getCategoryNodeData = (node) => {
   };
 };
 
+export const getProductTeaserImageData = (product) => {
+  return product?.rels?.product?.rels?.image?.localFile?.teaserImage;
+};
+
+export const getNodeUrl = (node) => {
+  return node.path.alias;
+}
+
+export const getProductTeaserVariantData = (product) => {
+  const variant = product?.rels?.product?.rels?.variants[0];
+  return { ...variant, shopifyId: getProductVariantGid(variant.shopifyId) };
+};
+
+
+export const getCollectionNodeProduct = (product) => {
+  return {
+    ...product,
+    // teaserStyle: 'product',
+    image: getProductTeaserImageData(product),
+    link: getNodeUrl(product),
+    variant: getProductTeaserVariantData(product),
+  };
+};
+
 export const getCategoryProducts = (node) => {
   return node?.rels?.products || [];
 };
@@ -156,7 +178,7 @@ export const getValidCategories = (nodes) => {
 };
 
 export const getValidProductNodes = (nodes) => {
-  return nodes.map(node => P.getCollectionNodeProduct(node));
+  return nodes.map(node => getCollectionNodeProduct(node));
 };
 
 export const getOverviewNodes = (displayName, dataSet) => {

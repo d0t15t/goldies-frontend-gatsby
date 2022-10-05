@@ -13,7 +13,7 @@ export const Tiles: FC<TilesProps> = ({ tiles }) => {
   const theme = useTheme();
   const mqMdUp = useMediaQuery(theme.breakpoints.up('md'));
   const tileMap = {
-    paragraph__tiles: ({ teasers, id, teaserStyle}) => <Teasers teasers={teasers} key={id} />,
+    paragraph__tiles: ({ teasers, id, teaserStyle}) => <Teasers listStyle='fancy' teasers={teasers} key={id} />,
     // paragraph__text: ({ teasers, id }) => <TextBlock key={id} />,
     paragraph__cart: ({ teasers, id }) => <Cart key={id} />,
     paragraph__overview: ({ displayName, id }) => <Overview displayName={displayName} key={id} />,

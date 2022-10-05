@@ -86,10 +86,6 @@ export const getNodeImageData = (node) => {
   return node.rels?.media?.rels?.mediaImage?.localFile?.teaserImage;
 };
 
-export const getNodeUrl = (node) => {
-  return node.path.alias;
-}
-
 export const getNodeTitle = (node) => node.title;
 
 /*
@@ -163,10 +159,12 @@ export const getProductNodeShopifyProductImageSet = (productNode) => {
     variants: productNode.rels.variants,
     name: 'teaserImage',
   });
+
   const thumbnailVariantSet = getVariantsImageSet({
     variants: productNode.rels.variants,
     name: 'thumbnailImage',
   });
+
   const largeVariantSet = getVariantsImageSet({
     variants: productNode.rels.variants,
     name: 'largeImage',
@@ -212,16 +210,6 @@ export const getProductNodeData = (node) => {
 /*
  * Collection functions.
  */
-
-export const getProductTeaserImageData = (product) => {
-  return product?.rels?.product?.rels?.image?.localFile?.teaserImage;
-};
-
-export const getProductTeaserVariantData = (product) => {
-  const variant = product?.rels?.product?.rels?.variants[0];
-  return { ...variant, shopifyId: U.getProductVariantGid(variant.shopifyId) };
-};
-
 export const getProductTeaserVariantsData = (product) => {
   return product?.rels?.product?.rels?.variants.map((variant) => {
     return { ...variant, shopifyId: U.getProductVariantGid(variant.shopifyId) };
@@ -236,29 +224,19 @@ export const getCollectionImage = (collection) => {
   return getImage({ index: 'largeImage', localFile: image });
 };
 
-export const getCollectionNodeProduct = (product) => {
-  return {
-    ...product,
-    // teaserStyle: 'product',
-    image: getProductTeaserImageData(product),
-    link: getNodeUrl(product),
-    variant: getProductTeaserVariantData(product),
-  };
-};
-
 export const getCollectionFeaturedProduct = (product) => {
   return {
     ...product,
     // teaserStyle: 'product',
-    image: getProductTeaserImageData(product),
-    link: getNodeUrl(product),
+    image: U.getProductTeaserImageData(product),
+    link: U.getNodeUrl(product),
     variants: getProductTeaserVariantsData(product),
   };
 };
 
 export const getCollectionNodeProducts = (node) => {
   return node.rels?.products
-    ? node.rels.products.map((product) => getCollectionNodeProduct(product))
+    ? node.rels.products.map((product) => U.getCollectionNodeProduct(product))
     : [];
 };
 
