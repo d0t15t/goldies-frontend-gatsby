@@ -1,37 +1,34 @@
 import React, { FC } from 'react';
 import { useMediaQuery, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { Swiper, Teaser, TeaserProps, TeasersFancy, ProductTeaser } from '~components/Teasers';
+import { Swiper, Teaser, TeaserProps, TeasersFancy, ProductTeaser, TeaserSimple } from '~components/Teasers';
 import * as S from './Teasers.styled';
 
-export interface TeasersProps {
-  teasers: TeaserProps[];
-}
-
-export const Teasers: FC<TeasersProps> = ({ teasers, teaserStyle }) => {
-  switch (teaserStyle) {
+export const Teasers = ({ teasers, listStyle, itemTemplate }) => {
+  const ItemTemplate = itemTemplate ?? TeaserSimple;
+  const items = teasers.map(item => {
+            return (
+              <li key={item.id}><ItemTemplate {...item} /></li>
+            );
+          });
+  switch (listStyle) {
     case 'grid':
       return (
         <S.TeasersGrid>
-          {teasers.map(item => {
-            return (
-              <li key={item.id}><ProductTeaser {...item} /></li>
-            );
-          })}
+          {items}
         </S.TeasersGrid>
       );
-    default:
+    case 'fancy':
       const theme = useTheme();
-      const fancy = useMediaQuery(theme.breakpoints.up('sm'));
-
-      const teasersMap = ({ fancy }) => {
-        if (fancy) {
-          return TeasersFancy;
-        }
-        return Swiper;
-      };
-      const Template = teasersMap({ fancy });
-      return <Template teasers={teasers} />;
+      const isFancy = useMediaQuery(theme.breakpoints.up('sm'));
+      const FancyTemplate = isFancy ? TeasersFancy : Swiper;
+      return <FancyTemplate teasers={teasers} />;
+    default:
+      return (
+        <S.TeasersBasic>
+          {items}
+        </S.TeasersBasic>
+      );
 
   }
 };

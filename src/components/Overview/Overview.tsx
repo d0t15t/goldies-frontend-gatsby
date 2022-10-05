@@ -29,20 +29,29 @@ export const Overview = ({ displayName }) => {
     }
   `);
 
-  const renderMap = [
-    {
-      id: 'products',
-      item_template: ProductTeaser,
+  const renderMap = {
+    products: {
+      listStyle: 'grid',
+      itemTemplate: ProductTeaser,
     },
-  ];
-
-   
+    collections: {
+      listStyle: 'basic',
+      itemTemplate: ProductTeaser,
+      itemTemplate: TeaserSimple,
+    },
+    categories: {
+      listStyle: 'basic',
+      itemTemplate: ProductTeaser,
+      itemTemplate: TeaserSimple,
+    },
+  };
 
   const dataSet = data[displayName]?.nodes ?? null; 
   const nodes = U.getOverviewNodes(displayName, dataSet);
   
   return nodes && Array.isArray(nodes) 
-    ? <Teasers teasers={nodes} teaserStyle={'grid'}/>
+    ? <Teasers 
+      teasers={nodes} listStyle={renderMap[displayName].listStyle} itemTemplate={renderMap[displayName].itemTemplate}/>
     : null;
 };
 
