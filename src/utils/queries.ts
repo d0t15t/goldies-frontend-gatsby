@@ -336,9 +336,6 @@ export const shopifyProductFragment = graphql`
     title
     product_id
     rels: relationships {
-      tags {
-        name
-      }
       variants {
         ...shopifyProductVariantFragment
       }
