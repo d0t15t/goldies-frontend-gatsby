@@ -2,6 +2,8 @@ import { PageHeaderProps } from '~components/PageHeader/PageHeader';
 // import { PageBodyProps } from '~components/PageBody/PageBody';
 import { PageFooterProps } from '~components/PageFooter/PageFooter';
 
+import * as U from '~utils';
+
 // import Teasers from '~components/Teasers/Teasers';
 
 export * from '~components/PageHeader/PageHeader';
@@ -12,8 +14,6 @@ export * from '~components/Collection/Collection';
 export * from '~components/Category/Category';
 export * from '~components/Product/Product';
 export * from '~components/Tiles/Tiles';
-
-import * as U from '~utils';
 
 export interface pageData {
   headerData: PageHeaderProps;
@@ -69,12 +69,14 @@ export const getRelated = (data): array | undefined => {
   if (!bcData) return [];
   const dataKeys = Object.keys(bcData);
 
-  return Object.keys(bcData).map(key => { 
+  return Object.keys(bcData).map((key) => {
     return {
       label: key,
-      items: bcData[key] ? bcData[key].map(item => {
-        return item;
-      }) : [],
+      items: bcData[key]
+        ? bcData[key].map((item) => {
+            return item;
+          })
+        : [],
     };
   });
 };
@@ -119,7 +121,12 @@ export const getNodeTiles = (tiles) => {
         ...tile,
         teasers: tile?.rels?.teasers ? getTileNodeTeasers(tile.rels.teasers) : [],
       },
-      paragraph__text: defaultTemplate,
+      paragraph__text: tile?.body?.markup
+        ? {
+            ...tile,
+            text: tile.body.markup,
+          }
+        : defaultTemplate,
       paragraph__cart: defaultTemplate,
     };
     return tile.internal?.type in pageBodyTileTemplate
@@ -265,7 +272,7 @@ export const getCollectionNodeData = (node) => {
 export const getCategoryNodeData = (node) => {
   return {
     id: node.id,
-    //image: getCollectionImage(node),
+    // image: getCollectionImage(node),
     path: U.getCategoryPath(node),
     products: getCollectionNodeProducts(node),
     title: node.name,
@@ -282,7 +289,7 @@ export const getCategoryProducts = (node) => {
     .replace(/ +/g, '-');
   const alias = `/category/${slug}`
   return { alias }
-}*/
+} */
 
 /* Helper functions. */
 

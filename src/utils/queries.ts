@@ -49,7 +49,7 @@ export const pageTilesFragment = graphql`
               type
             }
             body: field_body {
-              markup: value
+              markup: processed
             }
           }
           ... on paragraph__tiles {
@@ -524,7 +524,6 @@ export const ctaFragment = graphql`
         }
         link: field_link {
           title
-          uri
         }
       }
     }

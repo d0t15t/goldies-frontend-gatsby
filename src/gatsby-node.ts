@@ -12,6 +12,18 @@ require('dotenv').config({
 
 const frontPageId = process.env.GATSBY_DRUPAL_FRONTPAGE_ID;
 
+exports.onCreateNode = ({ node, getNode, actions }) => {
+  const { createNodeField } = actions;
+  if (node.internal.type.indexOf(`node__`) === 0) {
+    const slug = (node?.path?.alias ?? `/node/${node.drupal_internal__nid}`).replace(/\/$|$/, '/');
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    });
+  }
+};
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
@@ -154,4 +166,5 @@ exports.onCreateWebpackConfig = ({ actions, stage, plugins }) => {
     });
   }
 };
+
 

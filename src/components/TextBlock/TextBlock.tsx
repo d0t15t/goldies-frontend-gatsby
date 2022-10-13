@@ -1,12 +1,9 @@
 import React, { FC, ReactNode } from 'react';
+import cls from 'classnames';
 import * as S from './TextBlock.styled';
 
-interface TextBlockProps {
-  children: ReactNode;
-}
-
-export const TextBlock: FC<TextBlockProps> = ({ children }) => {
-  return <S.Container>TextBlock{children}</S.Container>;
+export const TextBlock = ({ text }) => {
+  return <S.Wrapper dangerouslySetInnerHTML={{__html: text}} className={cls('text-block--wrapper')}/>;
 };
 
 export default TextBlock;
