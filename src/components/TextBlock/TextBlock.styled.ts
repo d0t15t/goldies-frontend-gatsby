@@ -11,11 +11,6 @@ export const Wrapper = styled.div`
         padding: ${theme.spacing(6)} ${theme.spacing(8)};
       }
 
-      h3 {
-        font-size: 2rem;
-        line-height: 3.5rem;
-      }
-
     `;
   }}
 `;

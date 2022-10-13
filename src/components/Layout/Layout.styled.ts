@@ -14,9 +14,13 @@ export const Layout = styled(Box)(({ theme }) => {
     '& h2': {
       ...theme.typography.h2,
       fontSize: '1.5rem',
+      lineHeight: '2.5rem',
+      paddingBottom: theme.spacing(2),
     },
     '& h3': {
       ...theme.typography.h3,
+      fontSize: '2rem',
+      lineHeight: '3.5rem',
     },
     '& h4': {
       ...theme.typography.h4,
