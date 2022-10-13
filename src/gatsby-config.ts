@@ -44,7 +44,7 @@ const gatsbyConfig: GatsbyConfig = {
       'rockaway beach',
     ],
     siteUrl: 'https://goldies-frontend.netlify.app/',
-    imageUrl: '/favicon.png',
+    imageUrl: '/favicon.svg',
     language: 'en',
   },
   plugins: [
@@ -57,7 +57,7 @@ const gatsbyConfig: GatsbyConfig = {
         // background_color: theme.palette.primary.light,
         // theme_color: theme.palette.primary.main,
         display: `standalone`,
-        icon: `static/favicon.png`,
+        icon: `static/favicon.svg`,
       },
     },
     {
