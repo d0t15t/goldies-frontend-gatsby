@@ -9,7 +9,7 @@ export const Layout = styled(Box)(({ theme }) => {
 
     '& h1': {
       ...theme.typography.h1,
-      fontSize: '3rem',
+      fontSize: '2rem',
     },
     '& h2': {
       ...theme.typography.h2,
@@ -19,11 +19,13 @@ export const Layout = styled(Box)(({ theme }) => {
     },
     '& h3': {
       ...theme.typography.h3,
-      fontSize: '2rem',
-      lineHeight: '3.5rem',
+      fontSize: '1.1rem',
+      lineHeight: '2.5rem',
     },
     '& h4': {
       ...theme.typography.h4,
+      fontSize: '1.1rem',
+      lineHeight: '2.5rem',
     },
     '& h5': {
       ...theme.typography.h5,

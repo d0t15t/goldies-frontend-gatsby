@@ -95,10 +95,12 @@ export const getNodeTitle = (node) => node.title;
  */
 
 export const getTileTeaserNodeUrl = (node) => {
-  return node.rels?.reference.path.alias;
+  return node.rels?.reference?.path?.alias;
 };
 
 export const getTileNodeTeaser = (teaser) => {
+  console.log(teaser);
+  
   return {
     ...teaser,
     image: getNodeImageData(teaser),

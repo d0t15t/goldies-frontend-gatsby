@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 
 export const breadcrumbsFragment = graphql`
   fragment breadcrumbsFragment on Query {
-    node__product: nodeProduct(id: {eq: $id}) {
+    node__product: nodeProduct(id: { eq: $id }) {
       breadcrumb__node__product: relationships {
         Collections: node__collection {
           title
@@ -134,17 +134,14 @@ export const tileTeaserFragment = graphql`
     }
     title: field_headline
     subTitle: field_subline
-    teaserStyle: field_teaser_style
     rels: relationships {
       reference: field_content {
-        ... on node__collection {
-          id
-          internal {
-            type
-          }
-          path {
-            alias
-          }
+        id
+        internal {
+          type
+        }
+        path {
+          alias
         }
       }
       media: field_media {
@@ -313,14 +310,14 @@ export const shopifyTagFragment = graphql`
           field_shopify_product {
             relationships {
               image {
-              id
+                id
+              }
             }
           }
         }
       }
     }
   }
-}
 `;
 
 export const shopifyProductFragment = graphql`
@@ -511,6 +508,7 @@ export const menuSidebarMenuFragment = graphql`
   }
 `;
 
+/**
 export const ctaFragment = graphql`
   fragment ctaFragment on Query {
     notices: allNodeCta {
@@ -529,3 +527,4 @@ export const ctaFragment = graphql`
     }
   }
 `;
+*/

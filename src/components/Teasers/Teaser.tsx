@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC } from 'react';
 import cls from 'classnames';
-import { Typography, Box } from '@mui/material'
+import { Typography, Box } from '@mui/material';
 import { Image, Link } from '~components/index';
 import * as S from './Teaser.styled';
 
@@ -14,6 +14,7 @@ export interface TeaserProps {
 }
 
 export const Teaser: FC<TeaserProps> = ({ teaserStyle, title, subTitle, link, image }) => {
+  
   //const textStyle = teaserStyle === 'image-only' ? visuallyHidden : null;
 
   const getStyledTeaser = (teaserStyle) => {
