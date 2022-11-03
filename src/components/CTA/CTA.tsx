@@ -20,11 +20,11 @@ export const CTA = () => {
         <S.Inner>
           <Typography variant="overline" dangerouslySetInnerHTML={{ __html: item.body.markup }} />
 
-          {/* <Button variant="text"> */}
-          {/* <Typography variant="overline">
-            <Link to={item.link.uri}>{item.link.title}</Link>
-          </Typography> */}
-          {/* </Button> */}
+          <Button variant="text">
+            <Typography variant="overline">
+              <Link to={item.link.url}>{item.link.title}</Link>
+            </Typography>
+          </Button>
         </S.Inner>
       </S.Wrapper>
     );

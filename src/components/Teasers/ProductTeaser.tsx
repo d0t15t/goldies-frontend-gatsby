@@ -37,6 +37,7 @@ export const ProductTeaser: FC<TeaserProps> = ({
   const ref = useRef(null);
   const isHover = useHover(ref);
   const wrapWithLink = (path, content) => <Link to={path}>{content}</Link>;
+  
   return (
     <S.StyledProductTeaser
       as="article"

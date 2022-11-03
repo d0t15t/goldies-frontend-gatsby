@@ -3,6 +3,7 @@ import { PageHeaderProps } from '~components/PageHeader/PageHeader';
 import { PageFooterProps } from '~components/PageFooter/PageFooter';
 
 import * as U from '~utils';
+import { getProductTeaserVariantData } from '~utils/';
 
 // import Teasers from '~components/Teasers/Teasers';
 
@@ -95,17 +96,20 @@ export const getNodeTitle = (node) => node.title;
  */
 
 export const getTileTeaserNodeUrl = (node) => {
-  return node.rels?.reference?.path?.alias;
+  return Array.isArray(node.rels?.reference)
+    ? node.rels?.reference[0]?.path?.alias
+    : node.rels?.reference?.path?.alias;
 };
 
 export const getTileNodeTeaser = (teaser) => {
-  console.log(teaser);
+  //console.log(teaser);
   
   return {
     ...teaser,
     image: getNodeImageData(teaser),
     link: getTileTeaserNodeUrl(teaser),
     teaserStyle: 'image-only',
+    variant: getProductTeaserVariantData
   };
 };
 
@@ -119,6 +123,11 @@ export const getNodeTiles = (tiles) => {
       ...tile,
     };
     const pageBodyTileTemplate = {
+      paragraph__product_teasers: {
+        ...tile,
+        teaserStyle: 'swiper',
+        teasers: tile?.rels?.teasers ? getTileNodeTeasers(tile.rels.teasers) : [],
+      },
       paragraph__tiles: {
         ...tile,
         teasers: tile?.rels?.teasers ? getTileNodeTeasers(tile.rels.teasers) : [],

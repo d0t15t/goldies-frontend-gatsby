@@ -28,17 +28,16 @@ export const Carousel = ({ teasers, size }) => {
   };
 
   const getSlideCount = () => {
-    return 2;
     switch (size) {
       case 'lg':
         return 4;
       case 'md':
         return 3;
       default:
+        // 'sm'.
         return 2;
     }
   };
-  console.log(teasers);
 
   return (
     <S.CarouselWrapper h={getHeight()}>

@@ -25,15 +25,14 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
   useEffect(() => useDispatch('pageDimensions', box, dispatch), [box, dispatch]);
 
   const node = PU.getNode(data);
-  
+
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
-  
+
   const breadcrumbs = PU.getBreadcrumbs(node, path);
   const relatedItems = PU.getRelated(node);
 
   const getPageBodyTemplate = (data, type) => {
     const pageBodyTemplate = {
-      
       node__page: () => {
         return <PU.Tiles {...data} />;
       },
@@ -51,7 +50,7 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
   };
 
   const hasShiftedHeadline = PU.hasShiftedHeadline(path);
-  
+
   return node ? (
     <S.Page className="page-root">
       <PU.PageHeader {...headerData} hasShiftedHeadline={hasShiftedHeadline} />

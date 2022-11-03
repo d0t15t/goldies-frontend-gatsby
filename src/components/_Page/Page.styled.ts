@@ -11,6 +11,7 @@ export const Page = styled(Box)`
       ${theme.breakpoints.up('sm')} {
         padding-left: ${theme.spacing(5)};
         padding-right: ${theme.spacing(5)};
+        max-width: ${theme.mdWidth};
       }
         
       ${theme.breakpoints.up('md')} {

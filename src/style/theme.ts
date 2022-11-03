@@ -19,6 +19,7 @@ export const theme = createTheme({
     },
   },
   maxWidth: '960px',
+  mdWidth: '690px',
 });
 
 export default theme;

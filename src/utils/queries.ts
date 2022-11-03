@@ -61,6 +61,9 @@ export const pageTilesFragment = graphql`
           ... on paragraph__overview {
             ...overviewFragment
           }
+          ... on paragraph__product_teasers {
+            ...paragraphProductTeasersFragment
+          }
         }
       }
     }
@@ -146,6 +149,23 @@ export const tileTeaserFragment = graphql`
       }
       media: field_media {
         ...teaserMediaFragment
+      }
+    }
+  }
+`;
+
+export const paragraphProductTeasersFragment = graphql`
+  fragment paragraphProductTeasersFragment on paragraph__product_teasers {
+    id
+    internal {
+      type
+    }
+    body: field_body {
+      markup: processed
+    }
+    rels: relationships {
+      teasers: field_content {
+        ...productTeaserFragment
       }
     }
   }
@@ -508,7 +528,6 @@ export const menuSidebarMenuFragment = graphql`
   }
 `;
 
-/**
 export const ctaFragment = graphql`
   fragment ctaFragment on Query {
     notices: allNodeCta {
@@ -521,10 +540,10 @@ export const ctaFragment = graphql`
           markup: value
         }
         link: field_link {
+          url
           title
         }
       }
     }
   }
 `;
-*/
