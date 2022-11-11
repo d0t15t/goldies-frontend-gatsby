@@ -25,12 +25,13 @@ export const Header = styled('header')(({ theme }) => {
       marginBottom: theme.spacing(1),
 
       [theme.breakpoints.up('md')]: {
-        marginBottom: theme.spacing(2),
+        // marginBottom: theme.spacing(2),
       },
     },
     '& h2': {
       margin: 'unset',
       fontSize: '1.5rem',
+      paddingBottom: 0,
       // marginBottom: theme.spacing(1),
       fontStyle: 'italic',
       // color: theme.palette.secondary.light,

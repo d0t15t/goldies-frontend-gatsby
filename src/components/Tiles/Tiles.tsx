@@ -1,8 +1,9 @@
 import React, { FC, ReactNode } from 'react';
+import cls from 'classnames';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import * as S from './Tiles.styled';
-import * as TB from '~components/TextBlock/TextBlock.styled'
+import * as TB from '~components/TextBlock/TextBlock.styled';
 import { Teasers, TeasersProps } from '~components/Teasers/Teasers';
 import { Cart, TextBlock, Overview } from '~components';
 
@@ -15,7 +16,12 @@ export const Tiles: FC<TilesProps> = ({ tiles }) => {
   const ProductTeasers = ({ id, teasers, headline }) => {
     return (
       <>
-        {headline ? <TB.Wrapper dangerouslySetInnerHTML={{ __html: headline }} /> : null}
+        {headline ? (
+          <TB.Wrapper
+            dangerouslySetInnerHTML={{ __html: headline }}
+            className={cls('text-block--wrapper')}
+          />
+        ) : null}
         <Teasers listStyle="carousel" teasers={teasers} key={id} />
       </>
     );

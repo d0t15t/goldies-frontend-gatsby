@@ -35,7 +35,7 @@ export const pageTilesFragment = graphql`
         alias
       }
       headline: field_headline {
-        markup: value
+        markup: processed
       }
       body {
         markup: value

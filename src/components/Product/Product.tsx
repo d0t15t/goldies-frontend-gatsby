@@ -29,6 +29,8 @@ interface UpdateCounterProps {
 }
 
 export const Product: FC<ProductProps> = ({ body, headline, images, variants, relatedItems }) => {
+  console.log(variants);
+  
   const [addToCartAmount, setAddToCartAmount] = useState(1);
 
   const [currentVariantId, setCurrentVariantId] = useState(variants[0].shopifyId);

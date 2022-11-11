@@ -39,6 +39,27 @@ export const Carousel = ({ teasers, size }) => {
     }
   };
 
+  const getVariant = (teaser) => {
+    const variant = teaser.rels.product.rels.variants[0] ?? {};
+    const shopifyId = U.getProductVariantGid(variant.shopifyId);
+
+    return { ...variant, shopifyId };
+  };
+
+  const slides = teasers
+    ? teasers.map((teaser, key) => (
+        <SwiperSlide key={teaser.id}>
+          <ProductTeaser
+            {...teaser}
+            variant={getVariant(teaser)}
+            teaserStyle="slide"
+            link={U.getNodeUrl(teaser)}
+            image={teaser.rels.product.rels.image.localFile.teaserImage.gatsbyImageData}
+          />
+        </SwiperSlide>
+      ))
+    : NULL;
+
   return (
     <S.CarouselWrapper h={getHeight()}>
       <SW
@@ -50,19 +71,7 @@ export const Carousel = ({ teasers, size }) => {
         // spaceBetween={theme.spacing(1)}
         spaceBetween={8}
       >
-        {teasers
-          ? teasers.map((teaser, key) => (
-              <SwiperSlide key={teaser.id}>
-                <ProductTeaser
-                  {...teaser}
-                  variant={teaser.rels.product.rels.variants[0]}
-                  teaserStyle="slide"
-                  link={U.getNodeUrl(teaser)}
-                  image={teaser.rels.product.rels.image.localFile.teaserImage.gatsbyImageData}
-                />
-              </SwiperSlide>
-            ))
-          : null}
+        {slides}
       </SW>
     </S.CarouselWrapper>
   );

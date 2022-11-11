@@ -89,7 +89,8 @@ export const getNodeImageData = (node) => {
   return node.rels?.media?.rels?.mediaImage?.localFile?.teaserImage;
 };
 
-export const getNodeTitle = (node) => node.title;
+export const getNodeTitle = (node) =>
+  node.internal.type === 'node__page' ? node.headline.markup : node.title;
 
 /*
  * Tile helper functions.
@@ -102,14 +103,14 @@ export const getTileTeaserNodeUrl = (node) => {
 };
 
 export const getTileNodeTeaser = (teaser) => {
-  //console.log(teaser);
-  
+  // console.log(teaser);
+
   return {
     ...teaser,
     image: getNodeImageData(teaser),
     link: getTileTeaserNodeUrl(teaser),
     teaserStyle: 'image-only',
-    variant: getProductTeaserVariantData
+    variant: getProductTeaserVariantData,
   };
 };
 
