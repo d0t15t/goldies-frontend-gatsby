@@ -49,6 +49,12 @@ const gatsbyConfig: GatsbyConfig = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-google-gtag',
+      options: {
+        trackingIds: [process.env.GATSBY_GTAG_ID],
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'Goldies Natural Beauty',
@@ -177,10 +183,10 @@ const gatsbyConfig: GatsbyConfig = {
           }
         `,
         ref: 'id',
-        //index: ['title', 'body', 'tags', 'path'],
-        index: ['title', 'tags', 'body',],
-        store: ['title', 'tags', 'body', 'path', 'id',],
-        //store: ['id', 'path', 'title', 'tags'],
+        // index: ['title', 'body', 'tags', 'path'],
+        index: ['title', 'tags', 'body'],
+        store: ['title', 'tags', 'body', 'path', 'id'],
+        // store: ['id', 'path', 'title', 'tags'],
         normalizer: ({ data }) => {
           const products = data.products.nodes.map((node) => {
             return {
@@ -188,7 +194,7 @@ const gatsbyConfig: GatsbyConfig = {
               path: node.path.alias,
               body: node?.rels?.shopify_product?.body?.value || '',
               title: node.title,
-              //tags: node?.rels?.tags.length ? node.rels.tags.map((e) => e.name) : [],
+              // tags: node?.rels?.tags.length ? node.rels.tags.map((e) => e.name) : [],
               tags: node?.rels?.tags.length ? node.rels.tags.map((e) => e.title) : [],
             };
           });
@@ -199,28 +205,26 @@ const gatsbyConfig: GatsbyConfig = {
               path: node.path.alias,
               title: node.title,
               body: node?.body?.processed,
-              tags: cps.map((e) =>
-                e.rels?.tags.length ? e.rels.tags.map((e) => e.title) : []
-              ),
+              tags: cps.map((e) => (e.rels?.tags.length ? e.rels.tags.map((e) => e.title) : [])),
             };
           });
-          const categories = data.categories.nodes.map((node) => {
-            const path = U.getCategoryPath(node);
-            const category_content_items = node?.rels?.products || [];
-            return category_content_items.length ? {
-              id: node.id,
-              path: path.alias,
-              title: node.title,
-              body: '',
-              tags: category_content_items.map(e => e.title),
-            } : null;
-          }).filter(e => e);
-          const items = [ 
-            ...products, 
-            ...collections, 
-            ...categories 
-          ].map(e => {
-            return {...e, tags: e.tags.join(' ')}
+          const categories = data.categories.nodes
+            .map((node) => {
+              const path = U.getCategoryPath(node);
+              const category_content_items = node?.rels?.products || [];
+              return category_content_items.length
+                ? {
+                    id: node.id,
+                    path: path.alias,
+                    title: node.title,
+                    body: '',
+                    tags: category_content_items.map((e) => e.title),
+                  }
+                : null;
+            })
+            .filter((e) => e);
+          const items = [...products, ...collections, ...categories].map((e) => {
+            return { ...e, tags: e.tags.join(' ') };
           });
           return items;
         },
@@ -232,13 +236,13 @@ const gatsbyConfig: GatsbyConfig = {
         displayName: process.env.NODE_ENV !== 'production',
       },
     },
-    /*{
+    /* {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: resolve(__dirname, './assets'),
         name: 'assets',
       },
-    },*/
+    }, */
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
