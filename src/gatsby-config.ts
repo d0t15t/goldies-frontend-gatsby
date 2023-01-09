@@ -49,9 +49,10 @@ const gatsbyConfig: GatsbyConfig = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-gtag`,
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
-        trackingId: process.env.GATSBY_GTAG_ID,
+        //trackingId: process.env.GATSBY_GTAG_ID,
+        trackingIds: [process.env.GATSBY_GTAG_ID],
       },
     },
     {
