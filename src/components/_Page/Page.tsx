@@ -32,7 +32,6 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
-  console.log('🚀 ~ file: Page.tsx:33 ~ headerData', bodyData);
 
   const breadcrumbs = PU.getBreadcrumbs(node, path);
   const relatedItems = PU.getRelated(node);
