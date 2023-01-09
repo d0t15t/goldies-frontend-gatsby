@@ -14,7 +14,7 @@ export const Button: FC<ButtonProps> = (props) => {
   const templateMap = {
     basic: S.BasicButton,
     default: S.DefaultButton,
-    // link: S.LinkButton,
+    link: S.LinkButton,
     noStyle: S.NoStyleButton,
   };
   const Template = buttonTemplate in templateMap ? templateMap[buttonTemplate] : S.NoStyleButton;

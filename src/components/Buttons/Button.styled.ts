@@ -40,8 +40,7 @@ export const LinkButton = styled(Link)`
   ${(props) => {
     let { theme, themeStyle } = props;
     themeStyle ??= 'secondary';
-    return 'background: red;';
-    // return basicButtonStyle({ theme, themeStyle });
+    return basicButtonStyle({ theme, themeStyle });
   }}
 `;
 

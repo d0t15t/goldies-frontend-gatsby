@@ -8,11 +8,10 @@ import {
   useUpdateItemQuantity,
 } from 'gatsby-theme-shopify-manager';
 import { Typography } from '@material-ui/core';
+import { Box } from '@mui/material';
 import { Button, CartItem, Link, PaymentMethods, Price } from '~components';
 import * as U from '~utils';
 import * as S from './Cart.styled';
-import { Box } from '@mui/material';
-import { log } from 'util';
 
 interface CartProps {
   children: ReactNode;
@@ -49,11 +48,10 @@ export const Cart: FC<CartProps> = ({ children, context }) => {
   const removeItemFromCart = useRemoveItemFromCart();
 
   const getCartTotal = (cartItems) => {
-    return cartItems.reduce((acc, i) => acc + (i.quantity * i.variant.price), 0);
+    return cartItems.reduce((acc, i) => acc + i.quantity * i.variant.price, 0);
   };
 
   const handleRemove = async (variantId) => {
-    
     if (cartItems.length < 1) {
       return;
     }
@@ -66,6 +64,10 @@ export const Cart: FC<CartProps> = ({ children, context }) => {
   };
 
   const updateItemQuantity = useUpdateItemQuantity();
+
+  const handleCheckout = (e) => {
+    window.location.href = checkoutUrl;
+  };
 
   interface handleUpdateQuantityProps {
     targetId: string;
@@ -88,12 +90,12 @@ export const Cart: FC<CartProps> = ({ children, context }) => {
   return (
     <S.Container>
       <form onSubmit={handleSubmit} className={'cart--form'}>
-        <hr className={'cart--line'}/>
+        <hr className={'cart--line'} />
         <S.List>
           {cartItems.map((item, i) => {
             return (
               <Fragment key={i}>
-                {i ? <hr className={'cart--line'}/> : null}
+                {i ? <hr className={'cart--line'} /> : null}
                 <CartItem
                   {...item}
                   cartItemsCount={cartItems.length}
@@ -111,17 +113,25 @@ export const Cart: FC<CartProps> = ({ children, context }) => {
             );
           })}
         </S.List>
-        <hr className={'cart--line'}/>
+        <hr className={'cart--line'} />
         <Box className={cls(['cart--total'])}>
-          <Typography variant={'overline'} className={cls(['cart-subtotal'])}>Subtotal:</Typography>
-          <Price value={getCartTotal(cartItems)} />  
+          <Typography variant={'overline'} className={cls(['cart-subtotal'])}>
+            Subtotal:
+          </Typography>
+          <Price value={getCartTotal(cartItems)} />
         </Box>
 
         {/* {checkoutUrl && <Link url={checkoutUrl}>Proceed to Checkout</Link>} */}
-        <Box className={'cart--actions'}><Button type="submit" className={'cart--button-checkout'}>Proceed to Checkout</Button></Box>
+        <Box className={'cart--actions'}>
+          <Button type="submit" className={'cart--button-checkout'} onClick={handleCheckout}>
+            Proceed to Checkout
+          </Button>
+        </Box>
       </form>
       <Box className={'cart--lower'}>
-        <Typography className={'cart--lower__info'}>Checkout will commence on Shopify.com</Typography>
+        <Typography className={'cart--lower__info'}>
+          Checkout will commence on Shopify.com
+        </Typography>
         <PaymentMethods />
       </Box>
     </S.Container>
