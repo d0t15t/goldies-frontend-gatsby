@@ -16,20 +16,17 @@ export interface SEOProps {
 }
 
 export const SEO: FunctionComponent<SEOProps> = ({ location, pageMetadata }) => {
-  const { title, description, keywords, siteUrl, imageUrl, language } = useSiteMetadata();
+  console.log('🚀 ~ file: SEO.tsx:19 ~ pageMetadata', pageMetadata);
+  const { title, description, keywords, siteUrl, imageUrl, language, robots } = useSiteMetadata();
 
   return (
     <Helmet title={pageMetadata?.title} defaultTitle={title} titleTemplate={`${title} - %s`}>
       <html lang={pageMetadata?.language || language} />
       <meta name="description" content={pageMetadata?.description || description} />
       <meta name="keywords" content={(pageMetadata?.keywords || keywords).join(', ')} />
-      <meta property="og:title" content={pageMetadata?.title || title} />
-      <meta property="og:url" content={`${siteUrl}${location.pathname}`} />
-      <meta property="og:description" content={pageMetadata?.description || description} />
-      <meta property="og:type" content={pageMetadata?.type || 'website'} />
-      <meta property="og:image" content={pageMetadata?.imageUrl || `${siteUrl}${imageUrl}`} />
-      <meta property="og:image:alt" content={pageMetadata?.title || title} />
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="robots" content={pageMetadata?.keywords || robots} />
     </Helmet>
   );
 };
+
+export default SEO;

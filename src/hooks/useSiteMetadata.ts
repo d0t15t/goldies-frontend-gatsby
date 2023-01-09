@@ -9,6 +9,7 @@ interface SiteMetadataQuery {
       siteUrl: string;
       imageUrl: string;
       language: string;
+      robots: string;
     };
   };
 }
@@ -27,6 +28,9 @@ export const useSiteMetadata = () => {
             siteUrl
             imageUrl
             language
+            robots
+            copyright
+            author
           }
         }
       }

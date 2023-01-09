@@ -12,7 +12,7 @@ export const Layout: FC<Omit<PageProps, 'children'>> = ({ children, location }) 
   return (
     <>
       <GlobalStyle />
-      <SEO location={location} />
+      {/* <SEO location={location} /> */}
       <S.Layout className={cls(['layout-wrapper'])}>
         <Navigation />
         <CTA />

@@ -128,6 +128,8 @@ export const getMenuItems = (menuItems) => {
 
 export const stripTags = (str: string) => str.replace(/(<([^>]+)>)/gi, '');
 
+export const getMetaDescription = (str: string) => `${stripTags(str).slice(0, 157)}...`;
+
 export const getCategoryPath = (node) => {
   const slug = `${node.name}`
     .toLocaleLowerCase()

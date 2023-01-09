@@ -2,20 +2,25 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { graphql } from 'gatsby';
 import cls from 'classnames';
+import { Helmet } from 'react-helmet';
 import { useDimensions } from 'react-hook-dimensions';
 import { Box, Typography } from '@mui/material';
 import { Context, useDispatch } from '~context';
 import { useLocation } from '~hooks';
-import { Breadcrumbs, Link, EmojiPointer, SocialBlock } from '~components';
+import { useSiteMetadata } from '~hooks/useSiteMetadata';
+import { SEO, Breadcrumbs, Link, EmojiPointer, SocialBlock } from '~components';
 
 //* @var PU */ Page Utilities */
 import * as PU from './index';
+
+import * as U from '~utils';
 
 //* @var S */ Styled components */
 import * as S from './Page.styled';
 
 const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
   const path = location.pathname;
+
   const isFrontpage = path == '/';
   const [context, dispatch] = useContext(Context);
   const [ref, box] = useDimensions({
@@ -27,6 +32,7 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
   const node = PU.getNode(data);
 
   const { headerData, bodyData, footerData } = PU.getPageNodeData(node);
+  console.log('🚀 ~ file: Page.tsx:33 ~ headerData', bodyData);
 
   const breadcrumbs = PU.getBreadcrumbs(node, path);
   const relatedItems = PU.getRelated(node);
@@ -51,8 +57,23 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
 
   const hasShiftedHeadline = PU.hasShiftedHeadline(path);
 
+  const { title, description, keywords, siteUrl, imageUrl, language, robots, author, copyright } =
+    useSiteMetadata();
+
+  const metaDescription = U.getMetaDescription(bodyData?.body ?? description);
+
   return node ? (
     <S.Page className="page-root">
+      <Helmet title={node.title} titleTemplate={`%s - ${title}`}>
+        <html lang={language} />
+        <meta name="description" content={isFrontpage ? description : metaDescription} />
+        <meta name="keywords" content={(keywords || keywords).join(', ')} />
+        <meta name="robots" content={path === '/cart' ? 'noindex' : robots} />
+        <meta name="author" content={author} />
+        <meta name="copyright" content={copyright} />
+        <meta http-equiv="expires" content="43200" />
+      </Helmet>
+      {/* <SEO location={location} pageMetaData /> */}
       <PU.PageHeader {...headerData} hasShiftedHeadline={hasShiftedHeadline} />
 
       <Breadcrumbs breadcrumbs={breadcrumbs} />

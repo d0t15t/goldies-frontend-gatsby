@@ -42,10 +42,15 @@ const gatsbyConfig: GatsbyConfig = {
       'herbal',
       'woman owned business',
       'rockaway beach',
+      'New York City',
+      'goldies',
     ],
     siteUrl: 'https://goldies-frontend.netlify.app/',
     imageUrl: '/favicon.svg',
     language: 'en',
+    robots: 'follow',
+    copyright: 'Goldies Natural Beauty',
+    author: 'Goldies Natural Beauty',
   },
   plugins: [
     {
