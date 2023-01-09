@@ -71,13 +71,22 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+
+        a {
+          background-color: ${theme.palette.primary.main};
+          color: ${theme.palette.secondary.dark};
+          color: ${theme.palette.primary.contrastText};
+          padding: 0 ${theme.spacing(3)};
+          border-radius: 5px;
+          text-transform: uppercase;
+        }
       }
 
-      .cart--button-checkout {
-        background-color: ${theme.palette.primary.main};
-        color: ${theme.palette.secondary.dark};
-        color: ${theme.palette.primary.contrastText};
-      }
+      // .cart--button-checkout {
+      //   background-color: ${theme.palette.primary.main};
+      //   color: ${theme.palette.secondary.dark};
+      //   color: ${theme.palette.primary.contrastText};
+      // }
 
       .cart--lower {
         padding: ${theme.spacing(3)}; 
@@ -89,8 +98,6 @@ export const Container = styled.div`
       }
     `;
   }}
-  
-  
 `;
 
 export const List = styled.ul`
@@ -104,7 +111,7 @@ export const List = styled.ul`
 
 export const PaymentMethods = styled.div`
   ${({ theme }) => {
-    return`
+    return `
       ul {
         display: flex;
         flex-wrap: wrap;
@@ -112,7 +119,6 @@ export const PaymentMethods = styled.div`
       }
       ul li {
         border-top: 1px solid ${theme.palette.primary};
-      }`
+      }`;
   }}
 `;
-

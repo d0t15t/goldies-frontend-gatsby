@@ -121,12 +121,13 @@ export const Cart: FC<CartProps> = ({ children, context }) => {
           <Price value={getCartTotal(cartItems)} />
         </Box>
 
-        {/* {checkoutUrl && <Link url={checkoutUrl}>Proceed to Checkout</Link>} */}
-        <Box className={'cart--actions'}>
-          <Button type="submit" className={'cart--button-checkout'} onClick={handleCheckout}>
-            Proceed to Checkout
-          </Button>
-        </Box>
+        {checkoutUrl && (
+          <Box className={'cart--actions'}>
+            <a href={checkoutUrl} rel="nofollow">
+              Proceed to Checkout
+            </a>
+          </Box>
+        )}
       </form>
       <Box className={'cart--lower'}>
         <Typography className={'cart--lower__info'}>
