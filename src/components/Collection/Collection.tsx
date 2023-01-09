@@ -23,20 +23,21 @@ export const Collection: FC<CollectionProps> = ({
   id,
   title,
 }) => {
-  
   return (
     <S.Wrapper>
-      {displayFeatured && (<S.Upper className="collection--upper">
-        <Image data={image} alt={title} />
-        <S.FeaturedWrapper className="collection--featured-products-wrapper">
-          <FeaturedProducts products={featured} />
-          <Box
-            // variant="body1"
-            dangerouslySetInnerHTML={{ __html: featuredDescription }}
-            className={cls('collection--featured-products-text')}
-          />
-        </S.FeaturedWrapper>
-      </S.Upper>)}
+      {displayFeatured && (
+        <S.Upper className="collection--upper">
+          <Image data={image} alt={title} />
+          <S.FeaturedWrapper className="collection--featured-products-wrapper">
+            <FeaturedProducts products={featured} />
+            <Box
+              // variant="body1"
+              dangerouslySetInnerHTML={{ __html: featuredDescription }}
+              className={cls('collection--featured-products-text')}
+            />
+          </S.FeaturedWrapper>
+        </S.Upper>
+      )}
       <S.Description className="collection--description">
         <Typography variant="body1" dangerouslySetInnerHTML={{ __html: description }} />
       </S.Description>

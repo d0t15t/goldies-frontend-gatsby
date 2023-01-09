@@ -2,18 +2,20 @@ import styled from 'styled-components';
 import { Box, Typography } from '@mui/material';
 
 export const ListItem = styled.li`
-  ${({theme}) => {
-    return`
+  ${({ theme }) => {
+    return `
       padding: ${theme.spacing(3)};
       padding-bottom: 0;
       padding-top: ${theme.spacing(4)}; 
       display: grid;
       //grid-template-columns: 33% 33% 33%; 
       grid-template-columns: 100px auto 96px 24px;
+      grid-template-rows: 30px 30px auto auto;
+      col
       gap: ${theme.spacing(1)};
 
       > * {
-        overflow: hidden;
+        // overflow: hidden;
         height: auto;
         position: relative;
       }
@@ -55,14 +57,14 @@ export const ListItem = styled.li`
 
       .cart-item--subtitle {
         grid-area: 2 / 2 / 3 / 4;
-        height: 36.5px; 
+        height: 2em; 
         padding-left: ${theme.spacing(1)};
       }
 
       .cart-item--quantity {
         grid-area: 3 / 3 / 4 / 5;
         text-align: right;
-        height: 36.5px; 
+        // height: 2em; 
         
         .label {
           visibility: hidden;
@@ -77,12 +79,13 @@ export const ListItem = styled.li`
  
       .cart-item--price {
         grid-area: 2 / 3 / 3 / 5;
+        
       }
 
       .cart-item--total {
         grid-area: 4 / 3 / 5 / 5;
         text-align: right;
-
+        margin-top: ${theme.spacing(2)};
         .cart-item--total-arrow {
           color: ${theme.palette.grey[500]};
           
@@ -122,8 +125,8 @@ export const ListItemControlsWrapper = styled(Box)`
 `;
 
 export const ListItemControls = styled(Box)`
-  ${({theme}) => {
-    const grey = theme.palette.grey[400]; 
+  ${({ theme }) => {
+    const grey = theme.palette.grey[400];
     return `
       border: 1px solid transparent;
       transition: all .5s ease-in-out;

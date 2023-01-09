@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   ${({ theme }) => {
     return `
       text-align: center;
-      padding: ${theme.spacing(6)};
+      padding: ${theme.spacing(2)} ${theme.spacing(6)};
       color: ${theme.palette.primary.dark};
 
       & + .text-block--wrapper {

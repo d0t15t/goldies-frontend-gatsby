@@ -6588,27 +6588,15 @@ gatsby-page-utils@^1.11.0:
     lodash "^4.17.21"
     micromatch "^4.0.2"
 
-gatsby-plugin-google-analytics@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-5.0.0.tgz#4ec2fdbf28e93f99bfe86ded682468f83d13dbbd"
-  integrity sha512-UAY+j+dTpCjCkhZiN2dhupVDpS5Ur/hdrvkUdtsTCdeXCEa/XI+Sa1WG+PduSImoF1ymbjaKgAGAqFh1AsUTpA==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
-    minimatch "3.0.4"
-    web-vitals "^1.1.2"
-
 gatsby-plugin-google-fonts@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-google-fonts/-/gatsby-plugin-google-fonts-1.0.1.tgz#d71054f7bf207b9a8da227380369e18e6f4e0201"
   integrity sha512-p1NVkn27GUnDA5qHM+Z4cCcLCJIardzZXMon3640sT4xuL/AZJbsx3HEt2KY/5oZu0UXIkytkxzV2Da4rQeUIg==
 
-gatsby-plugin-google-gtag@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-gtag/-/gatsby-plugin-google-gtag-5.0.0.tgz#e8920538537bf121f2433a2cbc5d59b263ffc74c"
-  integrity sha512-pwhKI+fLbQNTWWJLHdLkKjfmNPbLdJ0Mjvvs+9lA8vvYTG0BLlSmju3+YOy/jvDIiyQYr+/QRMjX/ndrLL/nRw==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
-    minimatch "^3.1.2"
+gatsby-plugin-gtag@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-gtag/-/gatsby-plugin-gtag-1.0.13.tgz#ffa08a728ba1cfe33090e52764d014a025a5d35a"
+  integrity sha512-Oul6O67klajrEjkkF1diD228SmyUWsAwTq/1tYq41vBwmyNiPk4dhk8K93rrNQ5d5zesSv+awBeGBa503tQqGw==
 
 gatsby-plugin-image@^1.13.0:
   version "1.13.0"
@@ -14537,11 +14525,6 @@ wcwidth@^1.0.1:
   integrity sha1-8LDc+RW8X/FSivrbLA4XtTLaL+g=
   dependencies:
     defaults "^1.0.3"
-
-web-vitals@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-1.1.2.tgz#06535308168986096239aa84716e68b4c6ae6d1c"
-  integrity sha512-PFMKIY+bRSXlMxVAQ+m2aw9c/ioUYfDgrYot0YUa+/xa0sakubWhSDyxAKwzymvXVdF4CZI71g06W+mqhzu6ig==
 
 webpack-dev-middleware@^3.7.2:
   version "3.7.3"

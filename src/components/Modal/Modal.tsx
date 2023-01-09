@@ -1,8 +1,6 @@
 import React, { FC, ReactNode, useCallback, useContext, useEffect, useRef } from 'react';
 import { useDimensions } from 'react-hook-dimensions';
-import useEventListener from '@use-it/event-listener';
 import cls from 'classnames';
-import { Box, Modal as MuiModal } from '@mui/material';
 import { Context } from '~context';
 import { useKeyPress, useDispatch } from '~hooks';
 import { CloseButton } from '~components';

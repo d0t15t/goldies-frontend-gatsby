@@ -28,6 +28,7 @@ export const ProductsGrid = styled(Grid)`
   ${({ theme }) => {
     return `
       padding: 0 ${theme.spacing(2)} 0 ${theme.spacing(2)};
+      justify-content: center;
     `;
   }}
 `;

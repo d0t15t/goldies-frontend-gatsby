@@ -8,14 +8,14 @@ import * as S from './Link.styled';
 interface LinkProps {
   children: ReactNode;
   className: string;
-  handleClick: Function;
+  onClick: Function;
   to: string;
 }
 
 export const Link: FC<LinkProps> = (props) => {
-  const { handleClick, to, children, className } = props;
+  const { onClick, to, children, className } = props;
   return to ? (
-    <GatsbyLink {...props} to={to} className={cls(['link', className])} onClick={handleClick}>
+    <GatsbyLink {...props} to={to} className={cls(['link', className])} onClick={onClick}>
       {children}
     </GatsbyLink>
   ) : null;

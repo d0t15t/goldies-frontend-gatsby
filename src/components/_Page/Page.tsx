@@ -40,7 +40,7 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
         return <PU.Collection {...data} relatedItems={relatedItems} />;
       },
       node__product: () => {
-        return <PU.Product {...data} relatedItems={relatedItems} />;
+        return <PU.Product {...data} relatedItems={relatedItems} location={location} />;
       },
       taxonomy_term__shopify_tags: () => {
         return <PU.Category {...data} relatedItems={relatedItems} />;

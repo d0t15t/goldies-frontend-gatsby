@@ -37,7 +37,10 @@ export const AddToCart: FC<AddToCartProps> = ({
     return (
       <S.ModalWrapper className="modal--added-to-cart">
         <Typography>
-          <Link to="url">{title}</Link> was added to your cart.
+          <Link to={url} onClick={handleClose}>
+            {title}
+          </Link>{' '}
+          was added to your cart.
         </Typography>
         <Box
         // sx={{ width: 200 }}
@@ -45,7 +48,7 @@ export const AddToCart: FC<AddToCartProps> = ({
           {image}
         </Box>
         <Typography>
-          <Link to="/cart" handleClick={handleClose}>
+          <Link to="/cart" onClick={handleClose}>
             Go to cart
           </Link>
           <Button onClick={handleClose}>Continue shopping</Button>

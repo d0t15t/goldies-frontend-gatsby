@@ -46,7 +46,8 @@ export const getCurrentVariant = (items, currentId: string) =>
  * @returns string
  */
 export const getProductVariantTitle = (title, variant): string => {
-  return `${title}, ${variant.title}`;
+  const test = variant.title.localeCompare('Default Title', undefined, { sensitivity: 'accent' });
+  return test === 0 ? title : `${title}, ${variant.title}`;
 };
 
 /**
@@ -98,14 +99,14 @@ export const urlIsExternal = (url: string): boolean => {
 };
 
 export const arrayToTree = (items, id = null, link = 'parent_id') => {
-return items
-    .filter(item => item[link] === id)
-    .map(item => ({ ...item, children: arrayToTree(items, item.id) }))
+  return items
+    .filter((item) => item[link] === id)
+    .map((item) => ({ ...item, children: arrayToTree(items, item.id) }))
     .sort((a, b) => a.weight - b.weight);
 };
 
 const decorateTree = (tree, depth = 0) => {
-  return tree.map(item => { 
+  return tree.map((item) => {
     const d = { depth, ...item };
     if (d?.children.length) {
       decorateTree(d?.children, depth++);
@@ -115,10 +116,11 @@ const decorateTree = (tree, depth = 0) => {
 };
 
 export const getMenuItems = (menuItems) => {
-  const flattened = menuItems.nodes.map(item => {
+  const flattened = menuItems.nodes.map((item) => {
     return {
-      ...item, parent_id: item?.parent?.id ?? null,
-    }
+      ...item,
+      parent_id: item?.parent?.id ?? null,
+    };
   });
   const tree = arrayToTree(flattened);
   return decorateTree(tree);
@@ -127,7 +129,8 @@ export const getMenuItems = (menuItems) => {
 export const stripTags = (str: string) => str.replace(/(<([^>]+)>)/gi, '');
 
 export const getCategoryPath = (node) => {
-  const slug = `${node.name}`.toLocaleLowerCase()
+  const slug = `${node.name}`
+    .toLocaleLowerCase()
     .replace(/[^\w ]+/g, '')
     .replace(/ +/g, '-');
   const alias = `/category/${slug}`;
@@ -150,13 +153,12 @@ export const getProductTeaserImageData = (product) => {
 
 export const getNodeUrl = (node) => {
   return node.path.alias;
-}
+};
 
 export const getProductTeaserVariantData = (product) => {
   const variant = product?.rels?.product?.rels?.variants[0];
   return { ...variant, shopifyId: getProductVariantGid(variant.shopifyId) };
 };
-
 
 export const getCollectionNodeProduct = (product) => {
   return {
@@ -173,12 +175,12 @@ export const getCategoryProducts = (node) => {
 };
 
 export const getValidCategories = (nodes) => {
-  const items = nodes.filter(node => getCategoryProducts(node).length);
-  return items.map(node => getCategoryNodeData(node));
+  const items = nodes.filter((node) => getCategoryProducts(node).length);
+  return items.map((node) => getCategoryNodeData(node));
 };
 
 export const getValidProductNodes = (nodes) => {
-  return nodes.map(node => getCollectionNodeProduct(node));
+  return nodes.map((node) => getCollectionNodeProduct(node));
 };
 
 export const getOverviewNodes = (displayName, dataSet) => {
@@ -191,4 +193,3 @@ export const getOverviewNodes = (displayName, dataSet) => {
       return dataSet;
   }
 };
-

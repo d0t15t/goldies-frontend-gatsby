@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Box, Modal as MuiModal } from '@mui/material';
 
 export const Modal = styled(MuiModal)`
-  padding: ${({ theme }) => theme.spacing(5)}px;
+  padding: ${({ theme }) => theme.spacing(5)};
 `;
 
 export const Inner = styled(Box)`
@@ -12,12 +12,15 @@ export const Inner = styled(Box)`
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 400;
-      bgcolor: ${theme.palette.background.paper};
-      border: 2px solid #000;
+      width: 80%;
+      border: 2px solid #aaa;
       box-shadow: 24;
       background-color: ${theme.palette.background.paper};
       padding: ${theme.spacing(2)};
+
+      ${theme.breakpoints.up('sm')} {
+        width: 400px;
+      }
     `;
   }}
 `;
@@ -39,23 +42,3 @@ export const CloseButtonWrapper = styled.div`
   `;
   }}
 `;
-
-// export const Inner = styled.div`
-//   padding: 2em;
-//   max-width: 100%;
-//   width: 100%;
-
-//   .swiper {
-//     margin: auto;
-//     width: 100%;
-//   }
-
-//   ${(props) => {
-//     const { theme, modalStyle } = props;
-//     return `
-//       a {
-//         color: ${theme.palette.secondary};
-//       }
-//     `;
-//   }}
-// `;

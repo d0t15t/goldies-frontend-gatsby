@@ -11,7 +11,7 @@ import {
   Image,
   Price,
   ProductVariants,
-  Related
+  Related,
 } from '~components/index';
 
 import * as U from '~utils';
@@ -28,9 +28,14 @@ interface UpdateCounterProps {
   quantity: number;
 }
 
-export const Product: FC<ProductProps> = ({ body, headline, images, variants, relatedItems }) => {
-  console.log(variants);
-  
+export const Product: FC<ProductProps> = ({
+  body,
+  headline,
+  images,
+  variants,
+  relatedItems,
+  location,
+}) => {
   const [addToCartAmount, setAddToCartAmount] = useState(1);
 
   const [currentVariantId, setCurrentVariantId] = useState(variants[0].shopifyId);
@@ -38,6 +43,7 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants, re
   const updateCurrentVariantId = (id: string) => setCurrentVariantId(id);
 
   const currentVariant = U.getCurrentVariant(variants, currentVariantId);
+  const currentVariantImage = currentVariant.rels?.image?.localFile?.teaserImage?.gatsbyImageData;
 
   const productVariantTitle = U.getProductVariantTitle(headline, currentVariant);
 
@@ -48,13 +54,6 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants, re
       setAddToCartAmount(quantity);
     },
     minimumValue: 1,
-  };
-
-  const decodeHTML = (html) => {
-    if (typeof document === undefined) return '';
-    const txt = document.createElement('textarea');
-    txt.innerHTML = html;
-    return txt.value;
   };
 
   const theme = useTheme();
@@ -102,6 +101,12 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants, re
                 shopifyId={currentVariantId}
                 quantity={addToCartAmount}
                 title={productVariantTitle}
+                url={location.pathname}
+                image={
+                  currentVariantImage ? (
+                    <Image data={currentVariantImage} alt={productVariantTitle} />
+                  ) : null
+                }
               />
             </Box>
           </form>
@@ -117,8 +122,8 @@ export const Product: FC<ProductProps> = ({ body, headline, images, variants, re
           {/* {mqMdUp && form} */}
         </div>
       </S.Product>
-    <Related items={relatedItems} />
-</>
+      <Related items={relatedItems} />
+    </>
   );
 };
 
