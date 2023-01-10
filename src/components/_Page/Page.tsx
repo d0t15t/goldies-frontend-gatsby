@@ -59,7 +59,7 @@ const PageWrapper: FC<PageWrapper> = ({ data, location }) => {
   const { title, description, keywords, siteUrl, imageUrl, language, robots, author, copyright } =
     useSiteMetadata();
 
-  const metaDescription = U.getMetaDescription(bodyData?.body ?? description);
+  const metaDescription = U.getMetaDescription(bodyData?.body || node?.body?.markup || description);
 
   return node ? (
     <S.Page className="page-root">

@@ -48,7 +48,7 @@ const gatsbyConfig: GatsbyConfig = {
     siteUrl: 'https://goldies-frontend.netlify.app/',
     imageUrl: '/favicon.svg',
     language: 'en',
-    robots: 'follow',
+    robots: 'index',
     copyright: 'Goldies Natural Beauty',
     author: 'Goldies Natural Beauty',
   },

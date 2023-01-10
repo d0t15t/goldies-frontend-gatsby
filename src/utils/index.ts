@@ -128,7 +128,11 @@ export const getMenuItems = (menuItems) => {
 
 export const stripTags = (str: string) => str.replace(/(<([^>]+)>)/gi, '');
 
-export const getMetaDescription = (str: string) => `${stripTags(str).slice(0, 157)}...`;
+export const getMetaDescription = (str: string) => {
+  const string = stripTags(str).replace(/[\r\n]/gm, '');
+
+  return string.length > 160 ? `${stripTags(str).slice(0, 157).trim()}...` : string.trim();
+};
 
 export const getCategoryPath = (node) => {
   const slug = `${node.name}`
