@@ -5,7 +5,8 @@ import { useTheme } from '@mui/material/styles';
 import * as S from './Tiles.styled';
 import * as TB from '~components/TextBlock/TextBlock.styled';
 import { Teasers, TeasersProps } from '~components/Teasers/Teasers';
-import { Cart, TextBlock, Overview } from '~components';
+import { Cart, TextBlock } from '~components';
+import Overview from '~components/Overview/Overview';
 
 export interface TilesProps {
   tiles: TeasersProps[];

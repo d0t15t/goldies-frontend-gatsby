@@ -11,7 +11,7 @@ interface FeaturedProductsProps {
   id: string;
 }
 
-const FeaturedProducts: FC<FeaturedProductsProps> = ({ products }) => {
+export const FeaturedProducts: FC<FeaturedProductsProps> = ({ products }) => {
   return (
     <S.Wrapper className={cls(['featured-products'])}>
       {products.map((product) => {
